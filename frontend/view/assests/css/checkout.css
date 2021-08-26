@@ -1,0 +1,121 @@
+#title{
+    margin-top: 4%;
+    text-align: center;
+    font-family: Lato,Pacifico,cursive;
+    font-size: 1.8em;
+}
+
+tr td .worksans{
+    color: #666;
+    line-height: 2.4;
+}
+
+#left{
+    font-family: sans-serif;
+    margin: 65px 40px 0px 90px;
+    height:900px;
+    width:545px;
+    float: left; 
+}
+
+#subleft{
+    color: #666;
+}
+
+#leftspace::before{
+    content: "!!";
+    color: transparent;
+}
+
+#right{
+    font-family: sans-serif;
+    padding: 10px 10px 10px;
+    height:860px;
+    width:545px;
+    float: right;
+    background: #f4f4f4;
+    margin-right: 7%;
+    margin-top: -4%;
+    color: #222;
+}
+
+h3{
+    font-weight: 600;
+}
+tr td .tableelements{
+    width: 261px;
+    height:40px;
+}
+
+input[type=text]{
+    width: 540px;
+    height:40px;
+    border: 1px solid rgb(177, 174, 174);
+}
+
+select{
+    width: 540px;
+    height:50px;
+    background: #fff;
+    color: #666;
+    border: 1px solid rgb(177, 174, 174);
+}
+
+#productstable{
+    margin: 30px 30px 30px 1px;
+    text-align: center;
+    width: 100%; 
+    font-size: 16px;
+    padding: 15px 0;
+}
+
+#productstable td{
+    border-bottom: 1px solid #dadada;
+    padding: 20px 30px 20px 30px;
+}
+
+input[type=submit]{
+    background-color:#79cba8;
+    color:#fff;
+    font-size: 18px;
+    width: 80%;
+    margin: 20px 20px 20px 50px;
+    padding: 15px 15px;
+    border-radius: 40px;
+    border:none;
+}
+
+#heading, #total, #totalamount{
+    font-weight: 700;
+}
+
+#total, #totalamount{
+    font-size: 22px;
+}
+
+#totalamount{
+    color: #40a944;
+}
+
+hr{
+    border: none;
+    height: 1px;
+    background: #dadada;;
+}
+
+#required::after{
+    content: " *";
+    color: red;
+}
+
+span{
+    color: red;
+}
+
+#left label{
+    margin-bottom: 30px;
+}
+
+#footer{
+    margin-top: 85%;
+}
