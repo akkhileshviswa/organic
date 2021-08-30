@@ -1,0 +1,143 @@
+#head
+
+.body{
+    place-items: center;   
+}
+
+.owl-carousel{
+    margin-top: 60px ;  
+    margin-bottom: 0px; 
+}
+
+.owl-carousel img{
+    width: -40;
+    height: 400;
+}
+
+.fruit{
+    padding-left: 10px;
+    margin-top: 70px ;
+    height: 250px;
+    width: 18.9%;
+    margin-bottom: 60px;
+}
+
+#newproducts{
+    text-align: center;
+    margin: auto;
+}
+
+#heading{
+    font-size: 35px;
+    font-family:sans-serif;
+}
+
+#para{
+    color: grey;
+}
+
+li{
+    display: inline;
+}
+
+li::after { 
+    content:" "; 
+    letter-spacing:1em; 
+}
+
+#newproducts{
+    margin-bottom: 4%;
+}
+
+#products{
+    margin: 10px 40px 10px 40px;
+    border-collapse: separate;
+    border-spacing: 20px;   
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.image{
+    transition: transform .2s;
+}
+
+.image:hover{
+    transform: scale(1.15);
+}
+
+#products td {
+    padding: 5px 20px 20px ;
+    border: 2px solid rgb(221, 248, 199)
+}
+
+.amount{
+    color :rgb(15, 160, 160);
+    font-size: 20px;
+}
+
+.amount::before{
+    content: "$";
+    color :rgb(15, 160, 160);
+    font-size: 20px;
+}
+
+#subscribe{
+    margin-top: 40px;
+}
+
+#subscribe_left{
+    width: 500px;
+    float: left;
+    padding:20px 0px 0px 100px;
+    line-height: 0.4;
+}
+#text{
+    font-family: Lato,Pacifico,cursive;
+    font-size: 46px;
+    float: left;
+    color: rgb(20, 15, 15);
+}
+
+#email{
+    color: grey;
+    float: left;
+}
+  
+#subscribe_right{
+    padding-top: 20px;
+    margin-left: 42%;
+}
+
+input[type=email]{
+    padding:12px 20px;
+    border:none;
+    margin-bottom:10px;
+}
+
+#submit {
+    background-color:#79cba8;
+    border:none;
+    color:#fff;
+    padding:12px 0px 12px 30px;
+    margin-left:10px;
+    width: 120px;
+    font-size: 15px;
+}
+
+button[type=submit]{
+    background-color:#79cba8;
+    border:none;
+    color:#fff;
+    padding:12px 35px;
+    font-size: 15px;
+}
+
+#session {
+    color: grey;
+    margin-left: 70px;
+    font-size: 1.3em;
+    font-family:sans-serif;
+}
+

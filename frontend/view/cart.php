@@ -1,18 +1,16 @@
-<?php  
-    session_start();
-    // include "../autoload/autoloadcartdetails.php";
-    // include "../autoload/autoloadcalculatecarttotal.php";
+<?php 
+    error_reporting(0);
 ?>
 
 <html>
     <head>
         <title>Cart</title>
-        <link rel="stylesheet" type="text/css" href="assests/css/cart.css">
-        <script src="assests/js/addtocart.js"></script>     
+        <link rel="stylesheet" type="text/css" href="<?= Utility::getAssests() ?>/assests/css/cart.css">
+        <script src="<?= Utility::getAssests() ?>/assests/js/addtocart.js"></script>     
     </head>
     <body>
         <div id="header">
-            <?php include "header.html" ?>
+            <?php include "header.php" ?>
         </div>
         <div id="title">
             <h2>Cart</h2>
@@ -28,14 +26,18 @@
                     <td></td>
                 </thead>
                 <tbody id="producttablebody">
-                <?php foreach($results as $j ): ?>
+                <?php 
+                    $cart = new CartDetails;
+                    $result = $cart -> getCartDetails();
+                    foreach($result as $j ): 
+                ?>
                     <tr id="border">
-                        <td><img id="tableimage" src="assests/images/index/<?php echo $j['image']; ?>"></td>
-                        <td><?php echo $j['product_name']; ?></td>
-                        <td>$<?php echo $j['price']; ?><input id="product_price" type="hidden" value="<?php echo $j['price']; ?>" ></input></td>
-                        <td><input type="number" min=0 placeholder="0" id="product_quantity" onchange="changeQuantity(this.value, <?php echo $j['product_id']; ?>, <?php echo $j['price']; ?>);" ></td>
-                        <td id="<?php echo $j['product_id']; ?>" class="amount">0</td>
-                        <td><input type="button" id="remove" value="X" onclick="removeFromCart(<?php echo $j['cart_id']; ?>); " ></td>
+                        <td><img id="tableimage" src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $j['image']; ?>"></td>
+                        <td><?php echo $j['item_name']; ?></td>
+                        <td>$<?php echo $j['item_price']; ?></td>
+                        <td><input type="number" min=1 placeholder="1" id="item_quantity" value="<?php echo $j['item_quantity']; ?>" onchange="changeQuantity(this.value, <?php echo $j['item_id']; ?>, <?php echo $j['item_price']; ?>);" ></td>
+                        <td id="<?php echo $j['item_id']; ?>" class="amount"><?php echo $j['row_total']; ?></td>
+                        <td><input type="button" id="remove" value="X" onclick="removeFromCart(<?php echo $j['item_id']; ?>); " ></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -54,8 +56,8 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td><a href="index.php" >CONTINUE SHOPPING</a></td>
-                        <td><input id="update" type="submit" value="Update Cart"></td>
+                        <td><a  href="home" >CONTINUE SHOPPING</a></td>
+                        <td><a id="update" href="updatecart">UPDATE CART</a></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -76,8 +78,12 @@
                         <td class="space" colspan="3"><hr></td>
                 </tr>
 				<tr>
+                    <?php 
+                        $cart = new CartController;
+                        $grand_total = $cart -> updateCart();
+                    ?>
 					<td>SUBTOTAL</td>
-					<td id="grandtotal" class="amount"><?php //echo $cart['sum(cart.total_amount)']; ?></td>
+					<td id="grandtotal" class="amount"><?php echo $grand_total; ?></td>
 				</tr>
                 <tr>
                     <td class="space" colspan="3"><hr></td>
@@ -93,9 +99,9 @@
                 </tr>
 				<tr class="total">
 					<td>TOTAL</td>
-					<td id="totalamount" class="amount"><strong><?php //echo $cart['sum(cart.total_amount)']; ?></strong></td>
+					<td id="totalamount" class="amount"><strong><?php echo $grand_total; ?></strong></td>
 				</tr>
-                <tr><td colspan="3"><a href="checkout.php" >Proceed to Checkout</a></td></tr>
+                <tr><td colspan="3"><a href="checkout" >Proceed to Checkout</a></td></tr>
 			</table>
         </div>
         <div id="imagebackground">
@@ -107,14 +113,14 @@
                     </td>
                     <td>  
                         <div id="fruitimage">
-                            <img src="assests/images/user/loginfruit.png">
+                            <img src="<?= Utility::getAssests() ?>/assests/images/user/loginfruit.png">
                         </div>
                     </td>
                 </tr>
             </table>
         </div>
         <div id="footer">
-            <?php include "footer.html" ?>
+            <?php include "footer.php" ?>
         </div>   
     </body>
 </html>

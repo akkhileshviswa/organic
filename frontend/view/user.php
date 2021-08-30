@@ -1,18 +1,21 @@
+<?php 
+    error_reporting(0);
+?>
+
 <html>
     <head>
         <title>User Page</title>
-        <link rel="stylesheet" type="text/css" href="assests/css/user.css">
-        <script src="assests/js/user.js"></script>
+        <link rel="stylesheet" type="text/css" href="<?= Utility::getAssests() ?>/assests/css/user.css">
+        <script src="<?= Utility::getAssests() ?>/assests/js/user.js"></script>
     </head>
     <body>
-        <div id="head"><?php include "header.html";?>
+        <div id="head"><?php include "header.php";?>
         </div>
         <div id="table">
             <table id="main">
                 <tr id="session">    
                     <td><?php 
-                        session_start();
-                        if(isset($_SESSION['message'])){
+                           if(isset($_SESSION['message'])){
                             echo $_SESSION['message'];
                             unset($_SESSION['message']);
                         } 
@@ -26,7 +29,7 @@
             <table id="left">
                 <tr>
                     <td>
-                        <form method="POST" action= "../controller/Login.php" onsubmit="return loginvalidate()" autocomplete="off">
+                        <form method="POST" action= "home" onsubmit="return loginvalidate()" autocomplete="off">
                             <label id="required">USERNAME</label><br>
                             <input id="loginname" type="text" name="loginname" size="42" ><br>
                             <span id="loginnameerr"></span><br>
@@ -42,7 +45,7 @@
             <table id="right">
                 <tr>
                     <td>
-                        <form method="POST" action="../autoload/autoloadcreate.php" onsubmit="return validate()" autocomplete="off">
+                        <form method="POST" action="register" onsubmit="return validate()" autocomplete="off">
                             <label id="required">USERNAME</label><br>
                             <input id="name" type="text" name="name" size="42"><br>
                             <span id="nameerr"></span><br>
@@ -67,14 +70,14 @@
                     </td>
                     <td>  
                         <div id="fruitimage">
-                            <img src="assests/images/user/loginfruit.png">
+                            <img src="<?= Utility::getAssests() ?>/assests/images/user/loginfruit.png">
                         </div>
                     </td>
                 </tr>
             </table>
         </div>
         <div id="footer">
-        <?php include "footer.html" ?>
+        <?php include "footer.php" ?>
         </div>   
     </body>
 </html>

@@ -1,0 +1,247 @@
+body{
+    margin: 0 ;
+    overflow-y: hidden;
+    font-family: work-Sans,sans-serif;
+    font-size: 18px;
+}
+
+#left{
+    float: left;
+    height: 642px;
+    width: 266px;
+}
+
+#user{
+    text-align: center;
+}
+
+#userimage{
+    border-radius: 50%;
+}
+
+hr{
+    border: none;
+    height: 1px;
+    background: #dadada;;
+}
+
+#username{
+    color: #40a944;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    margin-bottom: 3px;
+    font-size: 18px;
+}
+
+p{
+    color: #777;
+    font-size: 13px;
+}
+
+#options{
+    margin-top: 3%;
+    font-size: 14px;
+    letter-spacing: .5px;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    text-transform:capitalize;
+    font-weight: 600;
+    color: #313131;
+}
+
+li{
+    list-style-type: none;
+}
+
+a:link, a:visited, a:active{
+    color: #313131;
+}
+
+a:hover{
+    color: #40a944;
+}
+
+a{
+    margin-left: 40px;
+    text-decoration: none;
+    color: #313131;
+}
+
+span{
+    margin-left: 15px;
+}
+
+#logout{
+    display: block;
+    width: 100px;
+    height: 25px;
+    background: #40a944;
+    padding: 10px;
+    text-align: center;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    padding-left: 6px;
+    padding-right: 14px;
+    padding-bottom: 5px;
+} 
+
+#right{
+    margin-left:250px;
+    height: 600px;
+    width: 1000x;
+    background-color: hsla(0,0%,96.5%,.6);
+    padding: 10px 50px 20px 50px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#name{
+    margin-bottom: 3px;
+    font-family: Nunito;
+    font-size: 28px;
+    margin-bottom: 0;
+    font-weight: 1200;
+    color: #000;
+}
+
+#one ,#two, #three, #four{
+    height:100px;
+    width:470px;
+    background-color: #40a944;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#one,#three{
+    float:left;
+    margin-bottom: 25px;
+}
+
+#two, #four{
+    float: right;
+    margin-bottom: 25px;
+}
+
+#one{
+    background-color:#ffbc58;  
+}
+
+#two{
+    background-color:#13c9ca;
+}
+
+#three{
+    background-color:#ff8084;
+}
+
+#four{
+    background-color:#a5a5a5;
+}
+
+#hole{
+    float: left;
+    margin:17px 0 0 25px;
+    height:60px;
+    width:60px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+#info{
+    height:100px;
+    width:200px;
+    margin-left: 200px;
+    margin-top: 25px;
+    color: white; 
+}
+
+#infotext{
+    margin-top: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+    color: white;
+    font-size: 15px;
+}
+#amount{
+    margin-left: 0;
+    margin-right: 5px;
+    font-size: 30px;
+    color: white;
+}
+
+/* #tablediv{
+    height:400px;
+    width: 970px;
+    margin-bottom: 50px;
+    margin-top: 200px;
+    background-color: #fff;
+    padding-top: 20px;
+    padding-left: 20px;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    font-size: 18px;
+} */
+
+#productstable {
+    border-top: 0; 
+    padding-top: 0;
+    padding: .75rem;
+    background-color: #fff;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#productstable thead tr td{
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+#productstable thead::after{
+    content:"@";
+    display:block; 
+    line-height:20px;
+    text-indent:-99999px;     
+}
+
+#productstable tbody tr td hr{
+    border-top: 0px thin #dadada;
+}
+
+#productstable tbody td{
+    width: 250px;
+    font-size: 16px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+#ordersbutton{
+    margin-left: 0;
+    display: block;
+    width: 200px;
+    height: 30px;
+    background: #40a944;
+    padding: 15px 8px 4px 8px;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: medium;
+}
+
+#heading{
+    margin-top: 20;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-left: 40px;
+    padding-top: 40px;
+    padding-bottom: 5px;
+    text-align: left;
+    font-size: 22px;
+    background-color: #fff;
+    border-bottom: none;
+}

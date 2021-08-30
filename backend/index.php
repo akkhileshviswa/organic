@@ -31,30 +31,29 @@
         }
     }
     
-    
     $method = $_SERVER['REQUEST_METHOD'];
     $request = pathinfo($_SERVER['REQUEST_URI'], PATHINFO_FILENAME);
     
     require_once "core/Layout.php";
-    if($method=="GET"){
+    if($method=="GET") {
         $routes = Routes::getRoutes("GET");
-        if(!empty($routes)){
-            foreach($routes as $route){
-                if(strstr($request,$route['url'])){
+        if(!empty($routes)) {
+            foreach($routes as $route) {
+                if(strstr($request,$route['url'])) {
                     $controller = $route['controller'];
                     $method = $route['method'];
                     $obj = new $controller();
                     $obj -> $method();
                 }
             }
-        }
+        } 
     }
         
-    if($method=="POST"){
+    if($method=="POST") {
         $routes = Routes::getRoutes("POST");
-        if(!empty($routes)){
-            foreach($routes as $route){
-                if(strstr($request,$route['url'])){
+        if(!empty($routes)) {
+            foreach($routes as $route) {
+                if(strstr($request,$route['url'])) {
                     $controller = $route['controller'];
                     $method = $route['method'];
                     $obj = new $controller();
@@ -63,7 +62,3 @@
             }
         }
     }
-
-   
-    
-    

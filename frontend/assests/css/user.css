@@ -1,0 +1,103 @@
+#main{
+    margin-left: 13%;
+    font-size: 1.5em;
+    font-family:  sans-serif;
+}
+
+#session td{
+    line-height: 2;
+    font-size: 1em;
+    font-weight: 600;
+    color:grey;
+    padding-left: 30px;
+}
+
+#mainleft{
+    font-family:  'Pacifico', cursive;;
+    padding-right: 410px;
+    padding-left: 30px;
+}
+
+#mainright{
+    font-family:  'Pacifico', cursive;;
+    padding-left: 60px;
+}
+
+#left{
+    float: left;
+    padding: 30px 20.5px 30px 19px;
+    font-family:  sans-serif;
+    font-size: 0.9em;
+    line-height: 1.6;
+    margin-left: 15%;
+    height: 20px;
+    border: 1px solid #f4eede;
+}
+
+#right{
+    float: right;
+    padding: 17.5px;
+    font-family:  sans-serif;
+    font-size: 0.9em;
+    line-height: 1.6;
+    margin-right: 16%;
+    border: 1px solid #f4eede;
+}
+
+input[type=text]{
+    height: 25px;
+    padding: 4px;
+    border: solid thin #f4eede;
+    color: grey;
+    font-style: italic;
+    outline: solid thin #f4eede;
+}
+
+input[type=password]{
+    height: 25px;
+    padding: 4px;
+    border: solid thin #f4eede;
+    outline: solid thin #f4eede;
+}
+
+#button{
+    padding: 10px;
+    width: 100px;
+    color: white;
+    border:none;
+    background-color: #79cba8;
+}
+
+#required::after{
+    content: " *";
+    color: red;
+}
+
+span{
+    color: red;
+}
+
+#imagebackground {
+    height: 250px;
+    background-color: #79cba8;
+    margin: 35% 0% 5%;
+    padding-left: 16%;
+}
+
+#quote{
+    padding-top: 0px;
+    font-family:  'Pacifico', cursive;
+    font-size: 2.4em;
+    color: white;
+}
+
+h1{
+    font-family: sans-serif;
+    font-size: 40px;
+    color: white;
+}
+
+#fruitimage{
+    padding-top: 4%;
+    padding-left: 260px ;
+}
