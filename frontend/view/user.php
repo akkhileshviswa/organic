@@ -1,7 +1,3 @@
-<?php 
-    error_reporting(0);
-?>
-
 <html>
     <head>
         <title>User Page</title>
