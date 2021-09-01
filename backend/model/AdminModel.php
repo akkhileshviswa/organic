@@ -1,5 +1,4 @@
 <?php   
-	error_reporting(0);
 	/**
 	 * This class insert, fetches, delete, update the values in database upon calling the specified function.
 	 */
