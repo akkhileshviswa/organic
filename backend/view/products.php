@@ -1,5 +1,3 @@
-<?php //header("Refresh:10");?>
-
 <html>
     <head>
         <title>Products</title>
