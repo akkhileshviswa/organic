@@ -30,7 +30,7 @@
 							<input id="price" type="text" name="price" size="40" ><br><br>
 							<span id="priceerr"></span><br>
 							<br><label id="required">Quantity</label><br>
-						    <br><input id="quantity" type="text" name="quantity" value="<?php echo $i["quantity"]; ?>" size="40" ><br><br>
+						    <br><input id="quantity" type="text" name="quantity" size="40" ><br><br>
 						    <span id="quantityerr" class="error"></span><br>
 							<br><label id="required">UPLOAD IMAGE OF PRODUCT </label><br>
 							<br><input id="file" type="file" name="file" ><br>

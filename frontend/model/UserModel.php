@@ -1,5 +1,5 @@
 <?php 
-	error_reporting(0);
+error_reporting(0);
 	/**
 	 * This class insert, fetches, delete, update the values in database upon calling the specified function.
 	 */
@@ -30,7 +30,7 @@
 				if(!empty($name) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($mdpassword)) {
 					try {
 							$statement =  $connection->prepare("INSERT INTO users (username,email,password) 
-														VALUES (:name, :email, :mdpassword)");
+																VALUES (:name, :email, :mdpassword)");
 							$statement->bindParam(':name', $name);
 							$statement->bindParam(':email', $email);
 							$statement->bindParam(':mdpassword', $mdpassword);
@@ -55,7 +55,7 @@
          */
 		public function signIn()
 		{
-			if($_SERVER['REQUEST_METHOD'] == "POST" && $_POST['loginname'] != "" && $_POST['loginpassword'] != "" ) {
+			if($_SERVER['REQUEST_METHOD'] == "POST") {
 				$connection = $this->instance->getConnection();
 				$name = trim($_POST['loginname']);
 				$password = trim($_POST['loginpassword']);

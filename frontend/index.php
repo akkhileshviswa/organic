@@ -1,31 +1,35 @@
 <?php
     session_start();
     spl_autoload_register('autoload');
+    const path_model = "model/";
+    const extension_model = ".php";
+    
+    const path_controller = "controller/";
+    const extension_controller = ".php";
+
+    const path_view = "view/";
+    const extension_view = ".php";
+
+    const path_core = "core/";
+    const extension_core = ".php";
+
     function autoload($className){
-        $path_model = "model/";
-        $extension_model = ".php";
-        $fullPath_model = $path_model.$className.$extension_model;
+        $fullPath_model = path_model.$className.extension_model;
         if (file_exists("model/$className.php")) {
             include_once $fullPath_model;
         }
 
-        $path_controller = "controller/";
-        $extension_controller = ".php";
-        $fullPath_controller = $path_controller.$className.$extension_controller;
+        $fullPath_controller = path_controller.$className.extension_controller;
         if (file_exists("controller/$className.php")) {
             include_once $fullPath_controller;
         }
 
-        $path_view = "view/";
-        $extension_view = ".php";
-        $fullPath_view = $path_view.$className.$extension_view;
+        $fullPath_view = path_view.$className.extension_view;
         if (file_exists("view/$className.php")) {
             include_once $fullPath_view;
         }
         
-        $path_core = "core/";
-        $extension_core = ".php";
-        $fullPath_core = $path_core.$className.$extension_core;
+        $fullPath_core = path_core.$className.extension_core;
         if (file_exists("core/$className.php")) {    
             include_once $fullPath_core;
         }
