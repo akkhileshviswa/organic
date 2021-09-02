@@ -30,7 +30,7 @@ error_reporting(0);
 				if(!empty($name) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($mdpassword)) {
 					try {
 							$statement =  $connection->prepare("INSERT INTO users (username,email,password) 
-														VALUES (:name, :email, :mdpassword)");
+																VALUES (:name, :email, :mdpassword)");
 							$statement->bindParam(':name', $name);
 							$statement->bindParam(':email', $email);
 							$statement->bindParam(':mdpassword', $mdpassword);

@@ -2,8 +2,6 @@
     header("Access-Control-Allow-Origin: *");
     header("Content-Type:application/json; charset=UTF-8");
     
-    // echo "hi";
-    // exit();
     include "model/Database.php";
     function cron(){
         $connection = new Database();

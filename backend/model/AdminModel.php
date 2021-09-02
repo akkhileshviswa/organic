@@ -103,9 +103,10 @@
 			$connection = $this->connect->getConnection();
 			$productName = trim($_POST['product_name']);
 			$price = floatval($_POST['price']);
+			$quantity = intval($_POST['quantity']);
 			$image = $_FILES['file']['name'];
-			$result = mysqli_query($connection,"INSERT INTO product (product_name, price, image) 
-									VALUES ('$productName', $price, '$image');");
+			$result = mysqli_query($connection,"INSERT INTO product (product_name, price, quantity, image) 
+									VALUES ('$productName', $price, $quantity, '$image');");
 			return $result;			
 		}
 		
