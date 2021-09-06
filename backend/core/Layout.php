@@ -11,6 +11,7 @@
     Routes::post(['url' => 'updateproduct', 'controller' => 'Controller', 'method' => 'updateProduct']);
     Routes::post(['url' => 'products', 'controller' => 'Controller', 'method' => 'updateEditedProduct']);
     Routes::post(['url' => 'createproduct', 'controller' => 'Controller', 'method' => 'createProduct']);
+    Routes::post(['url' => 'enableOrDisableProduct', 'controller' => 'Controller', 'method' => 'enableOrDisableProduct']);
     
     Routes::post(['url' => 'updatescustomer', 'controller' => 'Controller', 'method' => 'updateCustomer']);
     Routes::post(['url' => 'customers', 'controller' => 'Controller', 'method' => 'updateEditedCustomer']);

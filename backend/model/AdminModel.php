@@ -109,6 +109,25 @@
 									VALUES ('$productName', $price, $quantity, '$image');");
 			return $result;			
 		}
+
+		/**
+         * This method is used to delete the corresponding order details, checkout details and cart details 
+		 * for the corresponding customer in the database,
+		 * @return string of the result.
+         */
+		public function enableOrDisableProduct()
+		{
+			$connection = $this->connect->getConnection();
+			$productId = intval($_POST['product_id']);
+			$isActive = intval($_POST['is_active']);
+			$result = mysqli_query($connection,"UPDATE product
+									SET is_active = $isActive
+									WHERE product_id = $productId ;");
+			return $result;
+			if($result){
+				
+			}
+		}
 		
 		/**
          * This method is used to display the existing customers from the database,
@@ -158,7 +177,7 @@
 			$connection = $this->connect->getConnection();
 			$isActive = 0;
 			$result = mysqli_query($connection, "SELECT cart_id, grand_total, order_status FROM cart 
-									WHERE is_active = $isActive;");
+									WHERE is_active = $isActive ORDER BY cart_id DESC ;");
 			return $result;
 		}
 		
@@ -202,7 +221,7 @@
 		/**
          * This method is used to delete the corresponding order details, checkout details and cart details 
 		 * for the corresponding customer in the database,
-		 * @return object of the result.
+		 * @return boolean of the result.
          */
 		public function removeOrder()
 		{

@@ -15,14 +15,17 @@
         }
         
         /**
-         * This method is used to fetch the product details from the database 
-         * @return array of product details.
+         * This method is used to fetch the product details from the database, 
+         * @return  object of product details.
          */
         public function getProductDetails()
         {
             $connection = $this->instance->getConnection();
-            $result = $connection->query("SELECT product_id, product_name, price, image FROM product;");
+            $isActive = intval(1);
+            $result = $connection->prepare("SELECT product_id, product_name, price, image FROM product WHERE is_active = :isActive ;");
+            $result->bindParam(':isActive', $isActive);
+            $result->execute();
             return $result; 
         }
     }
-    
+     

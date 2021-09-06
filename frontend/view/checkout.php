@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Checkout</title>
@@ -7,10 +8,18 @@
     <body>
         <div id="head"><?php include "header.php" ?>
         </div>
+        <div id="session" >
+            <?php
+                if(isset($_SESSION['message'])){
+                    echo $_SESSION['message'];
+                    unset($_SESSION['message']);
+                }
+            ?>
+        </div>
         <div id="title">
             <h2>Checkout</h2>
         </div>
-        <form name="order" action="orderdetails" method="POST" onsubmit="validate();" autocomplete="off">
+        <form name="order" action="orderdetails" method="POST" onsubmit="return validate()" autocomplete="off">
             <div id="left">
                 <h3>BILLING DETAILS</h3>
                 <hr>
@@ -58,6 +67,8 @@
                         <option value="select">Select an option...</option>
                         <option value="Tamil Nadu">Tamil Nadu</option>
                         <option value="Andhra Pradhesh">Andhra Pradhesh</option>
+                        <option value="Texas">Texas</option>
+                        <option value="Washington">Washington</option>
                     </select><br>
                     <span id="stateerr"></span>
                     <br><br>

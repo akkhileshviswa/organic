@@ -14,8 +14,12 @@
                 <td id="phonesymbol">&#128222</td>
                 <td id="cartsymbol"><a href="cart">&#128722</a></td>
                 <td class="cart">
+                    <?php 
+                        $cart = new CartController;
+                        $grand_total = $cart -> updateCart();
+                    ?>
                     <a href="cart">MY CART</a><br>
-                    $0.00<br>
+                    $<?php echo number_format((float)$grand_total, 2, '.', ''); ?><br>
                 </td>
             </tr>
             <tr>
@@ -25,13 +29,23 @@
         <div class="down"></div>
         <div class="menu">
             <nav>
+            <?php
+                if( isset($_SESSION['loggedin'])){ ?>
                 <ul>
-                    <li>HOME</li>
+                    <li><a href="home">HOME</a></li>
                     <li>OUR STORY</li>
                     <li>SHOP</li>
-                    <li><a href="user">REGISTER/LOGIN</a></li>
                     <li><a href="myaccount">MY ACCOUNT</a></li>
                     <li><a href="logout">LOGOUT</a></li>
                 </ul>
+                <?php }else { ?>
+                <ul>
+                    <li><a href="home">HOME</a></li>
+                    <li>OUR STORY</li>
+                    <li>SHOP</li>
+                    <li><a href="user">REGISTER</a></li>
+                    <li><a href="user">LOGIN</a></li>
+                </ul>
+                <?php } ?>             
             </nav>
         </div>

@@ -157,6 +157,28 @@ select{
     border-radius: 5px;
 }
 
+#enable {
+    padding: 10px;
+    width: 100px;
+    background-color: #51e055;
+    font-weight: bold;
+    font-size: medium;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#disable {
+    padding: 10px;
+    width: 100px;
+    background-color: rgb(240, 112, 65);
+    font-weight: bold;
+    font-size: medium;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
 li{
     list-style-type: none;
 }

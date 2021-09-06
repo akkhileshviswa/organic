@@ -5,6 +5,7 @@
     class CartDetails
     {
         private $instance;
+        private $session;
         
         /**
          * This method is used to create a object for Database class.
@@ -12,6 +13,7 @@
         public function __construct()
         {
             $this->instance = Database::getInstance();
+            $this->session = SessionId::session();
         }
 
         /**
@@ -21,12 +23,16 @@
         public function getCartDetails()
         {
             $connection = $this->instance->getConnection();
-            $cartId = $_SESSION['cart_id'];
-            $result = $connection->query("SELECT product.image, item.item_id, item.item_name, item.item_price, 
+            $cartId = $this->session['cartId'];
+            $isActive = intval(1);
+            $statement = $connection->prepare("SELECT product.image, item.item_id, item.item_name, item.item_price, 
                                           item.item_quantity, item.row_total  FROM item
                                           JOIN product ON product.product_id = item.product_id
                                           JOIN cart ON cart.cart_id = item.cart_id 
-                                          WHERE item.cart_id = $cartId ;");
-            return $result; 
+                                          WHERE item.cart_id = :cart_id AND cart.is_active = :isActive;");
+            $statement->bindParam(':cart_id', $cartId);
+            $statement->bindParam(':isActive', $isActive);
+            $statement->execute();
+            return $statement; 
         }
     }

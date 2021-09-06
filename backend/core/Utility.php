@@ -1,4 +1,5 @@
 <?php
+    
     /**
      * This class stores the base url for the css and javascript files to be included
      */
@@ -12,9 +13,6 @@
          */
         public static function getAssests()
         {
-            // $baseurl = $_SERVER['SERVER_PORT'] == 443? 'https://': 'http://'.$_SERVER['HTTP_HOST'];
-            // $requsetedurl = $baseurl.$_SERVER['REQUEST_URI'];
-            // $asessturl =str_replace(substr($url, strpos($url, 'index.php')), "", $url);
             return self::url; 
         }
     }

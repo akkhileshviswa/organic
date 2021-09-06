@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Organic Store</title>
@@ -51,39 +52,45 @@
         <div id="productlist">
             <table  id="products">      
                 <?php
-                if( isset($_SESSION['loggedin'])){
-                    $userId = $_SESSION['user_id'];
-                    $action ="home";
-                }else {
-                    $action ="login";
-                    $onclick ="";
-                }
-                $temp=0; ?>
+                    if( isset($_SESSION['loggedin'])){
+                        $userId = $_SESSION['user_id'];
+                        $action ="home";
+                    }else {
+                        $action ="user";
+                        $onclick ="";
+                    }
+                ?>
                 <tr>
                 <?php 
                     $product = new ProductDetails;
                     $result = $product -> getProductDetails();
-                    foreach($result as $j ): ?>
+                    $tdlimit = 0;
+                    foreach($result as $j) :
+                        if($tdlimit%4 == 0) {
+                            echo '</tr>';
+                            echo '<tr>';
+                        }
+                        $tdlimit++;
+                ?>
                     <td>
                         <form class="form-submit" action= "<?php echo $action; ?>" method="POST" >   
-                            <div class="image">
-                            <br>
-                                <img width="250" height="300" src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $j['image']; ?>">
-                            <br><br>
-                            </div>
-                            <h3><?php echo $j['product_name']; ?></h3>
-                            <p class="amount"><?php echo $j['price']; ?></p>
-                            <input type="hidden" id="product_name" name="product_name"  value=" <?php echo $j['product_name']; ?>">
-                            <input type="hidden" id="price" name="price" value=" <?php echo $j['price']; ?>">
-                            <input type="hidden" id="user_id" name="user_id" value=" <?php echo $user_id; ?>">
-                            <input type="hidden" id="product_id" name="product_id"  value="<?php echo $j['product_id'];?>">
-                            <button type="submit" > Add to Cart</button>
-                        </form> 
-                    </td>
-                    <?php $temp++; if($temp%4==0){
-                        break; } 
-                        endforeach; 
-                    ?>
+                        <div class="image">
+                        <br>
+                            <img width="250" height="300" src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $j['image']; ?>">
+                        <br><br>
+                        </div>
+                        <h3><?php echo $j['product_name']; ?></h3>
+                        <p class="amount"><?php echo $j['price']; ?></p>
+                        <input type="hidden" id="product_name" name="product_name"  value=" <?php echo $j['product_name']; ?>">
+                        <input type="hidden" id="price" name="price" value=" <?php echo $j['price']; ?>">
+                        <input type="hidden" id="user_id" name="user_id" value=" <?php echo $user_id; ?>">
+                        <input type="hidden" id="product_id" name="product_id"  value="<?php echo $j['product_id'];?>">
+                        <button type="submit" > Add to Cart</button>
+                        </form>
+                    </td> 
+                <?php 
+                    endforeach;
+                ?>
                 </tr>         
             </table>
         </div> 

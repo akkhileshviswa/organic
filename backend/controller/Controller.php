@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     /**
      * This class creates a object for AdminModel class and calls the specified function of the AdminModel class.
      */
@@ -19,63 +20,99 @@
          */
         public function loadLogin()
         {
+            $_SESSION['loggedin'] = 0;
             View::load('login');
         }
         
         /**
-         * This method loads dashboard page on get request.
+         * This method loads dashboard page on get request, if the user has logged in.
          */
         public function loadDashboard()
         {
-            View::load("dashboard");
+            if($_SESSION['loggedin'] == 1) {
+                View::load("dashboard");
+            } else {
+                $_SESSION['message'] = "Login To Continue";
+                View::load('login');
+            }
         }
         
         /**
-         * This method loads customers page on get request.
+         * This method loads customers page on get request, if the user has logged in.
          */
         public function loadCustomers()
         {
-            View::load("customers");
+            if($_SESSION['loggedin'] == 1) {
+                View::load("customers");
+            } else {
+                $_SESSION['message'] = "Login To Continue";
+                View::load('login');
+            }
         }
         
         /**
-         * This method loads orders page on get request.
+         * This method loads orders page on get request, if the user has logged in.
          */
         public function loadOrders()
         {
-            View::load("orders");
+            if($_SESSION['loggedin'] == 1) {
+                View::load("orders");
+            } else {
+                $_SESSION['message'] = "Login To Continue";
+                View::load('login');
+            }
         }
         
         /**
-         * This method loads products page on get request.
+         * This method loads products page on get request, if the user has logged in.
          */
         public function loadProducts()
         {
-            View::load("products");
+            if($_SESSION['loggedin'] == 1) {
+                View::load("products");
+            } else {
+                $_SESSION['message'] = "Login To Continue";
+                View::load('login');
+            }
         }
         
         /**
-         * This method loads new product page on get request.
+         * This method loads new product page on get request, if the user has logged in.
          */
         public function newProduct()
         {
-            View::load("newproduct");
+            if($_SESSION['loggedin']==1) {
+                View::load("newproduct");
+            } else {
+                $_SESSION['message'] = "Login To Continue";
+                View::load('login');
+            }
         }
         
         /**
-         * This method loads update product page on post request.
+         * This method loads update product page on post request, if the user has logged in.
          */
         public function updateProduct()
         {
-            View::load("updateproduct");
+            if($_SESSION['loggedin'] == 1) {
+                View::load("updateproduct");
+            } else {
+                $_SESSION['message'] = "Login To Continue";
+                View::load('login');
+            }
         }
         
         /**
-         * This method loads update customer page on post request.
+         * This method loads update customer page on post request, if the user has logged in.
          */
         public function updateCustomer()
         {
-            View::load("updatecustomer");
+            if($_SESSION['loggedin'] == 1) {
+                View::load("updatecustomer");
+            } else {
+                $_SESSION['message'] = "Login To Continue";
+                View::load('login');
+            }
         }
         
         /**
@@ -88,6 +125,7 @@
             $result = $this->user -> signIn();
             if($result) {
                 {
+                    $_SESSION['loggedin'] = 1;
                     View::load("dashboard");
                 }
             } else {
@@ -140,6 +178,18 @@
                 $_SESSION['message'] = "Product has not been updated.";
             }
             View::load("products");
+        }
+
+         /**
+         * This method calls enableOrDisableProduct method in AdminModel class
+         * based on the result it loads the desired
+         * view page and session message.
+         */
+        public function enableOrDisableProduct()
+        {
+            $result = $this->user -> enableOrDisableProduct();
+            View::load("products");
+            
         }
         
         /**

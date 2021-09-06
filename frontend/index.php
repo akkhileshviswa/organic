@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    session_start(); 
     spl_autoload_register('autoload');
     const path_model = "model/";
     const extension_model = ".php";

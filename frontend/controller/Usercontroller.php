@@ -27,6 +27,7 @@
          */
         public function loadUser()
         {
+            $_SESSION['message'] = "Register/Login to continue!!"; 
             View::load("user");
         }
         
@@ -37,17 +38,22 @@
          */
         public function loginUser()
         {
-            $this->user = new UserModel();
             $result = $this->user -> signIn();
             if($result) {
                 $_SESSION['loggedin']=1;
-                $this -> user = new CartController;
-                $createCart = $this-> user-> registerCart();
-                if($createCart) {
+                $isActive = $this-> user ->isActiveCheck();
+                $cartId = 0;
+                foreach($isActive as $i ){
+                    $cartId = $i['cart_id'];
+                }
+                if($cartId != 0) {     
+                    $_SESSION['cart_id'] = $cartId ;                   
+                    View::load("home");
+                } else{
                     View::load("home");
                 }
             } else {
-                $_SESSION['message'] = "Register/Login to continue";
+                $_SESSION['message'] = "Username or Password is Incorrect!";
                 View::load("user");
             }
         }
@@ -60,10 +66,12 @@
         public function registerUser() 
         {
             $result = $this->user -> createUser();
-            if($result) {
+            if($result == 1) {
                 $_SESSION['message'] = "Registration Successfull! Login to continue!";
+            } else if($result == 2) {
+                $_SESSION['message'] = "Email already exists!!";
             } else {
-                $_SESSION['message'] = "Enter Valid Details for Registration";
+                $_SESSION['message'] = "Enter Valid Details for Registration!";
             }
             View::load("user");
         }
@@ -75,24 +83,22 @@
          */
         public function loginCheck() 
         {
-            if(!isset($_SESSION['loggedin'])) {
-                $result = $this->user -> signIn();
-                if($result) {
-                    $_SESSION['loggedin']=1;
+            if(isset($_SESSION['loggedin']) && empty($_SESSION['cart_id']) ) {
+            $this -> user = new CartController;
+            $createCart = $this-> user-> registerCart();
+                if($createCart) {
                     $this -> user = new CartController;
-                    $createCart = $this-> user-> registerCart();
-                    if($createCart) {
+                    $addToCart = $this-> user-> addToCart();
+                    if($addToCart) {
+                        $_SESSION['message'] = "Product added to cart Successfully!!";
                         View::load("home");
-                    }
-                } else { 
-                    $_SESSION['message'] = "Username or Password is incorrect";
-                    View::load("user");
+                    }   
                 }
             } else {
                 $this -> user = new CartController;
                 $addToCart = $this-> user-> addToCart();
                 if($addToCart) {
-                    $_SESSION['message'] = "Product added to cart";
+                    $_SESSION['message'] = "Product added to cart Successfully!!";
                     View::load("home");
                 }
             }
@@ -142,6 +148,9 @@
         {
             if(isset($_SESSION['loggedin'])) {
                 unset($_SESSION['loggedin']);
+                unset($_SESSION['cart_id']);
+                unset($_SESSION['isActive']);
+                unset($_SESSION['user_id']);
                 View::load("home");
             } else { 
                 $_SESSION['message'] = "Register/Login to continue";

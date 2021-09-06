@@ -10,8 +10,6 @@
     $orders = new AdminModel();
     $orderDetails = $orders -> orderDetails();
     $rowCount = mysqli_num_rows($orderDetails);
-//    echo("hi");
-//    exit;
     if($rowCount>0){
         while( $results = $orderDetails->fetch_assoc()){
             $customerDetails = $orders -> customerDetails($results['cart_id']);
@@ -27,7 +25,6 @@
                 "order_status" => $results['order_status']
             );
         }
-        //http_response_code(200);
         echo json_encode($order);
     }
     else{

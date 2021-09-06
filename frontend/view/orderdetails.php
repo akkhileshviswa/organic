@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Confirmation</title>
@@ -78,7 +79,8 @@
                         <td id="detail"><?php echo $customerDetails['address']; ?></td>
                     </tr>
                 </tbody>
-            </table>
+            </table><?php  $_SESSION['cart_id'] =0;
+                            unset($_SESSION['isActive']);?>
         </div>
         <?php include "footer.php" ?>
     </body>

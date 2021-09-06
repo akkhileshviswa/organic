@@ -6,6 +6,7 @@
     Routes::get(['url' => 'checkout', 'controller' => 'Cartcontroller', 'method' => 'loadCheckout']);
     Routes::get(['url' => 'logout', 'controller' => 'Usercontroller', 'method' => 'userLogout']);
     
+    Routes::post(['url' => 'user', 'controller' => 'Usercontroller', 'method' => 'loadUser']);
     Routes::post(['url' => 'home', 'controller' => 'Usercontroller', 'method' => 'loginCheck']);
     Routes::post(['url' => 'login', 'controller' => 'UserController', 'method' => 'loginUser']);
     Routes::post(['url' => 'register', 'controller' => 'UserController', 'method' => 'registerUser']);

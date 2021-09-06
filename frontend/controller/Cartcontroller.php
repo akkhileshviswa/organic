@@ -106,7 +106,12 @@
         {
             $checkoutDetails = $this->cart -> checkoutDetails();
             if( $checkoutDetails) {
+                
                 View::load('orderdetails');
+            }
+            else{
+                $_SESSION['message'] = "Fill all the fields!";
+                View::load('checkout');
             }
         }
         

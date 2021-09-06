@@ -1,52 +1,54 @@
 <?php 
-error_reporting(0);
+	error_reporting(0);
 	/**
 	 * This class insert, fetches, delete, update the values in database upon calling the specified function.
 	 */
 	class UserModel 
 	{
 		private $instance;
-        
+        private $session;
+
         /**
          * This method is used to create a object for Database class.
          */
         public function __construct()
         {
             $this->instance = Database::getInstance();
+			$this->session = SessionId::session();
         }
 
 		/**
          * This method is used to register the user based on the details provided,
-		 * @return boolean of the result.
+		 * @return integer of the result.
          */
 		public function createUser() 
 		{
-			if($_SERVER['REQUEST_METHOD'] == "POST") {	
+			if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'])) {	
 				$connection = $this->instance->getConnection();
 				$name = trim($_POST['name']);
 				$email = trim($_POST['email']);
 				$password = trim($_POST['password']);
-				$mdpassword = md5($password);
-				if(!empty($name) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($mdpassword)) {
+				$mdPassword = md5($password);
+				if(!empty($name) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($mdPassword)) {	
+					$statement =  $connection->prepare("INSERT INTO users (username,email,password) 
+														VALUES (:name, :email, :mdPassword)");
+					$statement->bindParam(':name', $name);
+					$statement->bindParam(':email', $email);
+					$statement->bindParam(':mdPassword', $mdPassword);
 					try {
-							$statement =  $connection->prepare("INSERT INTO users (username,email,password) 
-																VALUES (:name, :email, :mdpassword)");
-							$statement->bindParam(':name', $name);
-							$statement->bindParam(':email', $email);
-							$statement->bindParam(':mdpassword', $mdpassword);
-							$result = $statement->execute();
-							if(!$result) {
-								throw new Exception("Error in inserting user");
-							} else {
-								return true;    
-							}
-					} catch(Exception $e) {
-						throw "Message: " .$e->getMessage();
-					}	
+						$statement->execute();
+						return 1;
+					 } catch (PDOException $e) {
+						if ($e->errorInfo[1] == 1062) {
+							return 2;
+						}
+					 }
 				} else {
-					return false;
+					return 0;
 				}
-			} 
+			} else {
+				return false;
+			}	
 		}
 		
 		/**
@@ -55,13 +57,16 @@ error_reporting(0);
          */
 		public function signIn()
 		{
-			if($_SERVER['REQUEST_METHOD'] == "POST") {
+			if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['loginname']) && !empty($_POST['loginpassword'])) {
 				$connection = $this->instance->getConnection();
 				$name = trim($_POST['loginname']);
 				$password = trim($_POST['loginpassword']);
-				$mdpassword = md5($password);
+				$mdPassword = md5($password);
 				try {
-						$result = $connection->query("SELECT * FROM users WHERE username = '$name' AND password = '$mdpassword';");
+						$result = $connection->prepare("SELECT * FROM users WHERE username = :name AND password = :mdPassword;");
+						$result->bindParam(':name', $name);
+						$result->bindParam(':mdPassword', $mdPassword);
+						$result->execute();
 						if(!$result) {
 							throw new Exception("Error in Selecting the user.");
 						}
@@ -69,14 +74,44 @@ error_reporting(0);
 					throw "Message: " .$e->getMessage();
 				}
 				$row = $result->fetch();
-				if($row['username'] == $name && $row['password'] === $mdpassword) {
+				if($row['username'] == $name && $row['password'] === $mdPassword) {
 					$_SESSION['user_id'] = $row['user_id'];
 					return true;
 				} else {
 					return false;
 				}	
-            }
+            } else {
+				return false;
+			}	
         }
+
+		/**
+         * This method is used to check if the user has already has a cart,
+		 * @return object of the result.
+         */
+		public function isActiveCheck()
+		{
+			if(isset($_SESSION['user_id'])) {
+				$connection = $this->instance->getConnection();
+				$userId = $_SESSION['user_id'];
+				$isActive = intval(1);
+				try {
+						$result = $connection->prepare("SELECT cart_id FROM cart WHERE user_id = :userId AND is_active = :isActive;");
+						$result->bindParam(':userId', $userId);
+						$result->bindParam(':isActive', $isActive);
+						$result->execute();
+						if(!$result) {
+							throw new Exception("Error in Selecting the password");
+						} else {
+							return $result;
+						}
+				} catch(Exception $e) {
+					throw "Message: " .$e->getMessage();
+				}
+			} else {
+				return false;
+			}
+		}
 		
 		/**
          * This method is used to get the password of the current user,
@@ -84,17 +119,23 @@ error_reporting(0);
          */
 		public function getPassword()
 		{
-			$connection = $this->instance->getConnection();
-			$user_id = $_SESSION['user_id'];
-			try {
-					$result = $connection->query("SELECT password FROM users WHERE user_id = $user_id;");
-					if(!$result) {
-						throw new Exception("Error in Selecting the password");
-					} else {
-						return $result;
-					}
-			} catch(Exception $e) {
-				throw "Message: " .$e->getMessage();
+			if(isset($_SESSION['user_id'])) {
+				$connection = $this->instance->getConnection();
+				$userId = $this->session['userId'];
+				try {
+						$result = $connection->prepare("SELECT password FROM users WHERE user_id = :userId;");
+						$result->bindParam(':userId', $userId);
+						$result->execute();
+						if(!$result) {
+							throw new Exception("Error in Selecting the password");
+						} else {
+							return $result;
+						}
+				} catch(Exception $e) {
+					throw "Message: " .$e->getMessage();
+				}
+			} else {
+				return false;
 			}
 		}
 		
@@ -103,19 +144,24 @@ error_reporting(0);
          */
 		public function updatePassword()
 		{
-			$connection = $this->instance->getConnection();
-			$user_id = $_SESSION['user_id'];
-			$password = trim($_POST['password']);
-			$mdpassword = md5($password);
-			try {
-					$statement = $connection->prepare("UPDATE users SET password = :mdpassword WHERE user_id = $user_id;");
-					$statement->bindParam(':mdpassword', $mdpassword);
-					$result = $statement->execute();
-					if(!$result) {
-						throw new Exception("Error in updating the user details");
-					}
-			} catch(Exception $e) {
-				throw "Message: " .$e->getMessage();
+			if(isset($_SESSION['user_id']) && !empty($_POST['password'])) {
+				$connection = $this->instance->getConnection();
+				$userId = $this->session['userId'];
+				$password = trim($_POST['password']);
+				$mdPassword = md5($password);
+				try {
+						$statement = $connection->prepare("UPDATE users SET password = :mdPassword WHERE user_id = :userId;");
+						$statement->bindParam(':mdPassword', $mdPassword);
+						$statement->bindParam(':userId', $userId);
+						$result = $statement->execute();
+						if(!$result) {
+							throw new Exception("Error in updating the user details");
+						}
+				} catch(Exception $e) {
+					throw "Message: " .$e->getMessage();
+				}
+			} else {
+				return false;
 			}
 		}
 		
@@ -124,18 +170,23 @@ error_reporting(0);
          */
 		public function updateAddress()
 		{
-			$connection = $this->instance->getConnection();
-			$userId = $_SESSION['user_id'];
-			$address = trim($_POST['address']);
-			try {
-					$statement = $connection->prepare("UPDATE checkout SET address = :address WHERE user_id = $userId;");
-					$statement->bindParam(':address', $address);
-					$result = $statement->execute();
-					if(!$result) {
-						throw new Exception("Error in updating the user details");
-					}
-			} catch(Exception $e) {
-				throw "Message: " .$e->getMessage();
+			if(isset($_SESSION['user_id']) && !empty($_POST['address'])) {
+				$connection = $this->instance->getConnection();
+				$userId = $this->session['userId'];
+				$address = trim($_POST['address']);
+				try {
+						$statement = $connection->prepare("UPDATE checkout SET address = :address WHERE user_id = :userId;");
+						$statement->bindParam(':address', $address);
+						$statement->bindParam(':userId', $userId);
+						$result = $statement->execute();
+						if(!$result) {
+							throw new Exception("Error in updating the user details");
+						}
+				} catch(Exception $e) {
+					throw "Message: " .$e->getMessage();
+				}
+			} else {
+				return false;
 			}
 		}
 	}

@@ -40,3 +40,18 @@ function validate(){
         return error == "" ? true : false;
     }
 }
+
+
+function enableOrDisableProduct(productId, isActive) {
+    var http = new XMLHttpRequest();
+    if(isActive ==1){
+        isActive = 0;
+    } else {
+        isActive = 1;
+    }
+    var params = 'product_id=' + productId + '&is_active=' +isActive;
+    http.open('POST', 'enableOrDisableProduct', true);
+    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    http.send(params);
+    location.reload();
+}

@@ -1,7 +1,9 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Products</title>
         <link rel="stylesheet" href="<?= Utility::getAssests() ?>/assests/css/products.css">
+        <script src="<?= Utility::getAssests() ?>/assests/js/updateproduct.js"></script>
     </head>
     <body>
         <div id="dash_body">
@@ -74,6 +76,16 @@
                                     <input type="hidden" id="product_id" name="product_id" value="<?php echo $products['product_id'];?>" >
                                     <button id = "updatebutton">Edit </button>
                                 </form>
+                                <?php 
+                                    if($products['is_active'] == 1){
+                                        $isActive = "Disable";
+                                        $isActiveId = "disable";
+                                    } else if ($products['is_active'] == 0) {
+                                        $isActive = "Enable";
+                                        $isActiveId = "enable";
+                                    }
+                                ?>
+                                <input type="button" value="<?php echo $isActive;?>" id = "<?php echo $isActiveId;?>" onclick="enableOrDisableProduct(<?php echo $products['product_id'];?>, <?php echo $products['is_active'];?>);">
                                 </td>
                             </tr>
                             <?php endwhile;  ?>   

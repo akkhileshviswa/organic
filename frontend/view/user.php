@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>User Page</title>
@@ -10,7 +11,7 @@
         <div id="table">
             <table id="main">
                 <tr id="session">    
-                    <td><?php 
+                    <td><?php  
                            if(isset($_SESSION['message'])){
                             echo $_SESSION['message'];
                             unset($_SESSION['message']);
@@ -25,7 +26,7 @@
             <table id="left">
                 <tr>
                     <td>
-                        <form method="POST" action= "home" onsubmit="return loginvalidate()" autocomplete="off">
+                        <form method="POST" action= "login" onsubmit="return loginvalidate()" autocomplete="off">
                             <label id="required">USERNAME</label><br>
                             <input id="loginname" type="text" name="loginname" size="42" ><br>
                             <span id="loginnameerr"></span><br>
