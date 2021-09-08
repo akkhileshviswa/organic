@@ -31,7 +31,7 @@
                     <tr>
                         <td>#<?php echo $_SESSION['cart_id']; ?></td>
                         <td><?php echo $customerDetails['checkout_date']; ?></td>
-                        <td>$<?php echo $orderDetail['grand_total']; ?></td>
+                        <td>₹<?php echo $orderDetail['grand_total']; ?></td>
                         <td><?php echo $orderDetail['payment_method']; ?></td>
                     </tr>
                 </tbody>
@@ -49,7 +49,7 @@
                     ?>
                     <tr>
                         <td><?php echo $itemDetail['item_name']; ?> x <?php echo $itemDetail['item_quantity']; ?></td><td></td>
-                        <td><?php echo $itemDetail['row_total']; ?></td>
+                        <td class="amount"><?php echo $itemDetail['row_total']; ?></td>
                     </tr>
                     <?php endforeach; ?>
                     <tr>
@@ -58,7 +58,7 @@
                     </tr>
                     <tr>
                         <td>Total</td><td></td>
-                        <td><?php echo $orderDetail['grand_total']; ?></td>
+                        <td class="amount"><?php echo $orderDetail['grand_total']; ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

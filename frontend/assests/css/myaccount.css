@@ -132,3 +132,7 @@ textarea {
 .productslist{
     list-style-type:none;
 }
+
+.amount::before{
+    content: "₹";
+}

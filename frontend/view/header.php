@@ -19,7 +19,7 @@
                         $grand_total = $cart -> updateCart();
                     ?>
                     <a href="cart">MY CART</a><br>
-                    $<?php echo number_format((float)$grand_total, 2, '.', ''); ?><br>
+                    ₹<?php echo number_format((float)$grand_total, 2, '.', ''); ?><br>
                 </td>
             </tr>
             <tr>

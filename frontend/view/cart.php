@@ -31,7 +31,7 @@
                     <tr id="border">
                         <td><img id="tableimage" src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $j['image']; ?>"></td>
                         <td><?php echo $j['item_name']; ?></td>
-                        <td>$<?php echo $j['item_price']; ?></td>
+                        <td>₹<?php echo $j['item_price']; ?></td>
                         <td><input type="number" min=1 placeholder="1" id="item_quantity" value="<?php echo $j['item_quantity']; ?>" 
                                     onchange="changeQuantity(this.value, <?php echo $j['item_id']; ?>, <?php echo $j['item_price']; ?>); grandTotal();" ></td>
                         

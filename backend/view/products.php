@@ -70,7 +70,7 @@
                                 <td><?php echo $products['product_id']; ?></td>
                                 <td><img id="tableimage" src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $products['image']; ?>"></td>
                                 <td><?php echo $products['product_name']; ?></td>
-                                <td>$<?php echo $products['price']; ?></td>
+                                <td>₹<?php echo $products['price']; ?></td>
                                 <td><?php echo $products['quantity']; ?></td>
                                 <td><form method="POST" action="updateproduct">
                                     <input type="hidden" id="product_id" name="product_id" value="<?php echo $products['product_id'];?>" >
@@ -84,7 +84,7 @@
                                         $isActive = "Enable";
                                         $isActiveId = "enable";
                                     }
-                                ?>
+                                ?><br>
                                 <input type="button" value="<?php echo $isActive;?>" id = "<?php echo $isActiveId;?>" onclick="enableOrDisableProduct(<?php echo $products['product_id'];?>, <?php echo $products['is_active'];?>);">
                                 </td>
                             </tr>

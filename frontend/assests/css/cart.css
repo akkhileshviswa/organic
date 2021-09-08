@@ -116,7 +116,7 @@ input[type='number']{
 }
 
 .amount::before{
-    content: "$";
+    content: "₹";
 }
 
 .total span{

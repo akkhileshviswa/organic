@@ -22,11 +22,6 @@ tr td .worksans{
     color: #666;
 }
 
-#leftspace::before{
-    content: "!!";
-    color: transparent;
-}
-
 #right{
     font-family: sans-serif;
     padding: 10px 10px 10px;
@@ -120,7 +115,7 @@ span{
     margin-top: 85%;
 }
 .amount::before{
-    content: "$";
+    content: "₹";
 }
 
 tr #tdcash{

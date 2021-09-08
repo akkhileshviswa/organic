@@ -49,7 +49,7 @@
                     <div id="info">
                         <p id="infotext">Earnings</p>
                         <p id="infotext">
-                            <span id="amount">$ 6659</span>This Month</p>   
+                            <span id="amount">₹ 6659</span>This Month</p>   
                     </div>
                 </div>
                 <div id="two">
@@ -59,7 +59,7 @@
                     <div id="info">
                         <p id="infotext">Products</p>
                         <p id="infotext">
-                            <span id="amount">$ 9856</span>This Month</p>   
+                            <span id="amount">₹ 9856</span>This Month</p>   
                     </div>
                 </div>
                 <br>

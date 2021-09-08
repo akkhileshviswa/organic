@@ -5,8 +5,7 @@
                         <img src="<?= Utility::getAssests() ?>/assests/images/footer/footerlogo.png"><br>
                         <p>Maecenas tristique gravida, odio et sagi  <br>
                         ttis justo. Suspendisse ultricies  nisi veafn. <br>  
-                        onec dictum non nulla ut lobortis tellus.
-                        </p>
+                        onec dictum non nulla ut lobortis tellus.</p>
                         <hr>
                         <p>2021 Oganici.</p>
                     </div>

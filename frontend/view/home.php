@@ -104,7 +104,7 @@
                 <br><br><br><br>
                 <form>
                     <input type="email" name="EMAIL" placeholder="Email address" size="56">
-                    <input id="submit"  value="SUBMIT">
+                    <input type="submit" id="submit"  value="SUBMIT">
                 </form>
             </div> 
         </div>

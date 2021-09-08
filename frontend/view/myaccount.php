@@ -86,7 +86,7 @@
                                 </ol>
                             </td>
                             <td><?php echo $i['checkout_date']; ?></td>
-                            <td><?php echo $i['grand_total']; ?></td>
+                            <td class="amount"><?php echo $i['grand_total']; ?></td>
                             <td><?php echo $i['order_status']; ?></td>
                         </tr>
                         <?php endforeach;?>

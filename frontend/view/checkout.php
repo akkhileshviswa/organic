@@ -28,7 +28,7 @@
                     <table>
                         <tr>
                             <td><label id="required" class="worksans">First Name</label></td>
-                            <td id="leftspace"><label id="required" class="worksans" >Last Name</label></td>
+                            <td><label id="required" class="worksans" >Last Name</label></td>
                         </tr>
                         <tr>
                             <td><input type="text" class="tableelements" id="firstname" name="first_name" ></td>
@@ -114,7 +114,7 @@
                         <td id="heading">SHIPPING</td>
                         <td>
                             <input type="radio" id="delivery" name="shipping_method" value=2  onchange="changeShippingMethod(<?php echo $subTotal; ?>,this.value);" >
-                            <label>Flat rate: <b>$2.00</b></label><br><br>
+                            <label>Flat rate: <b>₹2.00</b></label><br><br>
                             <input type="radio" id="delivery" name="shipping_method" value=1 onchange="changeShippingMethod(<?php echo $subTotal; ?>,this.value);" >
                             <label>Free shipping</label><br><br>
                             <input type="radio" id="delivery" name="shipping_method" value=0 onchange="changeShippingMethod(<?php echo $subTotal; ?>,this.value);" >

@@ -114,3 +114,7 @@ h4{
     line-height: 2.4em;
     color: transparent;
 }
+
+.amount::before{
+    content: "₹";
+}
