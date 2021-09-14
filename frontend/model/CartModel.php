@@ -1,5 +1,4 @@
 <?php
-	error_reporting(0);
 	/**
 	 * This class insert, fetches, delete, update the values in database upon calling the specified function.
 	 */
@@ -18,7 +17,7 @@
         }
 		
 		/**
-		 * This method creates the cart for the logged in  user.
+		 * This method creates the cart for the logged in user.
 		 * @return boolean based on the result.
 		 */
         public function createCart()
@@ -111,6 +110,7 @@
 		
 		/**
 		 * This method updates the quantity and total price of the product upon updating the quantity into the item table.
+		 * @return null
 		 */
 		public function updateQuantity() 
 		{
@@ -139,6 +139,7 @@
 		
 		/**
 		 * This method removes the product from cart upon deleting the product from the cart.
+		 * @return null
 		 */
 		public function removeCartItem() 
 		{

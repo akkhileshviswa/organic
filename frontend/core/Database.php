@@ -1,8 +1,8 @@
 <?php
 
     /**
-    * This class connects to the database and returns the object when called.
-    */
+     * This class connects to the database and returns the object when called.
+     */
     class Database {
         private $connection;
         private static $instance;
@@ -26,7 +26,7 @@
         /**
          * This method returns the instance of the current class.
          */
-        public static function getInstance(){
+        public static function getInstance() {
             if(!self::$instance) {
                     self::$instance = new Database();
                 }
@@ -36,7 +36,7 @@
         /**
          * This method returns the object of the connection.
          */
-        public function getConnection(){
+        public function getConnection() {
             return $this->connection;
         }
     }

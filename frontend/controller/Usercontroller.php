@@ -1,4 +1,5 @@
 <?php  
+    error_reporting(0);
     /**
      * This class creates a object for UserModel class and calls the specified function of the UserModel class.
      */
@@ -16,6 +17,7 @@
 
         /**
          * This method loads home page on get request.
+         * @return null
          */
         public function loadHome() 
         {
@@ -24,10 +26,12 @@
         
         /**
          * This method loads user page on get request.
+         * @return null
          */
         public function loadUser()
         {
             $_SESSION['message'] = "Register/Login to continue!!"; 
+            $_SESSION['loggedin'] = 0;
             View::load("user");
         }
         
@@ -35,12 +39,13 @@
          * This method calls loginUser method in UserModel class
          * based on the result it loads the desired
          * view page.
+         * @return null
          */
         public function loginUser()
         {
             $result = $this->user -> signIn();
             if($result) {
-                $_SESSION['loggedin']=1;
+                $_SESSION['loggedin'] = 1;
                 $isActive = $this-> user ->isActiveCheck();
                 $cartId = 0;
                 foreach($isActive as $i ){
@@ -62,6 +67,7 @@
          * This method calls createUser method in UserModel class
          * based on the result it loads the desired
          * view page and session message.
+         * @return null
          */
         public function registerUser() 
         {
@@ -70,6 +76,8 @@
                 $_SESSION['message'] = "Registration Successfull! Login to continue!";
             } else if($result == 2) {
                 $_SESSION['message'] = "Email already exists!!";
+            } else if($result == 3) {
+                $_SESSION['message'] = "Username already exists!!";
             } else {
                 $_SESSION['message'] = "Enter Valid Details for Registration!";
             }
@@ -80,10 +88,11 @@
          * This method calls loginCheck method in UserModel class
          * based on the result it loads the desired
          * view page and session message.
+         * @return null
          */
         public function loginCheck() 
         {
-            if(isset($_SESSION['loggedin']) && empty($_SESSION['cart_id']) ) {
+            if($_SESSION['loggedin']>0 && empty($_SESSION['cart_id']) ) {
             $this -> user = new CartController;
             $createCart = $this-> user-> registerCart();
                 if($createCart) {
@@ -108,10 +117,11 @@
          * This method calls showUserDetails method in UserModel class
          * based on the result it loads the desired
          * view page and session message.
+         * @return null
          */
         public function showUserDetails() 
         {
-            if(isset($_SESSION['loggedin'])) {
+            if($_SESSION['loggedin']>0) {
                 View::load("myaccount");
             } else { 
                 $_SESSION['message'] = "Register/Login to continue";
@@ -143,10 +153,11 @@
          * This method calls userLogout method in UserModel class
          * based on the result it loads the desired
          * view page and session message.
+         * @return null
          */
         public function userLogout() 
         {
-            if(isset($_SESSION['loggedin'])) {
+            if($_SESSION['loggedin']>0) {
                 unset($_SESSION['loggedin']);
                 unset($_SESSION['cart_id']);
                 unset($_SESSION['isActive']);

@@ -1,4 +1,5 @@
 <?php
+ error_reporting(0);
     /**
      * This class creates a object for CartModel class and calls the specified function of the CartModel class.
      */
@@ -8,6 +9,7 @@
         
         /**
          * This method is used to create a object for CartModel class.
+         * @return null
          */
         public function __construct()
         {
@@ -16,26 +18,35 @@
 
         /**
          * This method loads cart page on get request.
+         * @return null
          */
         public function loadCart()
         {
-            View::load("cart");
+            if($_SESSION['loggedin'] > 0) {
+                View::load("cart");
+            } else {
+                $_SESSION['message'] = "Register/Login to continue!!"; 
+                View::load("user");
+            }
         }
         
         /**
          * This method loads checkout page on get request.
+         * @return null
          */
         public function loadCheckout()
         {
-            View::load("checkout");
-        }
-        
-        /**
-         * This method loads orderdetails page on get request.
-         */
-        public function loadOrderDetails()
-        {
-            View::load("orderdetails");
+            if($_SESSION['loggedin'] > 0) {
+                if( $_SESSION['itemCount'] > 0) {
+                    View::load("checkout");
+                } else {
+                    $_SESSION['message'] = "Cart is Empty!! Add Products To Continue!!";
+                    View::load("home");
+                }
+            } else {
+                $_SESSION['message'] = "Register/Login to continue!!"; 
+                View::load("user");
+            }
         }
         
         /**
@@ -106,10 +117,8 @@
         {
             $checkoutDetails = $this->cart -> checkoutDetails();
             if( $checkoutDetails) {
-                
                 View::load('orderdetails');
-            }
-            else{
+            } else {
                 $_SESSION['message'] = "Fill all the fields!";
                 View::load('checkout');
             }

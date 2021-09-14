@@ -34,8 +34,7 @@
                         <td>₹<?php echo $j['item_price']; ?></td>
                         <td><input type="number" min=1 placeholder="1" id="item_quantity" value="<?php echo $j['item_quantity']; ?>" 
                                     onchange="changeQuantity(this.value, <?php echo $j['item_id']; ?>, <?php echo $j['item_price']; ?>); grandTotal();" ></td>
-                        
-                                    <td id="<?php echo $j['item_id']; ?>" class="amount"><?php echo $j['row_total']; ?></td>
+                        <td id="<?php echo $j['item_id']; ?>" class="amount"><?php echo $j['row_total']; ?></td>
                         <td><input type="button" id="remove" value="X" onclick="removeFromCart(<?php echo $j['item_id']; ?>); " ></td>
                     </tr>
                     <tr>

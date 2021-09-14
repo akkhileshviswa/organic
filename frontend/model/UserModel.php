@@ -1,5 +1,4 @@
 <?php 
-	error_reporting(0);
 	/**
 	 * This class insert, fetches, delete, update the values in database upon calling the specified function.
 	 */
@@ -30,6 +29,17 @@
 				$password = trim($_POST['password']);
 				$mdPassword = md5($password);
 				if(!empty($name) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($mdPassword)) {	
+					$result = $connection->prepare("SELECT * FROM users WHERE username = :name ;");
+					$result->bindParam(':name', $name);
+					try {
+						$result->execute();
+						$row = $result->fetch();
+						if($row['username'] == $name) {
+							return 3;
+						}
+					} catch(Exception $e) {
+						throw "Message: " .$e->getMessage();
+					}
 					$statement =  $connection->prepare("INSERT INTO users (username,email,password) 
 														VALUES (:name, :email, :mdPassword)");
 					$statement->bindParam(':name', $name);
@@ -37,12 +47,18 @@
 					$statement->bindParam(':mdPassword', $mdPassword);
 					try {
 						$statement->execute();
+						//$to = $email;
+						$to = "akkhilesh42@gmail.com";
+						$subject = "Registration In Organici - Reg";
+						$body = "You have successfully registered in Organici!! Happy Shopping!!";
+						$headers = "From: \Organici";
+						mail($to, $subject, $body, $headers);
 						return 1;
-					 } catch (PDOException $e) {
+					} catch (PDOException $e) {
 						if ($e->errorInfo[1] == 1062) {
 							return 2;
 						}
-					 }
+					}
 				} else {
 					return 0;
 				}
@@ -141,6 +157,7 @@
 		
 		/**
          * This method is used to update the password of the current user.
+		 * @return null
          */
 		public function updatePassword()
 		{
@@ -167,6 +184,7 @@
 		
 		/**
          * This method is used to update the address of the current user.
+		 * @return null
          */
 		public function updateAddress()
 		{

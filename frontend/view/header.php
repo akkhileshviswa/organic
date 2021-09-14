@@ -30,7 +30,7 @@
         <div class="menu">
             <nav>
             <?php
-                if( isset($_SESSION['loggedin'])){ ?>
+                if( $_SESSION['loggedin'] > 0){ ?>
                 <ul>
                     <li><a href="home">HOME</a></li>
                     <li>OUR STORY</li>

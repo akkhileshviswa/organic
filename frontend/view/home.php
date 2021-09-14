@@ -21,10 +21,10 @@
             ?>
         </div>         
         <div class="owl-carousel owl-theme">
-        <div><img src="<?= Utility::getAssests() ?>/assests/images/index/slider_1.jpg"></div>
-        <div><img src="<?= Utility::getAssests() ?>/assests/images/index/slider_2.jpg"></div>
-        <div><img src="<?= Utility::getAssests() ?>/assests/images/index/slider_3.jpg"></div>
-    </div>
+            <div><img src="<?= Utility::getAssests() ?>/assests/images/index/slider_1.jpg"></div>
+            <div><img src="<?= Utility::getAssests() ?>/assests/images/index/slider_2.jpg"></div>
+            <div><img src="<?= Utility::getAssests() ?>/assests/images/index/slider_3.jpg"></div>
+        </div>
         <div>
             <img class="fruit" src="<?= Utility::getAssests() ?>/assests/images/index/fruit_1.jpg">
             <img class="fruit" src="<?= Utility::getAssests() ?>/assests/images/index/fruit_2.jpg">
@@ -52,7 +52,7 @@
         <div id="productlist">
             <table  id="products">      
                 <?php
-                    if( isset($_SESSION['loggedin'])){
+                    if( $_SESSION['loggedin'] > 0) {
                         $userId = $_SESSION['user_id'];
                         $action ="home";
                     }else {

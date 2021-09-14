@@ -1,5 +1,4 @@
 <?php
-    error_reporting(0);
     /**
      * This class creates a object for AdminModel class and calls the specified function of the AdminModel class.
      */
@@ -17,6 +16,7 @@
         
         /**
          * This method loads login page on get request.
+         * @return null
          */
         public function loadLogin()
         {
@@ -26,6 +26,7 @@
         
         /**
          * This method loads dashboard page on get request, if the user has logged in.
+         * @return null
          */
         public function loadDashboard()
         {
@@ -39,6 +40,7 @@
         
         /**
          * This method loads customers page on get request, if the user has logged in.
+         * @return null
          */
         public function loadCustomers()
         {
@@ -52,6 +54,7 @@
         
         /**
          * This method loads orders page on get request, if the user has logged in.
+         * @return null
          */
         public function loadOrders()
         {
@@ -65,6 +68,7 @@
         
         /**
          * This method loads products page on get request, if the user has logged in.
+         * @return null
          */
         public function loadProducts()
         {
@@ -78,6 +82,7 @@
         
         /**
          * This method loads new product page on get request, if the user has logged in.
+         * @return null
          */
         public function newProduct()
         {
@@ -91,6 +96,7 @@
         
         /**
          * This method loads update product page on post request, if the user has logged in.
+         * @return null
          */
         public function updateProduct()
         {
@@ -104,6 +110,7 @@
         
         /**
          * This method loads update customer page on post request, if the user has logged in.
+         * @return null
          */
         public function updateCustomer()
         {
@@ -119,6 +126,7 @@
          * This method calls signIn method in AdminModel class
          * based on the result it loads the desired
          * view page and session message.
+         * @return null
          */
         public function loginUser() 
         {
@@ -168,6 +176,7 @@
          * This method calls updateEditedProduct method in AdminModel class
          * based on the result it loads the desired
          * view page and session message.
+         * @return null
          */
         public function updateEditedProduct()
         {
@@ -184,6 +193,7 @@
          * This method calls enableOrDisableProduct method in AdminModel class
          * based on the result it loads the desired
          * view page and session message.
+         * @return null
          */
         public function enableOrDisableProduct()
         {
@@ -196,6 +206,7 @@
          * This method calls createProduct method in AdminModel class
          * based on the result it loads the desired
          * view page and session message.
+         * @return null
          */
         public function createProduct() 
         {
@@ -233,6 +244,7 @@
          * This method calls updateEditedCustomer method in AdminModel class
          * based on the result it loads the desired
          * view page and session message.
+         * @return null
          */
         public function updateEditedCustomer()
         {
@@ -249,6 +261,7 @@
          * This method calls changeOrderStatus method in AdminModel class
          * based on the result it loads the desired
          * view page and session message.
+         * @return null
          */
         public function changeOrderStatus()
         {
@@ -265,6 +278,7 @@
          * This method calls removeOrder method in AdminModel class
          * based on the result it loads the desired
          * view page and session message.
+         * @return null
          */
         public function removeOrder()
         {
