@@ -257,7 +257,7 @@
             } elseif($result == 3) {
                 $_SESSION['message'] = "Email already exists!!";
             } elseif($result == 4) {
-                $_SESSION['message'] = "This Details Are Already Existing For The Sama Customer!!";
+                $_SESSION['message'] = "Edit The Details For Updating!!";
             } else {
                 $_SESSION['message'] = "Customer Detail has not been updated!!";
             }
