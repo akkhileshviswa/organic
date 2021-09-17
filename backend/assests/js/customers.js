@@ -8,7 +8,7 @@ function validate(){
         return false;
 
     function validatename(){
-        var name = document.getElementById("name").value;
+        var name = document.getElementById("username").value;
         var error = "";
         if(name == ""){
             error = "Please enter the name";
@@ -20,9 +20,11 @@ function validate(){
     function validateemail(){
         var email = document.getElementById("email").value;
         var error = "";
+        var atposition = email.indexOf("@");  
+        var dotposition = email.lastIndexOf("."); 
         if(email == ""){
             error = "Please enter the email";
-        }else if(email.indexOf("@") == -1 || !(/\w+\d*@\w+.\w+/.test(email))){
+        }else if(atposition<1 || dotposition<atposition+2 || dotposition+2>=email.length){
             error = "Please enter the valid email"
         }
         emailerr.innerHTML = error;

@@ -15,10 +15,10 @@
 		 * This method connects to the database for the provided details.
 		 */
         private function __construct() {
-            try{
+            try {
                 $this->connection = new PDO('mysql:host='.self::dbhost.';dbname='.self::dbname, self::dbuser, self::dbpass);
                 $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            }catch(PDOException $e){
+            } catch(PDOException $e) {
                 die("Failed to connect to database: ". $e->getMessage());
             }
         }
@@ -30,7 +30,7 @@
             if(!self::$instance) {
                     self::$instance = new Database();
                 }
-                return self::$instance;
+            return self::$instance;
         }
 
         /**

@@ -1,4 +1,5 @@
 <?php   
+
 	/**
 	 * This class insert, fetches, delete, update the values in database upon calling the specified function.
 	 */
@@ -25,7 +26,7 @@
 				$name = trim($_POST['name']);
 				$password = trim($_POST['password']);
 				try {
-					$result = mysqli_query($connection,"SELECT * FROM admin WHERE username = '$name' AND password = '$password';");
+					$result = mysqli_query($connection, "SELECT * FROM admin WHERE username = '$name' AND password = '$password';");
 					if(!$result) {
 						throw new Exception("Error in Selecting");
 					}
@@ -50,7 +51,7 @@
 		{
             $connection = $this->connect->getConnection();
             $userId = $_SESSION['user_id'];
-            $result = mysqli_query($connection,"SELECT * FROM admin WHERE user_id = $userId ;");
+            $result = mysqli_query($connection, "SELECT * FROM admin WHERE user_id = $userId ;");
             return $result; 
         }
 		
@@ -61,7 +62,7 @@
 		public function showProducts()
 		{
             $connection = $this->connect->getConnection();
-            $result = mysqli_query($connection,"SELECT * FROM product ;");
+            $result = mysqli_query($connection, "SELECT * FROM product ;");
             return $result; 
         }
 		
@@ -73,7 +74,7 @@
 		{
 			$connection = $this->connect->getConnection();
 			$productId = intval($_POST['product_id']);
-			$result = mysqli_query($connection,"SELECT product_id, product_name, price, quantity FROM product 
+			$result = mysqli_query($connection, "SELECT product_id, product_name, price, quantity FROM product 
 									WHERE product_id = $productId ;");
             return $result; 
 		}
@@ -82,16 +83,20 @@
          * This method is used to update product details in the database,
 		 * @return object of the result.
          */
-		public function updateEditedProduct(){
-			$connection = $this->connect->getConnection();
-			$productId = intval($_POST['product_id']);
-			$productName = trim($_POST['product_name']);
-			$price = floatval($_POST['price']);
-			$quantity = intval($_POST['quantity']);
-			$result = mysqli_query($connection,"UPDATE product 
-									SET product_name = '$productName', price = $price, quantity = $quantity
-									WHERE product_id = $productId ;");
-            return $result; 
+		public function updateEditedProduct()
+		{
+			if($_SERVER['REQUEST_METHOD'] == "POST" && $_POST['product_id'] != "" && $_POST['product_name'] != "" 
+				&& $_POST['price'] != "" && $_POST['quantity'] != "" ) {
+				$connection = $this->connect->getConnection();
+				$productId = intval($_POST['product_id']);
+				$productName = trim($_POST['product_name']);
+				$price = floatval($_POST['price']);
+				$quantity = intval($_POST['quantity']);
+				$result = mysqli_query($connection, "UPDATE product 
+										SET product_name = '$productName', price = $price, quantity = $quantity
+										WHERE product_id = $productId ;");
+				return $result; 
+			}
 		}
 		
 		/**
@@ -100,14 +105,17 @@
          */
 		public function createProduct() 
 		{	
-			$connection = $this->connect->getConnection();
-			$productName = trim($_POST['product_name']);
-			$price = floatval($_POST['price']);
-			$quantity = intval($_POST['quantity']);
-			$image = $_FILES['file']['name'];
-			$result = mysqli_query($connection,"INSERT INTO product (product_name, price, quantity, image) 
-									VALUES ('$productName', $price, $quantity, '$image');");
-			return $result;			
+			if($_SERVER['REQUEST_METHOD'] == "POST" && $_POST['product_name'] != "" && $_POST['price'] != "" 
+				&& $_POST['quantity'] != "" && $_FILES['file']['name'] != "" ) {
+				$connection = $this->connect->getConnection();
+				$productName = trim($_POST['product_name']);
+				$price = floatval($_POST['price']);
+				$quantity = intval($_POST['quantity']);
+				$image = $_FILES['file']['name'];
+				$result = mysqli_query($connection, "INSERT INTO product (product_name, price, quantity, image) 
+										VALUES ('$productName', $price, $quantity, '$image');");
+				return $result;		
+			}	
 		}
 
 		/**
@@ -120,13 +128,10 @@
 			$connection = $this->connect->getConnection();
 			$productId = intval($_POST['product_id']);
 			$isActive = intval($_POST['is_active']);
-			$result = mysqli_query($connection,"UPDATE product
+			$result = mysqli_query($connection, "UPDATE product
 									SET is_active = $isActive
 									WHERE product_id = $productId ;");
 			return $result;
-			if($result){
-				
-			}
 		}
 		
 		/**
@@ -136,7 +141,7 @@
 		public function showCustomers()
 		{
             $connection = $this->connect->getConnection();
-            $result = mysqli_query($connection,"SELECT * FROM users ;");
+            $result = mysqli_query($connection, "SELECT * FROM users ;");
             return $result; 
         }
 		
@@ -148,7 +153,7 @@
 		{
 			$connection = $this->connect->getConnection();
 			$userId = intval($_POST['user_id']);
-			$result = mysqli_query($connection,"SELECT user_id, username, email FROM users WHERE user_id = $userId ;");
+			$result = mysqli_query($connection, "SELECT user_id, username, email FROM users WHERE user_id = $userId ;");
             return $result; 
 		}
 		
@@ -158,14 +163,44 @@
          */
 		public function updateEditedCustomer()
 		{
-			$connection = $this->connect->getConnection();
-			$userId = intval($_POST['user_id']);
-			$username = trim($_POST['username']);
-			$email = trim($_POST['email']);
-			$result = mysqli_query($connection,"UPDATE users 
-									SET username = '$username', email = '$email'
-									WHERE user_id = $userId ;");
-            return $result; 
+			if($_SERVER['REQUEST_METHOD'] == "POST" && $_POST['username'] != "" && $_POST['email'] != "" && $_POST['user_id'] != "") {
+				$connection = $this->connect->getConnection();
+				$userId = intval($_POST['user_id']);
+				$username = trim($_POST['username']);
+				$email = trim($_POST['email']);
+				$statement = mysqli_query($connection, "SELECT * FROM users WHERE username = '$username';");
+				$row = $statement->fetch_assoc();
+				$emailCheck = mysqli_query($connection, "SELECT * FROM users WHERE email = '$email';");
+				$rowEmailCheck = $emailCheck->fetch_assoc();
+				if($row['username'] == $username) {
+					if($row['user_id'] == $userId) {
+						if($rowEmailCheck['email'] == $email) { 
+							return 4;
+						} else {
+							$result = mysqli_query($connection, "UPDATE users 
+													SET email = '$email'
+													WHERE user_id = $userId ;");
+							return $result; 
+						}
+					} else {
+						return 2;
+					}
+				} elseif ($rowEmailCheck['email'] == $email) {
+					if($rowEmailCheck['user_id'] == $userId) {
+						$result = mysqli_query($connection, "UPDATE users 
+											SET username = '$username'
+											WHERE user_id = $userId ;");
+						return $result;
+					} else {
+						return 3;
+					}
+				} else {
+					$result = mysqli_query($connection, "UPDATE users 
+											SET username = '$username', email = '$email'
+											WHERE user_id = $userId ;");
+					return $result; 
+				}
+			}
 		}
 		
 		/**
@@ -212,7 +247,7 @@
 			$connection = $this->connect->getConnection();
 			$cartId = intval($_POST['cart_id']);
 			$orderStatus = trim($_POST['order_status']);
-			$result = mysqli_query($connection,"UPDATE cart
+			$result = mysqli_query($connection, "UPDATE cart
 									SET order_status = '$orderStatus'
 									WHERE cart_id = $cartId ;");
             return $result; 
@@ -227,9 +262,9 @@
 		{
 			$connection = $this->connect->getConnection();
 			$cartId = intval($_POST['cart_id']);
-			$deleteCheckout = mysqli_query($connection,"DELETE FROM checkout WHERE cart_id = $cartId;");
-			$deleteItem = mysqli_query($connection,"DELETE FROM item WHERE cart_id = $cartId;");
-			$deleteCart = mysqli_query($connection,"DELETE FROM cart WHERE cart_id = $cartId;");
+			$deleteCheckout = mysqli_query($connection, "DELETE FROM checkout WHERE cart_id = $cartId;");
+			$deleteItem = mysqli_query($connection, "DELETE FROM item WHERE cart_id = $cartId;");
+			$deleteCart = mysqli_query($connection, "DELETE FROM cart WHERE cart_id = $cartId;");
             return $deleteCart; 
 		}
     }

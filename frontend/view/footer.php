@@ -17,7 +17,7 @@
                         <p>(+844) 123 456 78 <br>
                         (+844) 888 97989</p>
                         <h4>EMAIL</h4>    
-                        <p>contact@organicistore.com</p>
+                        <p>organiciproducts@gmail.com</p>
                     </div>
                     <div class="column">
                         <h3>PHOTO FLICKER</h3>

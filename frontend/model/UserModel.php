@@ -31,14 +31,10 @@
 				if(!empty($name) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($mdPassword)) {	
 					$result = $connection->prepare("SELECT * FROM users WHERE username = :name ;");
 					$result->bindParam(':name', $name);
-					try {
-						$result->execute();
-						$row = $result->fetch();
-						if($row['username'] == $name) {
-							return 3;
-						}
-					} catch(Exception $e) {
-						throw "Message: " .$e->getMessage();
+					$result->execute();
+					$row = $result->fetch();
+					if($row['username'] == $name) {
+						return 3;
 					}
 					$statement =  $connection->prepare("INSERT INTO users (username,email,password) 
 														VALUES (:name, :email, :mdPassword)");
@@ -48,7 +44,7 @@
 					try {
 						$statement->execute();
 						//$to = $email;
-						$to = "akkhilesh42@gmail.com";
+						$to = "akkhilesh24@gmail.com";
 						$subject = "Registration In Organici - Reg";
 						$body = "You have successfully registered in Organici!! Happy Shopping!!";
 						$headers = "From: \Organici";

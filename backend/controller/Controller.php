@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     /**
      * This class creates a object for AdminModel class and calls the specified function of the AdminModel class.
      */
@@ -249,10 +250,16 @@
         public function updateEditedCustomer()
         {
             $result = $this->user -> updateEditedCustomer();
-            if($result) {
-                $_SESSION['message'] = "Customer Detail has been updated.";
+            if($result == 1) {
+                $_SESSION['message'] = "Customer Detail has been updated!!";
+            } elseif($result == 2) {
+                $_SESSION['message'] = "Username already exists!!";
+            } elseif($result == 3) {
+                $_SESSION['message'] = "Email already exists!!";
+            } elseif($result == 4) {
+                $_SESSION['message'] = "This Details Are Already Existing For The Sama Customer!!";
             } else {
-                $_SESSION['message'] = "Customer Detail has not been updated.";
+                $_SESSION['message'] = "Customer Detail has not been updated!!";
             }
             View::load("customers");
         }
