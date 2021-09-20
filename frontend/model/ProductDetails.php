@@ -2,7 +2,15 @@
     /**
      * This class is used to fetch the product details to be shown to the user.
      */
-    class ProductDetails
+    abstract class ProductDetail
+    {
+        abstract protected function getProductDetails();
+    }
+
+    /**
+     * {@inheritdoc} Here is where the method is defined.
+     */
+    class ProductDetails extends ProductDetail
     {
         private $instance;
         

@@ -2,7 +2,15 @@
     /**
      * This class is used to fetch the cart details of the current user.
      */
-    class CartDetails
+    interface CartDetail
+    {
+        public function getCartDetails();
+    }
+    
+    /**
+     * {@inheritdoc} Here is where the method is defined.
+     */
+    class CartDetails implements CartDetail
     {
         private $instance;
         private $session;
@@ -18,7 +26,7 @@
 
         /**
          * This method is used to fetch the details of the current user
-         * @return array of cart details of current user.
+         * @return object of cart details of current user.
          */
         public function getCartDetails()
         {
