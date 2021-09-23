@@ -8,18 +8,25 @@
 <body>
     <div id="session">
         <?php
-            if(isset($_SESSION['message'])) {
+            if (isset($_SESSION['message'])) {
                 echo $_SESSION['message'];
             } 
         ?>
     </div>
-    <form method="POST" action="product.php">
+    <form method="POST" action="product.php" enctype="multipart/form-data">
         <table id="product" align=center>
             <h2 align=center>Register Product</h2>
+            <tr>
+                <td>Product Name</td>
+                <td>Quantity</td>
+                <td>Product Code</td>
+                <td>Upload Product Image</td>
+            </tr>
             <tr id="row1">
                 <td class="right"><input type="text" name="name[]" placeholder="Enter Product Name"></td>
                 <td class="right"><input type="text" name="quantity[]" placeholder="Enter Quantity"></td>
                 <td class="right"><input type="text" name="code[]" placeholder="Enter Product Code"></td>
+                <td class="right"><input type="file" name="fileUpload[]" multiple></td>
                 <td class="button"><input type="button" id="submit" onclick="add_row();" value="ADD ROW"></td>
             </tr>
         </table>

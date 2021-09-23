@@ -16,7 +16,7 @@
                 <td class="cart">
                     <?php 
                         $cart = new CartController;
-                        $grand_total = $cart -> updateCart();
+                        $grand_total = $cart->updateCart();
                     ?>
                     <a href="cart">MY CART</a><br>
                     ₹<?php echo number_format((float)$grand_total, 2, '.', ''); ?><br>
@@ -30,7 +30,7 @@
         <div class="menu">
             <nav>
             <?php
-                if( $_SESSION['loggedin'] > 0){ ?>
+                if ( $_SESSION['loggedin'] > 0) { ?>
                 <ul>
                     <li><a href="home">HOME</a></li>
                     <li>OUR STORY</li>
@@ -38,7 +38,7 @@
                     <li><a href="myaccount">MY ACCOUNT</a></li>
                     <li><a href="logout">LOGOUT</a></li>
                 </ul>
-                <?php }else { ?>
+                <?php } else { ?>
                 <ul>
                     <li><a href="home">HOME</a></li>
                     <li>OUR STORY</li>

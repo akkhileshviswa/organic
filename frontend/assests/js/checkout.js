@@ -11,133 +11,145 @@ function validate() {
     var shipping = validateshipping()
     var cash = validatecash();
     var terms = validateterms();
-    if(firstname && lastname && country && address && town && state && postalcode && phone && email && shipping && cash && terms) {
+    if (firstname && lastname && country && address && town && state && postalcode && phone && email && shipping && cash && terms) {
         return true;
     } 
         return false;
     
-    function validatefirstname() {
+    function validatefirstname() 
+    {
         var name = document.getElementById("firstname").value;
         var error = "";
-        if(name == "") {
+        if (name == "") {
             error = "Please enter the first name.";
         }
         firstnameerr.innerHTML = error;
         return error == "" ? true : false;
     }
 
-    function validatelastname() {
+    function validatelastname() 
+    {
         var name = document.getElementById("lastname").value;
         var error = "";
-        if(name == "") {
+        if (name == "") {
             error = "Please enter the last name.";
         }
         lastnameerr.innerHTML = error;
         return error == "" ? true : false;
     }
 
-    function validatecountry() {
+    function validatecountry() 
+    {
         var select = document.getElementById("country").value;
         var error = "";
-        if(select == "select"){
+        if (select == "select") {
             error = "Please select the country.";
         }
         countryerr.innerHTML = error;
         return error == "" ? true : false;
     }
 
-    function validateaddress() {
+    function validateaddress() 
+    {
         var address = document.getElementById("address").value;
         var error = "";
-        if(address == "") {
+        if (address == "") {
             error = "Please enter the address.";
         }
         addresserr.innerHTML = error;
         return error == "" ? true : false;
     }
 
-    function validatetown() {
+    function validatetown() 
+    {
         var town = document.getElementById("town").value;
         var error = "";
-        if(town == "") {
+        if (town == "") {
             error = "Please enter the town.";
         }
         townerr.innerHTML = error;
         return error == "" ? true : false;
     }
 
-    function validatestate() {
+    function validatestate() 
+    {
         var result = document.getElementById('state').value;
         var error = "";
-        if(result == "select") {
+        if (result == "select") {
             error = "Please select the state.";
         }
         stateerr.innerHTML = error;
         return error == "" ? true : false;
     }
 
-    function validatepostalcode() {
+    function validatepostalcode() 
+    {
         var number = document.getElementById("postalcode").value;
         var error = "";
-        if(number == "") {
+        if (number == "") {
             error = "Please enter the postalcode.";
-        } else if(!(/^\d{6}$/.test(number))) {
+        } else if (!(/^\d{6}$/.test(number))) {
             error = "Please enter the valid postalcode.";
         }
         postalerr.innerHTML = error;
         return error == "" ? true : false;
     }
 
-    function validatephone() {
+    function validatephone() 
+    {
         var number = document.getElementById("phone").value;
         var error = "";
-        if(number == "") {
+        if (number == "") {
             error = "Please enter the mobile number.";
-        } else if(!(/^\d{10}$/.test(number))) {
+        } else if (!(/^\d{10}$/.test(number))) {
             error = "Please enter the valid mobile number.";
         }
         phoneerr.innerHTML = error;
         return error == "" ? true : false;
     }
 
-    function validateemail() {
+    function validateemail() 
+    {
         var email = document.getElementById("email").value;
         var error = "";
         var atposition = email.indexOf("@");  
         var dotposition = email.lastIndexOf(".");  
-        if(email == "") {
+        if (email == "") {
             error = "Please enter the email";
-        } else if(atposition < 1 || dotposition < atposition+2 || dotposition+2 >= email.length) {
+        } else if (atposition < 1 || dotposition < atposition+2 || dotposition+2 >= email.length) {
             error = "Please enter the valid email."
         }
         emailerr.innerHTML = error;
         return error == "" ? true : false;
     }
 
-    function validateshipping() { 
+    function validateshipping() 
+    { 
         var shipping_method = document.getElementsByName("shipping_method");
         var error = "";
-        if(!(shipping_method[0].checked == true || shipping_method[1].checked == true || shipping_method[2].checked == true )) {
+        if (!(shipping_method[0].checked == true || shipping_method[1].checked == true || shipping_method[2].checked == true )) {
             error = "Please select the shipping type.";
         }
         shippingerr.innerHTML = error;
         return error == "" ? true : false;
     }
 
-    function validatecash() {
+    function validatecash() 
+    {
         var cash = document.getElementById("payment_method");
         var error = "";
-        if(!(cash.checked == true)) {
+        if (!(cash.checked == true)) {
             error = "Please select the delivery type.";
         }
         casherr.innerHTML = error;
         return error == "" ? true : false;
     }
 
-    function validateterms() {
+    function validateterms() 
+    {
         var term = document.getElementById("terms");
         var error = "";
-        if(!(term.checked == true)) {
+        if (!(term.checked == true)) {
             error = "Please read and accept the terms and conditions to proceed with your order.";
         }
         termserr.innerHTML = error;
@@ -145,7 +157,8 @@ function validate() {
     }
 }
 
-function changeShippingMethod(sub_total,shipping_fee) {
+function changeShippingMethod(sub_total,shipping_fee) 
+{
     var http = new XMLHttpRequest();
     var grand_total = parseFloat(shipping_fee) + parseFloat(sub_total);
     document.getElementById('grand_total').innerHTML = grand_total;
@@ -155,7 +168,8 @@ function changeShippingMethod(sub_total,shipping_fee) {
     http.send(params);
 }
 
-function updatePassword(password) {
+function updatePassword(password) 
+{
     var http = new XMLHttpRequest();
     var params = 'password=' + password;
     http.open('POST', 'updatepassword', true);
@@ -163,7 +177,8 @@ function updatePassword(password) {
     http.send(params);
 }
 
-function updateAddress(address) {
+function updateAddress(address) 
+{
     var http = new XMLHttpRequest();
     var params = 'address=' + address;
     http.open('POST', 'updateaddress', true);

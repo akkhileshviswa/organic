@@ -18,7 +18,7 @@
                     <img id="userimage" src="<?= Utility::getAssests() ?>/assests/images/login/man.jpg" height="70px" width="70px">
                     <?php 
                         $result = new Controller;
-                        $showAdmin = $result-> showAdmin();
+                        $showAdmin = $result->showAdmin();
                         $admin = $showAdmin->fetch_assoc();
                     ?>                    
                     <h5 id="username"><?php echo $admin['username'];?></h5>
@@ -79,9 +79,9 @@
                         <tbody>
                             <?php 
                                 $adminModel = new AdminModel;
-                                $orderDetails = $adminModel-> orderDetails();
+                                $orderDetails = $adminModel->orderDetails();
                                 $temp = 1;
-                                while( $results = $orderDetails->fetch_assoc()): 
+                                while ( $results = $orderDetails->fetch_assoc()): 
                             ?>
                             <tr>
                                 <td colspan="5"><hr></td>
@@ -90,7 +90,7 @@
                                 <td><?php echo $results['cart_id']; ?></td>
                                 <?php 
                                         $customerDetails = $adminModel-> customerDetails($results['cart_id']);
-                                        while( $result = $customerDetails->fetch_assoc()):
+                                        while ( $result = $customerDetails->fetch_assoc()):
                                 ?>
                                 <td><?php echo $result['first_name']; ?></td>
                                 <td><?php echo $result['checkout_date']; ?></td>
@@ -100,7 +100,7 @@
                             </tr>
                             <?php
                                 $temp++;
-                                if($temp>5){
+                                if ($temp>5) {
                                     break;
                                 }
                                 endwhile;
@@ -114,5 +114,3 @@
         </div>
     </body>
 </html>
-
-

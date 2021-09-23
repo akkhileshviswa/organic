@@ -37,14 +37,14 @@
     routes($method, $request); 
     
     function routes($method, $request) {
-        if($method == get) {
+        if ($method == get) {
             $routes = Routes::getRoutes(get);
-        } elseif($method == post) {
+        } elseif ($method == post) {
             $routes = Routes::getRoutes(post);
         }
-        if(!empty($routes)) {
+        if (!empty($routes)) {
             foreach($routes as $route) {
-                if(strstr($request,$route['url'])) {
+                if (strstr($request,$route['url'])) {
                     $controller = $route['controller'];
                     $method = $route['method'];
                     $obj = new $controller();

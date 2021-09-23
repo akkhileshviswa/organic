@@ -44,17 +44,17 @@
         public function loginUser()
         {
             $result = $this->user -> signIn();
-            if($result) {
+            if ($result) {
                 $_SESSION['loggedin'] = 1;
                 $isActive = $this-> user ->isActiveCheck();
                 $cartId = 0;
                 foreach($isActive as $i ){
                     $cartId = $i['cart_id'];
                 }
-                if($cartId != 0) {     
+                if ($cartId != 0) {     
                     $_SESSION['cart_id'] = $cartId ;                   
                     View::load("home");
-                } else{
+                } else {
                     View::load("home");
                 }
             } else {
@@ -72,11 +72,11 @@
         public function registerUser() 
         {
             $result = $this->user -> createUser();
-            if($result == 1) {
+            if ($result == 1) {
                 $_SESSION['message'] = "Registration Successfull! Login to continue!";
-            } else if($result == 2) {
+            } elseif ($result == 2) {
                 $_SESSION['message'] = "Email already exists!!";
-            } else if($result == 3) {
+            } elseif ($result == 3) {
                 $_SESSION['message'] = "Username already exists!!";
             } else {
                 $_SESSION['message'] = "Enter Valid Details for Registration!";
@@ -92,13 +92,13 @@
          */
         public function loginCheck() 
         {
-            if($_SESSION['loggedin']>0 && empty($_SESSION['cart_id']) ) {
+            if ($_SESSION['loggedin']>0 && empty($_SESSION['cart_id']) ) {
             $this -> user = new CartController;
             $createCart = $this-> user-> registerCart();
-                if($createCart) {
+                if ($createCart) {
                     $this -> user = new CartController;
                     $addToCart = $this-> user-> addToCart();
-                    if($addToCart) {
+                    if ($addToCart) {
                         $_SESSION['message'] = "Product added to cart Successfully!!";
                         View::load("home");
                     }   
@@ -106,7 +106,7 @@
             } else {
                 $this -> user = new CartController;
                 $addToCart = $this-> user-> addToCart();
-                if($addToCart) {
+                if ($addToCart) {
                     $_SESSION['message'] = "Product added to cart Successfully!!";
                     View::load("home");
                 }
@@ -121,7 +121,7 @@
          */
         public function showUserDetails() 
         {
-            if($_SESSION['loggedin']>0) {
+            if ($_SESSION['loggedin']>0) {
                 View::load("myaccount");
             } else { 
                 $_SESSION['message'] = "Register/Login to continue";
@@ -157,7 +157,7 @@
          */
         public function userLogout() 
         {
-            if($_SESSION['loggedin']>0) {
+            if ($_SESSION['loggedin']>0) {
                 unset($_SESSION['loggedin']);
                 unset($_SESSION['cart_id']);
                 unset($_SESSION['isActive']);

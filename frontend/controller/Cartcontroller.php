@@ -22,7 +22,7 @@
          */
         public function loadCart()
         {
-            if($_SESSION['loggedin'] > 0) {
+            if ($_SESSION['loggedin'] > 0) {
                 View::load("cart");
             } else {
                 $_SESSION['message'] = "Register/Login to continue!!"; 
@@ -36,8 +36,8 @@
          */
         public function loadCheckout()
         {
-            if($_SESSION['loggedin'] > 0) {
-                if( $_SESSION['itemCount'] > 0) {
+            if ($_SESSION['loggedin'] > 0) {
+                if ( $_SESSION['itemCount'] > 0) {
                     View::load("checkout");
                 } else {
                     $_SESSION['message'] = "Cart is Empty!! Add Products To Continue!!";
@@ -116,7 +116,7 @@
         public function checkoutDetails()
         {
             $checkoutDetails = $this->cart -> checkoutDetails();
-            if( $checkoutDetails) {
+            if ( $checkoutDetails) {
                 View::load('orderdetails');
             } else {
                 $_SESSION['message'] = "Fill all the fields!";

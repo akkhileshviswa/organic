@@ -15,7 +15,7 @@
     include "../core/Database.php";
     $database = new Database;
     $connection = $database->getConnection();
-    foreach($data as $row){
+    foreach ($data as $row) {
         $result = mysqli_query($connection,"UPDATE product SET quantity = '".$row["quantity"]."'
 									WHERE product_code = '".$row["product_code"]."' ;");
     }

@@ -23,7 +23,7 @@
                     <tr id="border">
                         <?php 
                             $user = new UserModel;
-                            $result = $user-> getPassword();
+                            $result = $user->getPassword();
                             $getPassword = $result->fetch(PDO::FETCH_ASSOC);
                         ?>
                         <td>Password</td>
@@ -33,11 +33,12 @@
                     <tr id="border">
                         <?php 
                             $cart = new CartModel;
-                            $result = $cart-> getAddress();
+                            $result = $cart->getAddress();
                             $getAddress = $result->fetch(PDO::FETCH_ASSOC);
                         ?>
                         <td>Address</td>
-                        <td><textarea name="message" id="message" placeholder="Address" rows="5" cols="30"><?php echo $getAddress['address']; ?></textarea></td>
+                        <td><textarea name="message" id="message" placeholder="Address" rows="5" cols="30">
+                            <?php echo $getAddress['address']; ?></textarea></td>
                         <td><input type="button" id="updatebutton" value="Update" onclick = "updateAddress(message.value)" ></td>
                     </tr>
             </table>
@@ -57,8 +58,8 @@
                     <tbody>
                         <?php 
                             $cartModel = new CartModel;
-                            $getMyAcccountCartDetails = $cartModel-> getMyAcccountCartDetails();
-                            foreach($getMyAcccountCartDetails as $i):
+                            $getMyAcccountCartDetails = $cartModel->getMyAcccountCartDetails();
+                            foreach ($getMyAcccountCartDetails as $i) :
                         ?>
                         <tr>
                             <td colspan="6"><hr></td>
@@ -68,8 +69,8 @@
                             <td>
                                 <ol>
                                     <?php 
-                                        $getMyAcccountCartProducts = $cartModel-> getMyAcccountCartProducts( $i['cart_id']);
-                                        foreach($getMyAcccountCartProducts as $j): 
+                                        $getMyAcccountCartProducts = $cartModel->getMyAcccountCartProducts( $i['cart_id']);
+                                        foreach ($getMyAcccountCartProducts as $j) : 
                                     ?>
                                     <li><?php echo $j['item_name']; ?></li>
                                     <?php endforeach; ?>
@@ -78,8 +79,8 @@
                             <td>
                                 <ol class="productslist">
                                     <?php 
-                                        $getMyAcccountCartProducts = $cartModel-> getMyAcccountCartProducts( $i['cart_id']);
-                                        foreach($getMyAcccountCartProducts as $j): 
+                                        $getMyAcccountCartProducts = $cartModel->getMyAcccountCartProducts( $i['cart_id']);
+                                        foreach ($getMyAcccountCartProducts as $j) : 
                                     ?>
                                     <li><?php echo $j['item_quantity']; ?></li>
                                     <?php endforeach; ?>
@@ -89,7 +90,7 @@
                             <td class="amount"><?php echo $i['grand_total']; ?></td>
                             <td><?php echo $i['order_status']; ?></td>
                         </tr>
-                        <?php endforeach;?>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

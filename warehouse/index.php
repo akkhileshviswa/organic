@@ -2,7 +2,7 @@
     header("Access-Control-Allow-Origin: *");
     header("Content-Type:application/json; charset=UTF-8");
     include "model/Database.php";
-    function cron(){
+    function cron() {
         $connection = new Database();
         $connectWarehouse = $connection->getConnectionToWarehouse();
         $result = mysqli_query($connectWarehouse,"SELECT * FROM products;");

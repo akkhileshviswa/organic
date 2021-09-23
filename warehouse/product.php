@@ -1,14 +1,16 @@
 <?php
 session_start();
+error_reporting(0);
 include "model/Database.php";
 include "View.php";
-if(isset($_POST['submit_row']))
-{
+if (isset($_POST['submit_row'])) {
     $connection = new Database();
     $connectWarehouse = $connection->getConnectionToWarehouse();
     $name = $_POST['name'];
     $quantity = $_POST['quantity'];
     $code = $_POST['code'];
+    $uploadsDir = "uploads/";
+    $allowedFileType = array('jpg','png','jpeg');
     function arrayHasOnlyInts($values)
     {
         $test = implode('',$values);
@@ -18,12 +20,49 @@ if(isset($_POST['submit_row']))
     $checkCode = arrayHasOnlyInts($code);
     for($i=0;$i<count($name);$i++)
     {
-        if($name[$i]!="" && $quantity[$i]!="" && $code[$i]!="") {   
-            if($checkQuantity == 1 ) {
-                if($checkCode == 1) {
+        if ($name[$i]!="" && $quantity[$i]!="" && $code[$i]!="" && !empty(array_filter($_FILES['fileUpload']['name']))) {   
+            if ($checkQuantity == 1 ) {
+                if ($checkCode == 1) {
+                    $productCode = mysqli_query($connectWarehouse, "SELECT product_code FROM products;");
+                    $rows = mysqli_fetch_array($productCode);
+                    if (in_array($code[$i], $rows)) {
+                        $_SESSION['message'] = "Product code should be unique!!";
+                        View::load("addproduct");
+                    }
                     $result = mysqli_query($connectWarehouse,"INSERT INTO products (product_name, quantity, product_code) 
                                             VALUES('$name[$i]', $quantity[$i], $code[$i]);");
-                    if($result) {
+                    if ($result) {
+                        foreach ($_FILES['fileUpload']['name'] as $id=>$val) {
+                            $fileName        = $_FILES['fileUpload']['name'][$id];
+                            $tempLocation    = $_FILES['fileUpload']['tmp_name'][$id];
+                            $targetFilePath  = $uploadsDir . $fileName;
+                            $fileType        = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
+                            $uploadDate      = date('Y-m-d H:i:s');
+                            $uploadOk = 1;
+                            if (in_array($fileType, $allowedFileType)) {
+                                    if(move_uploaded_file($tempLocation, $targetFilePath)){
+                                        $sqlVal = "('".$code[$i]."', '".$fileName."')";
+                                    } else {                                      
+                                        $_SESSION['message'] = "File coud not be uploaded.";
+                                    }
+                            } else {                             
+                                $_SESSION['message'] = "Only .jpg, .jpeg and .png file formats allowed.";
+                            }
+                            if (!empty($sqlVal)) {
+                                $insert = mysqli_query($connectWarehouse, "INSERT INTO product_image (product_code, image) VALUES $sqlVal;");
+                                if (!$insert) {
+                                    $select = mysqli_query($connectWarehouse, "SELECT product_id FROM products WHERE product_code = $code[$i];");
+                                    $row = mysqli_fetch_array($select);
+                                    $product_id = $row['product_id'];
+                                    $delete = mysqli_query($connectWarehouse, "DELETE FROM products WHERE product_id = $product_id ;");
+                                    $_SESSION['message'] = "File could not be uploaded!!";
+                                }
+                            }
+                        }
+                    } else {
+                        $_SESSION['message'] = "Product could not be added!!";
+                    }
+                    if ($result && $insert) {
                         $_SESSION['message'] = "Product has been added!!";
                     }
                 }  else {

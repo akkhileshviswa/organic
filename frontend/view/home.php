@@ -10,11 +10,12 @@
         <script src="<?= Utility::getAssests() ?>/assests/js/addtocart.js"></script>      
     </head>
     <body>
-        <div id="head"><?php include "header.php";  ?>
+        <div id="head">
+            <?php include "header.php";  ?>
         </div>
         <div id="session" >
             <?php
-                if(isset($_SESSION['message'])){
+                if (isset($_SESSION['message'])) {
                     echo $_SESSION['message'];
                     unset($_SESSION['message']);
                 }
@@ -52,10 +53,10 @@
         <div id="productlist">
             <table  id="products">      
                 <?php
-                    if( $_SESSION['loggedin'] > 0) {
+                    if ( $_SESSION['loggedin'] > 0) {
                         $userId = $_SESSION['user_id'];
                         $action ="home";
-                    }else {
+                    } else {
                         $action ="user";
                         $onclick ="";
                     }
@@ -63,10 +64,10 @@
                 <tr>
                 <?php 
                     $product = new ProductDetails;
-                    $result = $product -> getProductDetails();
+                    $result = $product->getProductDetails();
                     $tdlimit = 0;
-                    foreach($result as $j) :
-                        if($tdlimit%4 == 0) {
+                    foreach ($result as $j) :
+                        if ($tdlimit%4 == 0) {
                             echo '</tr>';
                             echo '<tr>';
                         }
@@ -76,7 +77,7 @@
                         <form class="form-submit" action= "<?php echo $action; ?>" method="POST" >   
                         <div class="image">
                         <br>
-                            <img width="250" height="300" src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $j['image']; ?>">
+                        <img width="250" height="300" src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $j['image']; ?>">
                         <br><br>
                         </div>
                         <h3><?php echo $j['product_name']; ?></h3>

@@ -31,7 +31,7 @@
          */
         public function loadDashboard()
         {
-            if($_SESSION['loggedin'] == 1) {
+            if ($_SESSION['loggedin'] == 1) {
                 View::load("dashboard");
             } else {
                 $_SESSION['message'] = "Login To Continue";
@@ -45,7 +45,7 @@
          */
         public function loadCustomers()
         {
-            if($_SESSION['loggedin'] == 1) {
+            if ($_SESSION['loggedin'] == 1) {
                 View::load("customers");
             } else {
                 $_SESSION['message'] = "Login To Continue";
@@ -59,7 +59,7 @@
          */
         public function loadOrders()
         {
-            if($_SESSION['loggedin'] == 1) {
+            if ($_SESSION['loggedin'] == 1) {
                 View::load("orders");
             } else {
                 $_SESSION['message'] = "Login To Continue";
@@ -73,7 +73,7 @@
          */
         public function loadProducts()
         {
-            if($_SESSION['loggedin'] == 1) {
+            if ($_SESSION['loggedin'] == 1) {
                 View::load("products");
             } else {
                 $_SESSION['message'] = "Login To Continue";
@@ -87,7 +87,7 @@
          */
         public function newProduct()
         {
-            if($_SESSION['loggedin']==1) {
+            if ($_SESSION['loggedin']==1) {
                 View::load("newproduct");
             } else {
                 $_SESSION['message'] = "Login To Continue";
@@ -101,7 +101,7 @@
          */
         public function updateProduct()
         {
-            if($_SESSION['loggedin'] == 1) {
+            if ($_SESSION['loggedin'] == 1) {
                 View::load("updateproduct");
             } else {
                 $_SESSION['message'] = "Login To Continue";
@@ -115,7 +115,7 @@
          */
         public function updateCustomer()
         {
-            if($_SESSION['loggedin'] == 1) {
+            if ($_SESSION['loggedin'] == 1) {
                 View::load("updatecustomer");
             } else {
                 $_SESSION['message'] = "Login To Continue";
@@ -132,7 +132,7 @@
         public function loginUser() 
         {
             $result = $this->user -> signIn();
-            if($result) {
+            if ($result) {
                 {
                     $_SESSION['loggedin'] = 1;
                     View::load("dashboard");
@@ -182,7 +182,7 @@
         public function updateEditedProduct()
         {
             $result = $this->user -> updateEditedProduct();
-            if($result) {
+            if ($result) {
                 $_SESSION['message'] = "Product has been updated.";
             } else {
                 $_SESSION['message'] = "Product has not been updated.";
@@ -212,7 +212,7 @@
         public function createProduct() 
         {
             $result = $this->user -> createProduct();
-            if($result) {
+            if ($result) {
                 $_SESSION['message'] = "Product is registered.";
                 View::load("products");
             } else {
@@ -250,13 +250,13 @@
         public function updateEditedCustomer()
         {
             $result = $this->user -> updateEditedCustomer();
-            if($result == 1) {
+            if ($result == 1) {
                 $_SESSION['message'] = "Customer Detail has been updated!!";
-            } elseif($result == 2) {
+            } elseif ($result == 2) {
                 $_SESSION['message'] = "Username already exists!!";
-            } elseif($result == 3) {
+            } elseif ($result == 3) {
                 $_SESSION['message'] = "Email already exists!!";
-            } elseif($result == 4) {
+            } elseif ($result == 4) {
                 $_SESSION['message'] = "Edit The Details For Updating!!";
             } else {
                 $_SESSION['message'] = "Customer Detail has not been updated!!";
@@ -273,7 +273,7 @@
         public function changeOrderStatus()
         {
             $result = $this->user -> changeOrderStatus();
-            if($result) {
+            if ($result) {
                 $_SESSION['message'] = "Order Status has been updated.";
             } else {
                 $_SESSION['message'] = "Order Status has not been updated.";
@@ -290,7 +290,7 @@
         public function removeOrder()
         {
             $result = $this->user -> removeOrder();
-            if($result) {
+            if ($result) {
                 $_SESSION['message'] = "Order has been deleted.";
             } else {
                 $_SESSION['message'] = "Order has not been deleted.";

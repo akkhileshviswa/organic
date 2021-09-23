@@ -16,7 +16,7 @@
 		{
 			try {
 				$connect = new mysqli(self::dbhost,self::dbuser,self::dbpass,self::databasename);
-				if(!$connect) {
+				if (!$connect) {
 					throw new Exception("Error in Connecting to server");
 				} else {
 					return $connect;    

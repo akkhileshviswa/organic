@@ -27,7 +27,7 @@
          * This method returns the instance of the current class.
          */
         public static function getInstance() {
-            if(!self::$instance) {
+            if (!self::$instance) {
                     self::$instance = new Database();
                 }
             return self::$instance;

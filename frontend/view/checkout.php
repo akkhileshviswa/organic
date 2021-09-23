@@ -10,7 +10,7 @@
         </div>
         <div id="session" >
             <?php
-                if(isset($_SESSION['message'])){
+                if (isset($_SESSION['message'])) {
                     echo $_SESSION['message'];
                     unset($_SESSION['message']);
                 }
@@ -31,8 +31,8 @@
                             <td><label id="required" class="worksans" >Last Name</label></td>
                         </tr>
                         <tr>
-                            <td><input type="text" class="tableelements" id="firstname" name="first_name" ></td>
-                            <td id="leftspace"><input type="text" class="tableelements" id="lastname" name="last_name" ></td>
+                            <td><input type="text" class="tableelements" id="firstname" name="first_name"></td>
+                            <td id="leftspace"><input type="text" class="tableelements" id="lastname" name="last_name"></td>
                         </tr>
                         <tr>
                             <td><span id="firstnameerr"></span></td>
@@ -53,7 +53,7 @@
                     <span id="countryerr"></span>
                     <br><br>
                     <label id="required">Street Address</label><br><br>
-                    <input type="text" id="address" placeholder="House Number and street name" name="address" ><br>
+                    <input type="text" id="address" placeholder="House Number and street name" name="address"><br>
                     <span id="addresserr"></span>
                     <br><br>
                     <input type="text" name="apartment" placeholder="Apartment, Suite, unit, etc.,(optional)">
@@ -95,8 +95,8 @@
                     </tr>
                     <?php 
                             $showCartDetails = new CartController;
-                            $cartDetails = $showCartDetails -> showCartDetails();
-                            foreach($cartDetails as $j):
+                            $cartDetails = $showCartDetails->showCartDetails();
+                            foreach ($cartDetails as $j) :
                     ?>
                     <tr>
                         <td><?php echo $j['item_name']; ?> × <?php echo $j['item_quantity']; ?></td>
@@ -104,7 +104,7 @@
                     </tr>
                     <?php endforeach; ?>
                     <?php 
-                            $subTotal = $showCartDetails -> updateCart();
+                            $subTotal = $showCartDetails->updateCart();
                     ?>
                     <tr id="heading">
                         <td>SUBTOTAL</td>
@@ -113,11 +113,14 @@
                     <tr>
                         <td id="heading">SHIPPING</td>
                         <td>
-                            <input type="radio" id="delivery" name="shipping_method" value=2  onchange="changeShippingMethod(<?php echo $subTotal; ?>,this.value);" >
+                            <input type="radio" id="delivery" name="shipping_method" value=2 
+                                onchange="changeShippingMethod(<?php echo $subTotal; ?>,this.value);">
                             <label>Flat rate: <b>₹2.00</b></label><br><br>
-                            <input type="radio" id="delivery" name="shipping_method" value=1 onchange="changeShippingMethod(<?php echo $subTotal; ?>,this.value);" >
+                            <input type="radio" id="delivery" name="shipping_method" value=1 
+                                onchange="changeShippingMethod(<?php echo $subTotal; ?>,this.value);">
                             <label>Free shipping</label><br><br>
-                            <input type="radio" id="delivery" name="shipping_method" value=0 onchange="changeShippingMethod(<?php echo $subTotal; ?>,this.value);" >
+                            <input type="radio" id="delivery" name="shipping_method" value=0 
+                                onchange="changeShippingMethod(<?php echo $subTotal; ?>,this.value);">
                             <label>Local pickup</label><br><br>
                             <span id="shippingerr"></span><br><br>
                         </td>

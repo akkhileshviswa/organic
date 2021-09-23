@@ -42,7 +42,7 @@
                         <caption id="heading"><h3>CUSTOMER DETAILS</h3></caption>
                         <div id="sessionmessage">
 				        <?php 
-					       if(isset($_SESSION['message'])){
+					       if (isset($_SESSION['message'])) {
 						        echo $_SESSION['message'];
 						        unset($_SESSION['message']);
 					        } 
@@ -59,8 +59,8 @@
                         </thead>
                         <tbody>
                             <?php 
-                                $showCustomers = $result-> showCustomers();
-                                while( $results = $showCustomers->fetch_assoc()): 
+                                $showCustomers = $result->showCustomers();
+                                while ( $results = $showCustomers->fetch_assoc()): 
                             ?>
                             <tr>
                                 <td colspan="5"><hr></td>
@@ -81,7 +81,7 @@
                                 </form>
                                 </td>
                             </tr>
-                            <?php endwhile;  ?>     
+                            <?php endwhile; ?>     
                         </tbody>
                     </table> <br><br>
                 </div> 

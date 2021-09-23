@@ -13,8 +13,8 @@
 				</tr>
 				<?php
 					$controller = new Controller;
-					$editCustomer = $controller -> editCustomer();
-					while( $i = $editCustomer->fetch_assoc()): 
+					$editCustomer = $controller->editCustomer();
+					while ( $i = $editCustomer->fetch_assoc()): 
 				?>
 				<tr>
 					<td>
@@ -30,7 +30,7 @@
 						</form>
 					</td>
 				</tr>	
-				<?php endwhile;?>			
+				<?php endwhile; ?>			
         	</table>
 		</div>
 	</body>

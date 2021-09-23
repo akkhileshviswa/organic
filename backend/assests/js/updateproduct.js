@@ -1,39 +1,43 @@
-function validate(){
+function validate()
+{
     var name = validatename();
     var price = validateprice();
     var quantity = validatequantity();
-    if(name && price && quantity ) {
+    if (name && price && quantity ) {
         return true;
     }
         return false;
 
-    function validatename(){
+    function validatename()
+    {
         var name = document.getElementById("product_name").value;
         var error = "";
-        if(name == ""){
+        if (name == "") {
             error = "Please enter the product name.";
         }
         nameerr.innerHTML = error;
         return error == "" ? true : false;
     }
 
-    function validateprice(){
+    function validateprice()
+    {
         let price = document.getElementById("price").value;
         const nostring = /^[A-Za-z]+$/;
         var error = "";
-        if(price == "") {
+        if (price == "") {
             error = "Please enter the price of the product.";
-        } else if((nostring.test(price))) {
+        } else if ((nostring.test(price))) {
             error = "Please enter a valid price.";
         }
         priceerr.innerHTML = error;
         return error == "" ? true : false;
     }
 
-    function validatequantity(){
+    function validatequantity()
+    {
         var quantity = document.getElementById("quantity").value;
         var error = "";
-        if(quantity == ""){
+        if (quantity == "") {
             error = "Please enter the quantity.";
         }
         quantityerr.innerHTML = error;
@@ -42,9 +46,10 @@ function validate(){
 }
 
 
-function enableOrDisableProduct(productId, isActive) {
+function enableOrDisableProduct(productId, isActive) 
+{
     var http = new XMLHttpRequest();
-    if(isActive ==1){
+    if (isActive ==1) {
         isActive = 0;
     } else {
         isActive = 1;

@@ -7,7 +7,8 @@
     const path_core = "core/";
     const extension = ".php";
 
-    function autoload($className) {
+    function autoload($className) 
+    {
         $fullPath_model = path_model.$className.extension;
         if (file_exists($fullPath_model)) {
             include_once $fullPath_model;
@@ -36,15 +37,16 @@
     require_once "core/Layout.php";
     routes($method, $request); 
 
-    function routes($method, $request) {
-        if($method == get) {
+    function routes($method, $request) 
+    {
+        if ($method == get) {
             $routes = Routes::getRoutes(get);
-        } elseif($method == post) {
+        } elseif ($method == post) {
             $routes = Routes::getRoutes(post);
         }
-        if(!empty($routes)) {
+        if (!empty($routes)) {
             foreach($routes as $route) {
-                if(strstr($request,$route['url'])) {
+                if (strstr($request,$route['url'])) {
                     $controller = $route['controller'];
                     $method = $route['method'];
                     $obj = new $controller();

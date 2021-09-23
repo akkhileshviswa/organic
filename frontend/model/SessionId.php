@@ -9,7 +9,7 @@
          * @return array.
          */
         public static function session() {
-            if(!isset($_SESSION['user_id']) && !isset($_SESSION['cart_id'])) {
+            if (!isset($_SESSION['user_id']) && !isset($_SESSION['cart_id'])) {
                 $data['userId'] = 0;
                 $data['cartId'] = 0;
                 return $data;

@@ -5,7 +5,8 @@
         <link rel="stylesheet" href="<?= Utility::getAssests() ?>/assests/css/completepage.css">
     </head>
     <body>
-        <div id="head"><?php include "header.php" ?>
+        <div id="head">
+            <?php include "header.php" ?>
         </div>
         <div id="title">
             <img src="<?= Utility::getAssests() ?>/assests/images/cart.png">
@@ -23,10 +24,10 @@
                 <tbody id="ordertablebody">
                     <?php 
                         $orders = new CartController;
-                        $orderDetails = $orders-> orderDetails();
-                        $array = $orders -> customerDetails();
+                        $orderDetails = $orders->orderDetails();
+                        $array = $orders->customerDetails();
                         $customerDetails = $array->fetch(PDO::FETCH_ASSOC);
-                        foreach($orderDetails as $orderDetail):
+                        foreach ($orderDetails as $orderDetail) : 
                     ?>
                     <tr>
                         <td>#<?php echo $_SESSION['cart_id']; ?></td>
@@ -44,8 +45,8 @@
                 </thead>
                 <tbody id="orderstablebody">
                 <?php 
-                        $itemDetails = $orders-> showCartDetails();
-                        foreach($itemDetails as $itemDetail):
+                        $itemDetails = $orders->showCartDetails();
+                        foreach ($itemDetails as $itemDetail) :
                     ?>
                     <tr>
                         <td><?php echo $itemDetail['item_name']; ?> x <?php echo $itemDetail['item_quantity']; ?></td><td></td>
@@ -79,8 +80,10 @@
                         <td id="detail"><?php echo $customerDetails['address']; ?></td>
                     </tr>
                 </tbody>
-            </table><?php  $_SESSION['cart_id'] =0;
-                            unset($_SESSION['isActive']);?>
+            </table>
+            <?php   $_SESSION['cart_id'] =0;
+                    unset($_SESSION['isActive']);
+            ?>
         </div>
         <?php include "footer.php" ?>
     </body>

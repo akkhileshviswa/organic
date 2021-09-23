@@ -16,7 +16,7 @@
                     <img id="userimage" src="<?= Utility::getAssests() ?>/assests/images/login/man.jpg" height="70px" width="70px">
                     <?php 
                         $result = new Controller;
-                        $showAdmin = $result-> showAdmin();
+                        $showAdmin = $result->showAdmin();
                         $admin = $showAdmin->fetch_assoc();
                     ?>                    
                     <h5 id="username"><?php echo $admin['username'];?></h5>
@@ -43,7 +43,7 @@
                         <caption id="heading"><h3>PRODUCT DETAILS</h3></caption>
                         <div id="sessionmessage">
                             <?php 
-                                if(isset($_SESSION['message'])){
+                                if (isset($_SESSION['message'])) {
                                     echo $_SESSION['message'];
                                     unset($_SESSION['message']);
                                 } 
@@ -61,8 +61,8 @@
                         </thead>
                         <tbody>
                             <?php 
-                                $showProducts = $result-> showProducts();
-                                while( $products = $showProducts->fetch_assoc()): ?>
+                                $showProducts = $result->showProducts();
+                                while ( $products = $showProducts->fetch_assoc()): ?>
                             <tr>
                                 <td colspan="6"><hr></td>
                             </tr>
@@ -77,10 +77,10 @@
                                     <button id = "updatebutton">Edit </button>
                                 </form>
                                 <?php 
-                                    if($products['is_active'] == 1){
+                                    if ($products['is_active'] == 1) {
                                         $isActive = "Disable";
                                         $isActiveId = "disable";
-                                    } else if ($products['is_active'] == 0) {
+                                    } elseif ($products['is_active'] == 0) {
                                         $isActive = "Enable";
                                         $isActiveId = "enable";
                                     }
@@ -88,7 +88,7 @@
                                 <input type="button" value="<?php echo $isActive;?>" id = "<?php echo $isActiveId;?>" onclick="enableOrDisableProduct(<?php echo $products['product_id'];?>, <?php echo $products['is_active'];?>);">
                                 </td>
                             </tr>
-                            <?php endwhile;  ?>   
+                            <?php endwhile; ?>   
                             <tr>
                                 <td colspan="6"><hr></td>
                             </tr>

@@ -22,7 +22,7 @@
                     <table id="right">
                         <tr id="session">
                             <td><?php 
-                                if(isset($_SESSION['message'])){
+                                if (isset($_SESSION['message'])) {
                                     echo $_SESSION['message'];
                                     unset($_SESSION['message']);
                                 } 
@@ -35,10 +35,12 @@
                             <td>
                                 <form method="POST" action="home" autocomplete="off">
                                     <label id="required">USERNAME</label><br>
-                                    <input id="name" type="text" name="name" size="50" value="<?php if(isset($_POST['name'])) echo $_POST['name']; ?>"><br>
+                                    <input id="name" type="text" name="name" size="50" 
+                                        value="<?php if (isset($_POST['name'])) echo $_POST['name']; ?>"><br>
                                     <br>
                                     <br><label id="required">PASSWORD</label><br>
-                                    <input id="password" type="password" name="password" size="50" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br>
+                                    <input id="password" type="password" name="password" size="50" 
+                                        value="<?php if (isset($_POST['password'])) echo $_POST['password']; ?>"><br>
                                     <br>
                                     <br><input id="button" type="submit" value="Login"><br>
                                 </form>

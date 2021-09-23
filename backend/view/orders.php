@@ -16,11 +16,11 @@
                     <img id="userimage" src="<?= Utility::getAssests() ?>/assests/images/login/man.jpg" height="70px" width="70px">
                     <?php 
                         $result = new Controller;
-                        $showAdmin = $result-> showAdmin();
+                        $showAdmin = $result->showAdmin();
                         $admin = $showAdmin->fetch_assoc();
                     ?>                    
-                    <h5 id="username"><?php echo $admin['username'];?></h5>
-                    <p><?php echo $admin['designation'];?></p>
+                    <h5 id="username"><?php echo $admin['username']; ?></h5>
+                    <p><?php echo $admin['designation']; ?></p>
                     <br><hr>
                 </div>
                 <div id="options">
@@ -41,7 +41,7 @@
                 <h3 id="name">ORDERS</h3>
                 <div id="sessionmessage">
                     <?php 
-                        if(isset($_SESSION['message'])){
+                        if (isset($_SESSION['message'])) {
                             echo $_SESSION['message'];
                             unset($_SESSION['message']);
                         } 
@@ -67,8 +67,8 @@
                         <tbody>
                             <?php 
                                 $adminModel = new AdminModel;
-                                $orderDetails = $adminModel-> orderDetails();
-                                while( $results = $orderDetails->fetch_assoc()): 
+                                $orderDetails = $adminModel->orderDetails();
+                                while ( $results = $orderDetails->fetch_assoc()): 
                             ?>
                             <tr>
                                 <td colspan="7"><hr></td>
@@ -78,16 +78,16 @@
                                 <td>
                                     <ol class="productslist">
                                         <?php 
-                                            $getCustomerCartProducts = $adminModel-> getCustomerCartProducts($results['cart_id']);
-                                            while( $i = $getCustomerCartProducts->fetch_assoc()): 
+                                            $getCustomerCartProducts = $adminModel->getCustomerCartProducts($results['cart_id']);
+                                            while ( $i = $getCustomerCartProducts->fetch_assoc()): 
                                         ?>
                                         <li><?php echo $i['item_name']; ?></li>
                                         <?php endwhile; ?>
                                     </ol>
                                 </td>
                                 <?php 
-                                        $customerDetails = $adminModel-> customerDetails($results['cart_id']);
-                                        while( $j = $customerDetails->fetch_assoc()):
+                                        $customerDetails = $adminModel->customerDetails($results['cart_id']);
+                                        while ( $j = $customerDetails->fetch_assoc()):
                                 ?>
                                 <td><?php echo $j['first_name']; ?></td>
                                 <td><?php echo $j['checkout_date']; ?></td>
@@ -96,13 +96,13 @@
                                 <td>
                                     <select onchange="changeOrderStatus(<?php echo $results['cart_id'];?>,this.value);">
                                     <option id = "status" value="<?php echo $results['order_status']; ?>"><?php echo $results['order_status']; ?></option>
-                                        <?php if($results['order_status'] == "Processing"){ ?>
+                                        <?php if ($results['order_status'] == "Processing") { ?>
                                             <option value="Dispatched">Dispatched</option>
                                             <option value="Delivered">Delivered</option>
-                                        <?php } elseif($results['order_status'] == "Dispatched"){ ?>
+                                        <?php } elseif ($results['order_status'] == "Dispatched") { ?>
                                             <option value="Processing">Processing</option>
                                             <option value="Delivered">Delivered</option>
-                                        <?php  } else{ ?>
+                                        <?php  } else { ?>
                                             <option value="Processing">Processing</option>
                                             <option value="Dispatched">Dispatched</option>
                                         <?php } ?>

@@ -22,19 +22,19 @@
 		 */
         public function createCart()
 		{
-		    if(isset($_SESSION['user_id'])) {
+		    if (isset($_SESSION['user_id'])) {
                 $connection = $this->instance->getConnection();
                 $userId = $this->session['userId'];
 					try {
-							$statement =  $connection->prepare("INSERT INTO cart (user_id) VALUES (:userId);");
-							$statement->bindParam(':userId', $userId);
-							$result = $statement->execute();
-							if(!$result) {
-								return false;
-							} else {
-								return true;    
-							}
-					} catch(Exception $e) {
+						$statement =  $connection->prepare("INSERT INTO cart (user_id) VALUES (:userId);");
+						$statement->bindParam(':userId', $userId);
+						$result = $statement->execute();
+						if (!$result) {
+							return false;
+						} else {
+							return true;    
+						}
+					} catch (Exception $e) {
 						throw "Message: " .$e->getMessage();
 					}	
 			} else {
@@ -48,7 +48,7 @@
 		 */
 		public function addToCart()
 		{
-		    if(!empty($_POST['product_id']) && !empty($_POST['product_name']) && !empty($_POST['price'])) {
+		    if (!empty($_POST['product_id']) && !empty($_POST['product_name']) && !empty($_POST['price'])) {
                 $connection = $this->instance->getConnection();
                 $userId = $this->session['userId'];
 				$productId = intval($_POST['product_id']);
@@ -74,11 +74,11 @@
 					$productIdCheck = $productIdArray['product_id'];
 					$quantityCheck = $productIdArray['item_quantity'];
 					$itemPriceCheck = $productIdArray['item_price'];
-					if($productIdCheck == $productId) {
+					if ($productIdCheck == $productId) {
 						$addQuantity = $quantityCheck + 1;
 						$totalRowPrice = number_format(($addQuantity * $itemPriceCheck), 2);
 						$statement = $connection->prepare("UPDATE item SET item_quantity = :addQuantity, row_total = :totalRowPrice 
-														WHERE cart_id = :cartId AND product_id = :productIdCheck ;");
+															WHERE cart_id = :cartId AND product_id = :productIdCheck ;");
 						$statement->bindParam(':addQuantity', $addQuantity);
 						$statement->bindParam(':totalRowPrice', $totalRowPrice);
 						$statement->bindParam(':cartId', $cartId);
@@ -87,20 +87,20 @@
 						return true;	
 					} else {
 						$statement =  $connection->prepare("INSERT INTO item (cart_id,product_id,item_name,item_price, row_total) 
-														VALUES (:cartId, :productId, :itemName, :itemPrice, :rowTotal);");
+															VALUES (:cartId, :productId, :itemName, :itemPrice, :rowTotal);");
 						$statement->bindParam(':cartId', $cartId);
 						$statement->bindParam(':productId', $productId);
 						$statement->bindParam(':itemName', $itemName);
 						$statement->bindParam(':itemPrice', $itemPrice, PDO::PARAM_STR);
 						$statement->bindParam(':rowTotal', $itemPrice, PDO::PARAM_STR);
 						$result = $statement->execute();
-						if(!$result) {
+						if (!$result) {
 							return false;
 						} else {
 							return true;    
 						}
 					}
-				} catch(Exception $e) {
+				} catch (Exception $e) {
 					throw "Message: " .$e->getMessage();
 				}	
 			} else {
@@ -114,22 +114,22 @@
 		 */
 		public function updateQuantity() 
 		{
-            if(!empty($_POST['item_quantity']) && !empty($_POST['row_total']) && !empty($_POST['item_id'])) {
+            if (!empty($_POST['item_quantity']) && !empty($_POST['row_total']) && !empty($_POST['item_id'])) {
 				$connection = $this->instance->getConnection();
                 $itemQuantity = intval($_POST['item_quantity']);
                 $rowTotal = floatval($_POST['row_total']); 
                 $itemId = intval($_POST['item_id']);
-                try{
+                try {
                     $statement =  $connection->prepare("UPDATE item SET item_quantity = :itemQuantity, row_total = :rowTotal 
-													WHERE item_id = :itemId;");
+														WHERE item_id = :itemId;");
 					$statement->bindParam(':itemQuantity', $itemQuantity);
 					$statement->bindParam(':rowTotal', $rowTotal);
 					$statement->bindParam(':itemId', $itemId);
 					$result = $statement->execute();
-                    if(!$result){
+                    if (!$result){
                         throw new Exception("Error in updating the details");
                     }
-                }catch(Exception $e){
+                }catch (Exception $e){
                     throw "Message: " .$e->getMessage();
                 }	   
             } else {
@@ -143,17 +143,17 @@
 		 */
 		public function removeCartItem() 
 		{
-            if(!empty($_POST['item_id'])) {
+            if (!empty($_POST['item_id'])) {
                 $connection = $this->instance->getConnection();
                 $itemId = intval($_POST['item_id']);
                 try {
                     $statement = $connection->prepare("DELETE FROM item WHERE item_id = :itemId;");
 					$statement->bindParam(':itemId', $itemId);
 					$result = $statement->execute();
-                    if(!$result) {
+                    if (!$result) {
                         throw new Exception("Error in deleting the details");
                     }
-                } catch(Exception $e) {
+                } catch (Exception $e) {
                     throw "Message: " .$e->getMessage();
                 }	   
             } else {
@@ -167,21 +167,21 @@
 		 */
 		public function updateCart() 
 		{
-			if(isset($_SESSION['cart_id'])) {
+			if (isset($_SESSION['cart_id'])) {
 				$connection = $this->instance->getConnection();
 				$cartId = $this->session['cartId'];
 				try {
 					$result = $connection->prepare("SELECT sum(row_total) FROM item WHERE cart_id = :cartId ;");
 					$result->bindParam(':cartId', $cartId);
 					$result->execute();
-					if(!$result) {
+					if (!$result) {
 						throw new Exception("Error in selecting the details");
 					} else {
 						$array = $result ->fetch(PDO::FETCH_ASSOC); 
 						$grandTotal = $array['sum(row_total)'];
 						return round($grandTotal,2);
 					}
-				} catch(Exception $e) {
+				} catch (Exception $e) {
 					throw "Message: " .$e->getMessage();
 				}	
 			} else {
@@ -195,19 +195,19 @@
 		 */
 		public function showCartDetails() 
 		{
-			if(isset($_SESSION['cart_id'])) {
+			if (isset($_SESSION['cart_id'])) {
 				$connection = $this->instance->getConnection();
 				$cartId = $this->session['cartId'];
 				try {
 					$result = $connection->prepare("SELECT item_name, item_quantity, row_total  FROM item WHERE cart_id = :cartId ;");
 					$result->bindParam(':cartId', $cartId);
 					$result->execute();
-					if(!$result) {
+					if (!$result) {
 						throw new Exception("Error in selecting the details");
 					} else {
 						return $result;
 					}
-				} catch(Exception $e) {
+				} catch (Exception $e) {
 					throw "Message: " .$e->getMessage();
 				}
 			} else {
@@ -221,7 +221,7 @@
 		 */
 		public function checkoutDetails()
 		{ 
-			if(isset($_SESSION['cart_id']) && isset($_SESSION['user_id']) 
+			if (isset($_SESSION['cart_id']) && isset($_SESSION['user_id']) 
 				&& !empty($_POST['first_name']) && !empty($_POST['last_name']) && !empty($_POST['country']) && !empty($_POST['town'])
 				&& !empty($_POST['state'])&& !empty($_POST['postal_code'])&& !empty($_POST['phone']) && !empty($_POST['email'])
 				 && !empty($_POST['address'])  && !empty($_POST['payment_method']) && isset($_POST['shipping_method'])) {
@@ -243,9 +243,9 @@
 				$isActive = intval(0);
 				$paymentMethod = trim($_POST['payment_method']);
 				$shippingFee = intval($_POST['shipping_method']);
-				if($shippingFee == 2) {
+				if ($shippingFee == 2) {
 					$shippingMethod = "Flat rate";
-				} else if($shippingFee == 1) {
+				} elseif ($shippingFee == 1) {
 					$shippingMethod = "Free shipping";
 				} else {
 					$shippingMethod = "Local pickup";
@@ -259,9 +259,9 @@
 					$cart->bindParam(':cartId', $cartId);
 					$cart->execute();				
 					$statement = $connection->prepare("INSERT INTO checkout (cart_id, user_id, first_name, last_name, country, town, state, 
-													postal_code, phone, email, address, company, checkout_date) 
-													VALUES(:cartId, :userId, :firstName, :lastName, :country, :town, 
-													:state, :postalCode, :phone, :email, :address, :company, :checkoutDate);");
+														postal_code, phone, email, address, company, checkout_date) 
+														VALUES(:cartId, :userId, :firstName, :lastName, :country, :town, 
+														:state, :postalCode, :phone, :email, :address, :company, :checkoutDate);");
 					$statement->bindParam(':cartId', $cartId);
 					$statement->bindParam(':userId', $userId);
 					$statement->bindParam(':firstName', $firstName );
@@ -276,12 +276,12 @@
 					$statement->bindParam(':company', $company);
 					$statement->bindParam(':checkoutDate', $checkoutDate);
 					$result = $statement->execute();
-					if(!($result && $cart)) {
+					if (!($result && $cart)) {
 						throw new Exception("Error in inserting and updating the details");
 					} else {
 						return $result;
 					}
-				} catch(Exception $e) {
+				} catch (Exception $e) {
 					throw "Message: " .$e->getMessage();
 				}
 			} else {
@@ -295,7 +295,7 @@
 		 */
 		public function checkoutTotal()
 		{	
-			if(isset($_SESSION['cart_id']) && isset($_POST['shipping_fee']) && !empty($_POST['grand_total']) 
+			if (isset($_SESSION['cart_id']) && isset($_POST['shipping_fee']) && !empty($_POST['grand_total']) 
 				&& isset($_POST['sub_total'])) {
 				$connection = $this->instance->getConnection();
 				$shippingFee = floatval($_POST['shipping_fee']);
@@ -304,16 +304,16 @@
 				$cartId = $this->session['cartId'];
 				try {
 					$statement =  $connection->prepare("UPDATE cart SET sub_total = :subTotal, shipping_fee = :shippingFee, 
-													grand_total = :grandTotal WHERE cart_id = :cartId;");
+														grand_total = :grandTotal WHERE cart_id = :cartId;");
 					$statement->bindParam(':subTotal', $subTotal);
 					$statement->bindParam(':shippingFee', $shippingFee);
 					$statement->bindParam(':cartId', $cartId);
 					$statement->bindParam(':grandTotal', $grandTotal);
 					$result = $statement->execute();
-					if(!$result) {
+					if (!$result) {
 						throw new Exception("Error in updating the details");
 					}
-				} catch(Exception $e) {
+				} catch (Exception $e) {
 					throw "Message: " .$e->getMessage();
 				}
 			} else {
@@ -327,7 +327,7 @@
 		 */
 		public function orderDetails()
 		{
-			if(isset($_SESSION['cart_id']) && isset($_SESSION['user_id'])) {
+			if (isset($_SESSION['cart_id']) && isset($_SESSION['user_id'])) {
 				$connection = $this->instance->getConnection();
 				$cartId = $this->session['cartId'];
 				$userId = $this->session['userId'];
@@ -337,12 +337,12 @@
 					$result->bindParam(':cartId', $cartId);
 					$result->bindParam(':userId', $userId);
 					$result->execute();
-					if(!$result) {
+					if (!$result) {
 						throw new Exception("Error in selecting the details");
 					} else {
 						return $result;
 					}
-				} catch(Exception $e) {
+				} catch (Exception $e) {
 					throw "Message: " .$e->getMessage();
 				}	
 			} else {
@@ -356,7 +356,7 @@
 		 */
 		public function customerDetails()
 		{
-			if(isset($_SESSION['cart_id']) && isset($_SESSION['user_id'])) {
+			if (isset($_SESSION['cart_id']) && isset($_SESSION['user_id'])) {
 				$connection = $this->instance->getConnection();
 				$cartId = $this->session['cartId'];
 				$userId = $this->session['userId'];
@@ -366,12 +366,12 @@
 					$result->bindParam(':cartId', $cartId);
 					$result->bindParam(':userId', $userId);
 					$result->execute();
-					if(!$result) {
+					if (!$result) {
 						throw new Exception("Error in selecting the details");
 					} else {
 						return $result;
 					}
-				} catch(Exception $e) {
+				} catch (Exception $e) {
 					throw "Message: " .$e->getMessage();
 				}	
 			} else {
@@ -385,19 +385,19 @@
 		 */
 		public function getAddress() 
 		{
-			if(isset($_SESSION['user_id'])) {
+			if (isset($_SESSION['user_id'])) {
 				$connection = $this->instance->getConnection();
 				$userId = $this->session['userId'];
 				try {
 					$result = $connection->prepare("SELECT address FROM checkout WHERE user_id = :userId;");
 					$result->bindParam(':userId', $userId);
 					$result->execute();
-					if(!$result) {
+					if (!$result) {
 						throw new Exception("Error in selecting the details");
 					} else {
 						return $result;
 					}
-				} catch(Exception $e) {
+				} catch (Exception $e) {
 					throw "Message: " .$e->getMessage();
 				}
 			} else {
@@ -411,21 +411,21 @@
 		 */
 		public function getMyAcccountCartDetails()
 		{
-			if(isset($_SESSION['user_id'])) {
+			if (isset($_SESSION['user_id'])) {
 				$connection = $this->instance->getConnection();
 				$userId = $this->session['userId'];
 				try {
 					$result = $connection->prepare("SELECT cart.cart_id, checkout.checkout_date, cart.grand_total, cart.order_status
-												FROM cart JOIN checkout ON cart.cart_id = checkout.cart_id
-												WHERE cart.user_id = :userId;");
+													FROM cart JOIN checkout ON cart.cart_id = checkout.cart_id
+													WHERE cart.user_id = :userId;");
 					$result->bindParam(':userId', $userId);
 					$result->execute();
-					if(!$result) {
+					if (!$result) {
 						throw new Exception("Error in selecting the details");
 					} else {
 						return $result;
 					}
-				} catch(Exception $e) {
+				} catch (Exception $e) {
 					throw "Message: " .$e->getMessage();
 				}
 			} else {
@@ -439,22 +439,22 @@
 		 */
 		public function getMyAcccountCartProducts($cartId)
 		{
-			if(isset($_SESSION['user_id'])) {
+			if (isset($_SESSION['user_id'])) {
 				$connection = $this->instance->getConnection();
 				$userId = $this->session['userId'];
-				try{
+				try {
 					$result = $connection->prepare("SELECT item.item_name, item.item_quantity FROM item 
-												JOIN cart ON item.cart_id = cart.cart_id
-												WHERE cart.user_id = :userId AND item.cart_id = :cartId;");
+													JOIN cart ON item.cart_id = cart.cart_id
+													WHERE cart.user_id = :userId AND item.cart_id = :cartId;");
 					$result->bindParam(':cartId', $cartId);
 					$result->bindParam(':userId', $userId);
 					$result->execute();
-					if(!$result) {
+					if (!$result) {
 						throw new Exception("Error in selecting the details");
 					} else {
 						return $result;
 					}
-				} catch(Exception $e) {
+				} catch (Exception $e) {
 					throw "Message: " .$e->getMessage();
 				}
 			} else {
