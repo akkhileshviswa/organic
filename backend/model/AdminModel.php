@@ -1,5 +1,5 @@
 <?php   
-	trait Model {
+	trait Admin {
 		/**
          * This method is used to show the customer checkout details,
 		 * @return object of the result.
@@ -22,7 +22,7 @@
 		/**
 		 * Using the trait named Model which has the function customer details defined in it.
 		 */
-		use Model;
+		use Admin;
 
 		/**
          * This method is used to create a object for Database class.

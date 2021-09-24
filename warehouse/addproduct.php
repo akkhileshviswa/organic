@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="assests/css/product.css" type="text/css" rel="stylesheet">
+    <link href="assests/css/addproduct.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="assests/js/jquery.js"></script>
     <script type="text/javascript" src="assests/js/addproduct.js"></script>
 </head>
@@ -13,7 +13,7 @@
             } 
         ?>
     </div>
-    <form method="POST" action="product.php" enctype="multipart/form-data">
+    <form method="POST" action="products.php" enctype="multipart/form-data">
         <table id="product" align=center>
             <h2 align=center>Register Product</h2>
             <tr>

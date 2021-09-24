@@ -1,8 +1,24 @@
 <?php
 	/**
-	 * This class insert, fetches, delete, update the values in database upon calling the specified function.
-	 */
-    class CartModel 
+     * This class is used to the products to the cart for the current user.
+     */
+    interface AddToCart
+    {
+        public function addToCart();
+    }
+    
+    /**
+     * This class is used to show the cart details of the current user.
+     */
+    interface ShowCartDetails
+    {
+        public function showCartDetails();
+    }
+    
+    /**
+     * {@inheritdoc} Here is where the method is defined.
+     */
+    class CartModel implements AddToCart, ShowCartDetails
 	{
         private $instance;
         private $session;
