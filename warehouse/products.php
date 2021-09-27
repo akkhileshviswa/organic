@@ -31,7 +31,7 @@ if (isset($_POST['submit_row'])) {
                     $n = count($rows);
                     for ($j=0; $j<$n ; $j++) {
                         if (in_array($code[$i], $rows[$j])) { 
-                            $_SESSION['message'] = "Product code should be unique!!";
+                            $_SESSION['message'] = $name[$i]." Product code should be unique!!";
                             View::load("addproduct");
                         }
                     } 
