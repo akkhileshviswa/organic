@@ -48,14 +48,16 @@ if (isset($_POST['submit_row'])) {
                                         $sqlVal = $fileName;
                                     } else {                                      
                                         $_SESSION['message'] = "File coud not be uploaded.";
+                                        View::load("addproduct");
                                     }
                             } else {                             
                                 $_SESSION['message'] = "Only .jpg, .jpeg and .png file formats allowed.";
+                                View::load("addproduct");
                             }
                             if (!empty($sqlVal)) {
                                 $insert = mysqli_query($connectWarehouse, "INSERT INTO product_image (product_code, product_name, image) 
                                                         VALUES ($code[$i], '$name[$i]', '$sqlVal');");
-                                if (!$insert) {
+                                if (!$insert ) {
                                     $select = mysqli_query($connectWarehouse, "SELECT product_id FROM products 
                                                             WHERE product_code = $code[$i];");
                                     $row = mysqli_fetch_array($select);
