@@ -13,7 +13,7 @@
             } 
         ?>
     </div>
-    <form method="POST" action="products.php" enctype="multipart/form-data">
+    <form method="POST" action="products.php">
         <table id="product" align=center>
             <h2 align=center>Register Product</h2>
             <tr>
@@ -26,7 +26,6 @@
                 <td class="right"><input type="text" name="name[]" placeholder="Enter Product Name"></td>
                 <td class="right"><input type="text" name="quantity[]" placeholder="Enter Quantity"></td>
                 <td class="right"><input type="text" name="code[]" placeholder="Enter Product Code"></td>
-                <td class="right"><input type="file" name="fileUpload[]" multiple></td>
                 <td class="button"><input type="button" id="submit" onclick="add_row();" value="ADD ROW"></td>
             </tr>
         </table>

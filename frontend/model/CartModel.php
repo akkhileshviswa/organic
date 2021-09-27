@@ -77,7 +77,7 @@
 					$cartIdResult->bindParam(':userId', $userId);
 					$cartIdResult->bindParam(':isActive', $isActive);
 					$cartIdResult->execute();
-					$cartIdArray = $cartIdResult ->fetch(PDO::FETCH_ASSOC); 
+					$cartIdArray = $cartIdResult->fetch(PDO::FETCH_ASSOC); 
 					$cartId = $cartIdArray['cart_id'];
 					$_SESSION['cart_id'] = $cartId;
 					$productIdResult = $connection->prepare("SELECT product_id, item_quantity, item_price FROM item 
@@ -86,7 +86,7 @@
 					$productIdResult->bindParam(':productId', $productId);
 					$productIdResult->execute();
 
-					$productIdArray = $productIdResult ->fetch(PDO::FETCH_ASSOC); 
+					$productIdArray = $productIdResult->fetch(PDO::FETCH_ASSOC); 
 					$productIdCheck = $productIdArray['product_id'];
 					$quantityCheck = $productIdArray['item_quantity'];
 					$itemPriceCheck = $productIdArray['item_price'];
@@ -136,12 +136,19 @@
                 $rowTotal = floatval($_POST['row_total']); 
                 $itemId = intval($_POST['item_id']);
                 try {
+					$connection->beginTransaction();
                     $statement =  $connection->prepare("UPDATE item SET item_quantity = :itemQuantity, row_total = :rowTotal 
 														WHERE item_id = :itemId;");
 					$statement->bindParam(':itemQuantity', $itemQuantity);
 					$statement->bindParam(':rowTotal', $rowTotal);
 					$statement->bindParam(':itemId', $itemId);
 					$result = $statement->execute();
+					if ($itemQuantity > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
                     if (!$result){
                         throw new Exception("Error in updating the details");
                     }
@@ -163,9 +170,16 @@
                 $connection = $this->instance->getConnection();
                 $itemId = intval($_POST['item_id']);
                 try {
+					$connection->beginTransaction();
                     $statement = $connection->prepare("DELETE FROM item WHERE item_id = :itemId;");
 					$statement->bindParam(':itemId', $itemId);
 					$result = $statement->execute();
+					if ($itemId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
                     if (!$result) {
                         throw new Exception("Error in deleting the details");
                     }

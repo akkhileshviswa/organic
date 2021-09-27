@@ -214,13 +214,15 @@
         public function createProduct() 
         {
             $result = $this->user -> createProduct();
-            if ($result) {
+            if ($result == 1 ) {
                 $_SESSION['message'] = "Product is registered!!";
                 View::load("products");
+            } elseif($result == 2) {
+                $_SESSION['message'] = "Product Name should be more than 5 characters!!";  
             } else {
                 $_SESSION['message'] = "Enter Valid Details for Registering the Product!!";
-                View::load("newproduct");
             }
+            View::load("newproduct");
         }
 
         /**
@@ -292,7 +294,7 @@
         public function removeOrder()
         {
             $result = $this->user -> removeOrder();
-            if ($result) {
+            if ($result == 1) {
                 $_SESSION['message'] = "Order has been deleted!!";
             } else {
                 $_SESSION['message'] = "Order has not been deleted!!";

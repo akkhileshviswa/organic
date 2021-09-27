@@ -130,15 +130,22 @@
          */
 		public function createProduct() 
 		{	
-			if ($_SERVER['REQUEST_METHOD'] == "POST" && $_POST['product_name'] != "" && $_POST['price'] != "" 
+			if ($_SERVER['REQUEST_METHOD'] == "POST" && $_POST['product_name'] != "" && $_POST['price'] != "" && $_POST['price'] != 0
 				&& $_POST['quantity'] != "" && $_FILES['file']['name'] != "" ) {
 				$connection = $this->connect->getConnection();
 				$productName = trim($_POST['product_name']);
 				$price = floatval($_POST['price']);
 				$quantity = intval($_POST['quantity']);
 				$image = $_FILES['file']['name'];
+				mysqli_autocommit($connection,FALSE);
 				$result = mysqli_query($connection, "INSERT INTO product (product_name, price, quantity, image) 
 										VALUES ('$productName', $price, $quantity, '$image');");
+				if (strlen($productName) > 5) {
+					mysqli_autocommit($connection,TRUE);
+				} else {
+					mysqli_rollback($connection);
+					return 2;
+				}
 				return $result;		
 			}	
 		}
@@ -248,7 +255,14 @@
 		public function getCustomerCartProducts($cartId)
 		{
 			$connection = $this->connect->getConnection();
+			mysqli_autocommit($connection,FALSE);
 			$result = mysqli_query($connection, "SELECT item_name FROM item WHERE cart_id = $cartId;");
+			if ($cartId > 0) {
+				mysqli_autocommit($connection,TRUE);
+			} else {
+				mysqli_rollback($connection);
+				return 2;
+			}
 			return $result;
 		}
 		
@@ -276,9 +290,20 @@
 		{
 			$connection = $this->connect->getConnection();
 			$cartId = intval($_POST['cart_id']);
+			mysqli_autocommit($connection,FALSE);
 			$deleteCheckout = mysqli_query($connection, "DELETE FROM checkout WHERE cart_id = $cartId;");
-			$deleteItem = mysqli_query($connection, "DELETE FROM item WHERE cart_id = $cartId;");
-			$deleteCart = mysqli_query($connection, "DELETE FROM cart WHERE cart_id = $cartId;");
+			if ($deleteCheckout == 1) {
+				$deleteItem = mysqli_query($connection, "DELETE FROM item WHERE cart_id = $cartId;");
+				if ($deleteItem == 1) {
+					$deleteCart = mysqli_query($connection, "DELETE FROM cart WHERE cart_id = $cartId;");
+				}
+			}
+			if ($deleteCart == 1 && $cartId > 0) {
+				mysqli_autocommit($connection,TRUE);
+			} else {
+				mysqli_rollback($connection);
+				return 2;
+			}
             return $deleteCart; 
 		}
     }

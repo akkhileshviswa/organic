@@ -1,5 +1,4 @@
 <?php 
-	
 	/**
 	 * This class insert, fetches, delete, update the values in database upon calling the specified function.
 	 */
@@ -30,6 +29,7 @@
 				$password = trim($_POST['password']);
 				$mdPassword = md5($password);
 				if (!empty($name) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($mdPassword)) {	
+					$connection->beginTransaction();
 					$result = $connection->prepare("SELECT * FROM users WHERE username = :name ;");
 					$result->bindParam(':name', $name);
 					$result->execute();
@@ -37,7 +37,6 @@
 					if ($row['username'] == $name) {
 						return 3;
 					}
-					$connection->beginTransaction();
 					$statement =  $connection->prepare("INSERT INTO users (username,email,password) 
 														VALUES (:name, :email, :mdPassword)");
 					$statement->bindParam(':name', $name);
