@@ -39,35 +39,36 @@ if (isset($_POST['submit_row'])) {
                                             VALUES('$name[$i]', $quantity[$i], $code[$i]);");                     
                     if ($result) {
                         foreach ($_FILES['fileUpload']['name'] as $id=>$val) {
-                            $fileName        = $_FILES['fileUpload']['name'][$id];
+                            $fileName      = $_FILES['fileUpload']['name'][$id];
                             $tempLocation    = $_FILES['fileUpload']['tmp_name'][$id];
-                            $targetFilePath  = $uploadsDir . $fileName;
+                            $targetFilePath  = $uploadsDir.$fileName;
                             $fileType        = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
                             if (in_array($fileType, $allowedFileType)) {
                                     if (move_uploaded_file($tempLocation, $targetFilePath)) {
                                         $sqlVal = $fileName;
-                                    } else {                                      
-                                        $_SESSION['message'] = "File coud not be uploaded.";
-                                        View::load("addproduct");
+                                    } else {      
+                                        $sqlVal =  "fruit_1.jpg";
                                     }
-                            } else {                             
-                                $_SESSION['message'] = "Only .jpg, .jpeg and .png file formats allowed.";
-                                View::load("addproduct");
+                            } else {         
+                                $upload = 1;                    
                             }
-                            if (!empty($sqlVal)) {
+                            if ($upload != 1) {
                                 $insert = mysqli_query($connectWarehouse, "INSERT INTO product_image (product_code, product_name, image) 
                                                         VALUES ($code[$i], '$name[$i]', '$sqlVal');");
-                                if (!$insert ) {
-                                    $select = mysqli_query($connectWarehouse, "SELECT product_id FROM products 
-                                                            WHERE product_code = $code[$i];");
-                                    $row = mysqli_fetch_array($select);
-                                    $product_id = $row['product_id'];
-                                    $delete = mysqli_query($connectWarehouse, "DELETE FROM products WHERE product_id = $product_id ;");
-                                    $_SESSION['message'] = "File could not be uploaded!!";
-                                }
-                            } else {
-                                $_SESSION['message'] = "File could not be uploaded!!";
                             }
+                            if (!$insert || $upload == 1) {
+                                $select = mysqli_query($connectWarehouse, "SELECT product_id FROM products 
+                                                        WHERE product_code = $code[$i];");
+                                $row = mysqli_fetch_array($select);
+                                $product_id = $row['product_id'];
+                                $delete = mysqli_query($connectWarehouse, "DELETE FROM products WHERE product_id = $product_id ;");
+                                if ($upload == 1 ) {
+                                    $_SESSION['message'] = "Only .jpg, .jpeg and .png file formats allowed.";
+                                } else {
+                                    $_SESSION['message'] = "File could not be uploaded!!!";
+                                }
+                                View::load("addproduct");
+                            } 
                         }
                     } else {
                         $_SESSION['message'] = "Product could not be added!!";
@@ -84,8 +85,7 @@ if (isset($_POST['submit_row'])) {
         } else {
             $_SESSION['message'] = "Fill all the details!!";
         }
-        View::load("addproduct");
-    }    
+    }    View::load("addproduct");
 } 
 
 
