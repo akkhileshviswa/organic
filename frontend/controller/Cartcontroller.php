@@ -37,7 +37,7 @@
         public function loadCheckout()
         {
             if ($_SESSION['loggedin'] > 0) {
-                if ( $_SESSION['itemCount'] > 0) {
+                if ($_SESSION['itemCount'] > 0) {
                     View::load("checkout");
                 } else {
                     $_SESSION['message'] = "Cart is Empty!! Add Products To Continue!!";
@@ -65,7 +65,7 @@
          */
         public function addToCart() 
         {
-            $addToCart = $this->cart -> addToCart();
+            $addToCart = $this->cart->addToCart();
             return $addToCart;
         }
         
@@ -75,7 +75,7 @@
          */
         public function updateQuantity() 
         {
-            $updateQuantity = $this->cart -> updateQuantity();
+            $updateQuantity = $this->cart->updateQuantity();
             return $updateQuantity;
         }
         
@@ -85,7 +85,7 @@
          */
         public function removeCartItem() 
         {
-            $removeCartItem = $this->cart -> removeCartItem();
+            $removeCartItem = $this->cart->removeCartItem();
             return $removeCartItem;
         }
         
@@ -95,7 +95,7 @@
          */
         public function updateCart() 
         {
-            $updateCart = $this->cart -> updateCart();
+            $updateCart = $this->cart->updateCart();
             return $updateCart;
         }
         
@@ -105,7 +105,7 @@
          */
         public function showCartDetails()
         {
-            $showCartDetails = $this->cart -> showCartDetails();
+            $showCartDetails = $this->cart->showCartDetails();
             return $showCartDetails;
         }
         
@@ -115,8 +115,8 @@
          */
         public function checkoutDetails()
         {
-            $checkoutDetails = $this->cart -> checkoutDetails();
-            if ( $checkoutDetails) {
+            $checkoutDetails = $this->cart->checkoutDetails();
+            if ($checkoutDetails) {
                 View::load('orderdetails');
             } else {
                 $_SESSION['message'] = "Fill all the fields!";
@@ -130,7 +130,7 @@
          */
         public function checkoutTotal()
         {
-            $checkoutTotal = $this->cart -> checkoutTotal();
+            $checkoutTotal = $this->cart->checkoutTotal();
             return $checkoutTotal;
         }
         
@@ -140,7 +140,7 @@
          */
         public function orderDetails()
         {
-            $orderDetails = $this->cart -> orderDetails();
+            $orderDetails = $this->cart->orderDetails();
             return $orderDetails;            
         }
         
@@ -150,7 +150,7 @@
          */
         public function customerDetails()
         {
-            $customerDetails = $this-> cart -> customerDetails();
+            $customerDetails = $this-> cart->customerDetails();
             return $customerDetails;
         }
 	}

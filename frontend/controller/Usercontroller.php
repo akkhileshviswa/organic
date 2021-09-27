@@ -78,6 +78,8 @@
                 $_SESSION['message'] = "Email already exists!!";
             } elseif ($result == 3) {
                 $_SESSION['message'] = "Username already exists!!";
+            } elseif ($result == 4) {
+                $_SESSION['message'] = "Username length should be more than 5 characters!!";
             } else {
                 $_SESSION['message'] = "Enter Valid Details for Registration!";
             }

@@ -11,12 +11,14 @@
         <div id="table">
             <table id="main">
                 <tr id="session">    
-                    <td><?php  
+                    <td>
+                        <?php  
                            if (isset($_SESSION['message'])) {
                             echo $_SESSION['message'];
                             unset($_SESSION['message']);
                         } 
-                    ?></td>	
+                        ?>
+                    </td>	
                 </tr><br><br>
                 <tr>
                     <td id="mainleft"><h2>Login</h2></td>

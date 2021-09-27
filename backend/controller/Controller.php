@@ -34,7 +34,7 @@
             if ($_SESSION['loggedin'] == 1) {
                 View::load("dashboard");
             } else {
-                $_SESSION['message'] = "Login To Continue";
+                $_SESSION['message'] = "Login To Continue!!";
                 View::load('login');
             }
         }
@@ -48,7 +48,7 @@
             if ($_SESSION['loggedin'] == 1) {
                 View::load("customers");
             } else {
-                $_SESSION['message'] = "Login To Continue";
+                $_SESSION['message'] = "Login To Continue!!";
                 View::load('login');
             }
         }
@@ -62,7 +62,7 @@
             if ($_SESSION['loggedin'] == 1) {
                 View::load("orders");
             } else {
-                $_SESSION['message'] = "Login To Continue";
+                $_SESSION['message'] = "Login To Continue!!";
                 View::load('login');
             }
         }
@@ -76,7 +76,7 @@
             if ($_SESSION['loggedin'] == 1) {
                 View::load("products");
             } else {
-                $_SESSION['message'] = "Login To Continue";
+                $_SESSION['message'] = "Login To Continue!!";
                 View::load('login');
             }
         }
@@ -90,7 +90,7 @@
             if ($_SESSION['loggedin']==1) {
                 View::load("newproduct");
             } else {
-                $_SESSION['message'] = "Login To Continue";
+                $_SESSION['message'] = "Login To Continue!!";
                 View::load('login');
             }
         }
@@ -104,7 +104,7 @@
             if ($_SESSION['loggedin'] == 1) {
                 View::load("updateproduct");
             } else {
-                $_SESSION['message'] = "Login To Continue";
+                $_SESSION['message'] = "Login To Continue!!";
                 View::load('login');
             }
         }
@@ -118,7 +118,7 @@
             if ($_SESSION['loggedin'] == 1) {
                 View::load("updatecustomer");
             } else {
-                $_SESSION['message'] = "Login To Continue";
+                $_SESSION['message'] = "Login To Continue!!";
                 View::load('login');
             }
         }
@@ -138,7 +138,7 @@
                     View::load("dashboard");
                 }
             } else {
-                $_SESSION['message'] = "Username or Password is incorrect";
+                $_SESSION['message'] = "Username or Password is incorrect!!";
                 View::load("login");
             }
         }
@@ -182,10 +182,12 @@
         public function updateEditedProduct()
         {
             $result = $this->user -> updateEditedProduct();
-            if ($result) {
-                $_SESSION['message'] = "Product has been updated.";
+            if ($result == 1) {
+                $_SESSION['message'] = "Product details has been updated!!";
+            } elseif ($result == 2) {
+                $_SESSION['message'] = "Price cannot be zero!!";
             } else {
-                $_SESSION['message'] = "Product has not been updated.";
+                $_SESSION['message'] = "Product details has not been updated!!";
             }
             View::load("products");
         }
@@ -213,10 +215,10 @@
         {
             $result = $this->user -> createProduct();
             if ($result) {
-                $_SESSION['message'] = "Product is registered.";
+                $_SESSION['message'] = "Product is registered!!";
                 View::load("products");
             } else {
-                $_SESSION['message'] = "Enter Valid Details for Registering the Product.";
+                $_SESSION['message'] = "Enter Valid Details for Registering the Product!!";
                 View::load("newproduct");
             }
         }
@@ -274,9 +276,9 @@
         {
             $result = $this->user -> changeOrderStatus();
             if ($result) {
-                $_SESSION['message'] = "Order Status has been updated.";
+                $_SESSION['message'] = "Order Status has been updated!!";
             } else {
-                $_SESSION['message'] = "Order Status has not been updated.";
+                $_SESSION['message'] = "Order Status has not been updated!!";
             }
             View::load("orders");
         }
@@ -291,9 +293,9 @@
         {
             $result = $this->user -> removeOrder();
             if ($result) {
-                $_SESSION['message'] = "Order has been deleted.";
+                $_SESSION['message'] = "Order has been deleted!!";
             } else {
-                $_SESSION['message'] = "Order has not been deleted.";
+                $_SESSION['message'] = "Order has not been deleted!!";
             }
             View::load("orders");
         }

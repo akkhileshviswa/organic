@@ -110,9 +110,16 @@
 				$productName = trim($_POST['product_name']);
 				$price = floatval($_POST['price']);
 				$quantity = intval($_POST['quantity']);
+				mysqli_autocommit($connection,FALSE);
 				$result = mysqli_query($connection, "UPDATE product 
 										SET product_name = '$productName', price = $price, quantity = $quantity
 										WHERE product_id = $productId ;");
+				if ($price > 0) {
+					mysqli_autocommit($connection,TRUE);
+				} else {
+					mysqli_rollback($connection);
+					return 2;
+				}
 				return $result; 
 			}
 		}
@@ -206,8 +213,8 @@
 				} elseif ($rowEmailCheck['email'] == $email) {
 					if ($rowEmailCheck['user_id'] == $userId) {
 						$result = mysqli_query($connection, "UPDATE users 
-											SET username = '$username'
-											WHERE user_id = $userId ;");
+												SET username = '$username'
+												WHERE user_id = $userId ;");
 						return $result;
 					} else {
 						return 3;

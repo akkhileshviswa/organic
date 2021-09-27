@@ -37,11 +37,18 @@
 					if ($row['username'] == $name) {
 						return 3;
 					}
+					$connection->beginTransaction();
 					$statement =  $connection->prepare("INSERT INTO users (username,email,password) 
 														VALUES (:name, :email, :mdPassword)");
 					$statement->bindParam(':name', $name);
 					$statement->bindParam(':email', $email);
 					$statement->bindParam(':mdPassword', $mdPassword);
+					if (strlen($name) > 5) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return 4;
+					}
 					try {
 						$statement->execute();
 						//$to = $email;
