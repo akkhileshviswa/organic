@@ -3,7 +3,7 @@
     error_reporting(0);
     include "model/Database.php";
     include "View.php";
-    if (isset($_POST['submit_row']) && $_POST['name'] !="" && $_POST['code'] !="" && $_POST['fileUpload'] != "") {
+    if (isset($_POST['submit_row']) && $_POST['name'] !="" && $_POST['code'] !="" && $_FILES['fileUpload']['name'] != "") {
         $connection = new Database();
         $connectWarehouse = $connection->getConnectionToWarehouse();
         $name = $_POST['name'];
