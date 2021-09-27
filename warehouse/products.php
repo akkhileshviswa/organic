@@ -24,10 +24,16 @@ if (isset($_POST['submit_row'])) {
             if ($checkQuantity == 1 ) {
                 if ($checkCode == 1) {
                     $productCode = mysqli_query($connectWarehouse, "SELECT product_code FROM products;");
-                    $rows = mysqli_fetch_array($productCode);
-                    if (in_array($code[$i], $rows)) { 
-                        $_SESSION['message'] = "Product code should be unique!!";
-                        View::load("addproduct");
+                    $rows = [];
+                    while ($row = $productCode->fetch_row()) {
+                        $rows[] = $row;
+                    }
+                    $n = count($rows);
+                    for ($j=0; $j<$n ; $j++) {
+                        if (in_array($code[$i], $rows[$j])) { 
+                            $_SESSION['message'] = "Product code should be unique!!";
+                            View::load("addproduct");
+                        }
                     } 
                     $result = mysqli_query($connectWarehouse,"INSERT INTO products (product_name, quantity, product_code) 
                                             VALUES('$name[$i]', $quantity[$i], $code[$i]);");                     
@@ -58,7 +64,7 @@ if (isset($_POST['submit_row'])) {
                                     $_SESSION['message'] = "File could not be uploaded!!";
                                 }
                             } else {
-                                $_SESSION['message'] = "File could nota uploaded!!";
+                                $_SESSION['message'] = "File could not be uploaded!!";
                             }
                         }
                     } else {
@@ -79,6 +85,7 @@ if (isset($_POST['submit_row'])) {
         View::load("addproduct");
     }    
 } 
+
 
 class Products
 {
