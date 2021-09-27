@@ -82,10 +82,17 @@
 				$password = trim($_POST['loginpassword']);
 				$mdPassword = md5($password);
 				try {
+					$connection->beginTransaction();
 					$result = $connection->prepare("SELECT * FROM users WHERE username = :name AND password = :mdPassword;");
 					$result->bindParam(':name', $name);
 					$result->bindParam(':mdPassword', $mdPassword);
 					$result->execute();
+					if ($name != "") {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!$result) {
 						throw new Exception("Error in Selecting the user.");
 					}
@@ -113,12 +120,19 @@
 			if (isset($_SESSION['user_id'])) {
 				$connection = $this->instance->getConnection();
 				$userId = $_SESSION['user_id'];
-				$isActive = intval(1);
+				$isActive = 1;
 				try {
+					$connection->beginTransaction();
 					$result = $connection->prepare("SELECT cart_id FROM cart WHERE user_id = :userId AND is_active = :isActive;");
 					$result->bindParam(':userId', $userId);
 					$result->bindParam(':isActive', $isActive);
 					$result->execute();
+					if ($userId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!$result) {
 						throw new Exception("Error in Selecting the password");
 					} else {
@@ -142,9 +156,16 @@
 				$connection = $this->instance->getConnection();
 				$userId = $this->session['userId'];
 				try {
+					$connection->beginTransaction();
 					$result = $connection->prepare("SELECT password FROM users WHERE user_id = :userId;");
 					$result->bindParam(':userId', $userId);
 					$result->execute();
+					if ($userId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!$result) {
 						throw new Exception("Error in Selecting the password");
 					} else {
@@ -170,10 +191,17 @@
 				$password = trim($_POST['password']);
 				$mdPassword = md5($password);
 				try {
+					$connection->beginTransaction();
 					$statement = $connection->prepare("UPDATE users SET password = :mdPassword WHERE user_id = :userId;");
 					$statement->bindParam(':mdPassword', $mdPassword);
 					$statement->bindParam(':userId', $userId);
 					$result = $statement->execute();
+					if ($userId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!$result) {
 						throw new Exception("Error in updating the user details");
 					}
@@ -196,10 +224,17 @@
 				$userId = $this->session['userId'];
 				$address = trim($_POST['address']);
 				try {
+					$connection->beginTransaction();
 					$statement = $connection->prepare("UPDATE checkout SET address = :address WHERE user_id = :userId;");
 					$statement->bindParam(':address', $address);
 					$statement->bindParam(':userId', $userId);
 					$result = $statement->execute();
+					if ($userId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!$result) {
 						throw new Exception("Error in updating the user details");
 					}

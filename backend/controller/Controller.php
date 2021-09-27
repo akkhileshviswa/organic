@@ -186,6 +186,8 @@
                 $_SESSION['message'] = "Product details has been updated!!";
             } elseif ($result == 2) {
                 $_SESSION['message'] = "Price cannot be zero!!";
+            } elseif ($result == 3) {
+                $_SESSION['message'] = "Product Name should be more than 5 characters!!";  
             } else {
                 $_SESSION['message'] = "Product details has not been updated!!";
             }
@@ -217,8 +219,10 @@
             if ($result == 1 ) {
                 $_SESSION['message'] = "Product is registered!!";
                 View::load("products");
-            } elseif($result == 2) {
+            } elseif ($result == 2) {
                 $_SESSION['message'] = "Product Name should be more than 5 characters!!";  
+            } elseif ($result == 3) {
+                $_SESSION['message'] = "Price cannot be zero!!";  
             } else {
                 $_SESSION['message'] = "Enter Valid Details for Registering the Product!!";
             }

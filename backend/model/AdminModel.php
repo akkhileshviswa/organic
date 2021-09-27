@@ -7,7 +7,13 @@
 		public function customerDetails($cartId)
 		{
 			$connection = $this->connect->getConnection();
+			mysqli_autocommit($connection,FALSE);
 			$result = mysqli_query($connection, "SELECT first_name, checkout_date FROM checkout WHERE cart_id = $cartId;");
+			if ($cartId > 0) {
+				mysqli_autocommit($connection,TRUE);
+			} else {
+				mysqli_rollback($connection);
+			}
 			return $result;
 		}
 	}
@@ -44,7 +50,13 @@
 				$password = trim($_POST['password']);
 				$mdPassword = md5($password);
 				try {
+					mysqli_autocommit($connection,FALSE);
 					$result = mysqli_query($connection, "SELECT * FROM admin WHERE username = '$name' AND password = '$mdPassword';");
+					if ($name != "") {
+						mysqli_autocommit($connection,TRUE);
+					} else {
+						mysqli_rollback($connection);
+					}
 					if (!$result) {
 						throw new Exception("Error in Selecting");
 					}
@@ -69,7 +81,13 @@
 		{
             $connection = $this->connect->getConnection();
             $userId = $_SESSION['user_id'];
+			mysqli_autocommit($connection,FALSE);
             $result = mysqli_query($connection, "SELECT * FROM admin WHERE user_id = $userId ;");
+			if ($userId > 0) {
+				mysqli_autocommit($connection,TRUE);
+			} else {
+				mysqli_rollback($connection);
+			}
             return $result; 
         }
 		
@@ -92,8 +110,14 @@
 		{
 			$connection = $this->connect->getConnection();
 			$productId = intval($_POST['product_id']);
+			mysqli_autocommit($connection,FALSE);
 			$result = mysqli_query($connection, "SELECT product_id, product_name, price, quantity FROM product 
 									WHERE product_id = $productId ;");
+			if ($productId > 0) {
+				mysqli_autocommit($connection,TRUE);
+			} else {
+				mysqli_rollback($connection);
+			}
             return $result; 
 		}
 		
@@ -114,8 +138,11 @@
 				$result = mysqli_query($connection, "UPDATE product 
 										SET product_name = '$productName', price = $price, quantity = $quantity
 										WHERE product_id = $productId ;");
-				if ($price > 0) {
+				if ($price > 0 && strlen($productName) > 5) {
 					mysqli_autocommit($connection,TRUE);
+				} elseif (strlen($productName) < 5) {
+					mysqli_rollback($connection);
+					return 3;
 				} else {
 					mysqli_rollback($connection);
 					return 2;
@@ -140,8 +167,11 @@
 				mysqli_autocommit($connection,FALSE);
 				$result = mysqli_query($connection, "INSERT INTO product (product_name, price, quantity, image) 
 										VALUES ('$productName', $price, $quantity, '$image');");
-				if (strlen($productName) > 5) {
+				if (strlen($productName) > 5 && $price > 0) {
 					mysqli_autocommit($connection,TRUE);
+				} elseif ($price == 0 ) {
+					mysqli_rollback($connection);
+					return 3;
 				} else {
 					mysqli_rollback($connection);
 					return 2;
@@ -160,9 +190,15 @@
 			$connection = $this->connect->getConnection();
 			$productId = intval($_POST['product_id']);
 			$isActive = intval($_POST['is_active']);
+			mysqli_autocommit($connection,FALSE);
 			$result = mysqli_query($connection, "UPDATE product
 									SET is_active = $isActive
 									WHERE product_id = $productId ;");
+			if ($productId > 0) {
+				mysqli_autocommit($connection,TRUE);
+			} else {
+				mysqli_rollback($connection);
+			}
 			return $result;
 		}
 		
@@ -185,7 +221,13 @@
 		{
 			$connection = $this->connect->getConnection();
 			$userId = intval($_POST['user_id']);
+			mysqli_autocommit($connection,FALSE);
 			$result = mysqli_query($connection, "SELECT user_id, username, email FROM users WHERE user_id = $userId ;");
+			if ($userId > 0) {
+				mysqli_autocommit($connection,TRUE);
+			} else {
+				mysqli_rollback($connection);
+			}
             return $result; 
 		}
 		
@@ -200,18 +242,36 @@
 				$userId = intval($_POST['user_id']);
 				$username = trim($_POST['username']);
 				$email = trim($_POST['email']);
+				mysqli_autocommit($connection,FALSE);
 				$statement = mysqli_query($connection, "SELECT * FROM users WHERE username = '$username';");
+				if ($username != "") {
+					mysqli_autocommit($connection,TRUE);
+				} else {
+					mysqli_rollback($connection);
+				}
 				$row = $statement->fetch_assoc();
+				mysqli_autocommit($connection,FALSE);
 				$emailCheck = mysqli_query($connection, "SELECT * FROM users WHERE email = '$email';");
+				if ($email != "") {
+					mysqli_autocommit($connection,TRUE);
+				} else {
+					mysqli_rollback($connection);
+				}
 				$rowEmailCheck = $emailCheck->fetch_assoc();
 				if ($row['username'] == $username) {
 					if ($row['user_id'] == $userId) {
 						if ($rowEmailCheck['email'] == $email) { 
 							return 4;
 						} else {
+							mysqli_autocommit($connection,FALSE);
 							$result = mysqli_query($connection, "UPDATE users 
 													SET email = '$email'
 													WHERE user_id = $userId ;");
+							if ($userId > 0) {
+								mysqli_autocommit($connection,TRUE);
+							} else {
+								mysqli_rollback($connection);
+							}
 							return $result; 
 						}
 					} else {
@@ -219,17 +279,29 @@
 					}
 				} elseif ($rowEmailCheck['email'] == $email) {
 					if ($rowEmailCheck['user_id'] == $userId) {
+						mysqli_autocommit($connection,FALSE);
 						$result = mysqli_query($connection, "UPDATE users 
 												SET username = '$username'
 												WHERE user_id = $userId ;");
+						if ($userId > 0) {
+							mysqli_autocommit($connection,TRUE);
+						} else {
+							mysqli_rollback($connection);
+						}
 						return $result;
 					} else {
 						return 3;
 					}
 				} else {
+					mysqli_autocommit($connection,FALSE);
 					$result = mysqli_query($connection, "UPDATE users 
 											SET username = '$username', email = '$email'
 											WHERE user_id = $userId ;");
+					if ($userId > 0) {
+						mysqli_autocommit($connection,TRUE);
+					} else {
+						mysqli_rollback($connection);
+					}
 					return $result; 
 				}
 			}
@@ -275,9 +347,15 @@
 			$connection = $this->connect->getConnection();
 			$cartId = intval($_POST['cart_id']);
 			$orderStatus = trim($_POST['order_status']);
+			mysqli_autocommit($connection,FALSE);
 			$result = mysqli_query($connection, "UPDATE cart
 									SET order_status = '$orderStatus'
 									WHERE cart_id = $cartId ;");
+			if ($cartId > 0) {
+				mysqli_autocommit($connection,TRUE);
+			} else {
+				mysqli_rollback($connection);
+			}
             return $result; 
 		}
 		

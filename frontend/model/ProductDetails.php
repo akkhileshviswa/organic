@@ -29,7 +29,7 @@
         public function getProductDetails()
         {
             $connection = $this->instance->getConnection();
-            $isActive = intval(1);
+            $isActive = 1;
             $result = $connection->prepare("SELECT product_id, product_name, price, image FROM product WHERE is_active = :isActive ;");
             $result->bindParam(':isActive', $isActive);
             $result->execute();

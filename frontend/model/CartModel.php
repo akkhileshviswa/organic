@@ -42,16 +42,22 @@
                 $connection = $this->instance->getConnection();
                 $userId = $this->session['userId'];
 					try {
+						$connection->beginTransaction();
 						$statement =  $connection->prepare("INSERT INTO cart (user_id) VALUES (:userId);");
 						$statement->bindParam(':userId', $userId);
 						$result = $statement->execute();
+						if ($userId > 0) {
+							$connection->commit();
+						} else {
+							$connection->rollback();
+						}
 						if (!$result) {
 							return false;
 						} else {
 							return true;    
 						}
-					} catch (Exception $e) {
-						throw "Message: " .$e->getMessage();
+					} catch (Exception) {
+						throw "Message: Error in creating the cart!!" ;
 					}	
 			} else {
 				return false;
@@ -70,8 +76,9 @@
 				$productId = intval($_POST['product_id']);
 				$itemName = trim($_POST['product_name']); 
 				$itemPrice = floatval($_POST['price']);
-				$isActive = intval(1);
+				$isActive = 1;
 				try {
+					$connection->beginTransaction();
 					$cartIdResult =  $connection->prepare("SELECT cart_id FROM cart 
 															WHERE user_id = :userId AND is_active = :isActive ;");
 					$cartIdResult->bindParam(':userId', $userId);
@@ -85,7 +92,11 @@
 					$productIdResult->bindParam(':cartId', $cartId);
 					$productIdResult->bindParam(':productId', $productId);
 					$productIdResult->execute();
-
+					if ($cartId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+					}
 					$productIdArray = $productIdResult->fetch(PDO::FETCH_ASSOC); 
 					$productIdCheck = $productIdArray['product_id'];
 					$quantityCheck = $productIdArray['item_quantity'];
@@ -93,6 +104,7 @@
 					if ($productIdCheck == $productId) {
 						$addQuantity = $quantityCheck + 1;
 						$totalRowPrice = number_format(($addQuantity * $itemPriceCheck), 2);
+						$connection->beginTransaction();
 						$statement = $connection->prepare("UPDATE item SET item_quantity = :addQuantity, row_total = :totalRowPrice 
 															WHERE cart_id = :cartId AND product_id = :productIdCheck ;");
 						$statement->bindParam(':addQuantity', $addQuantity);
@@ -100,8 +112,14 @@
 						$statement->bindParam(':cartId', $cartId);
 						$statement->bindParam(':productIdCheck', $productIdCheck);
 						$result = $statement->execute();
+						if ($cartId > 0) {
+							$connection->commit();
+						} else {
+							$connection->rollback();
+						}
 						return true;	
 					} else {
+						$connection->beginTransaction();
 						$statement =  $connection->prepare("INSERT INTO item (cart_id,product_id,item_name,item_price, row_total) 
 															VALUES (:cartId, :productId, :itemName, :itemPrice, :rowTotal);");
 						$statement->bindParam(':cartId', $cartId);
@@ -110,14 +128,20 @@
 						$statement->bindParam(':itemPrice', $itemPrice, PDO::PARAM_STR);
 						$statement->bindParam(':rowTotal', $itemPrice, PDO::PARAM_STR);
 						$result = $statement->execute();
+						if ($cartId > 0) {
+							$connection->commit();
+						} else {
+							$connection->rollback();
+							return false;
+						}
 						if (!$result) {
 							return false;
 						} else {
 							return true;    
 						}
 					}
-				} catch (Exception $e) {
-					throw "Message: " .$e->getMessage();
+				} catch (Exception) {
+					throw "Message: Error in adding the product to the cart!!" ;
 				}	
 			} else {
 				return false;
@@ -201,13 +225,20 @@
 				$connection = $this->instance->getConnection();
 				$cartId = $this->session['cartId'];
 				try {
+					$connection->beginTransaction();
 					$result = $connection->prepare("SELECT sum(row_total) FROM item WHERE cart_id = :cartId ;");
 					$result->bindParam(':cartId', $cartId);
 					$result->execute();
+					if ($cartId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!$result) {
 						throw new Exception("Error in selecting the details");
 					} else {
-						$array = $result ->fetch(PDO::FETCH_ASSOC); 
+						$array = $result->fetch(PDO::FETCH_ASSOC); 
 						$grandTotal = $array['sum(row_total)'];
 						return round($grandTotal,2);
 					}
@@ -229,11 +260,18 @@
 				$connection = $this->instance->getConnection();
 				$cartId = $this->session['cartId'];
 				try {
+					$connection->beginTransaction();
 					$result = $connection->prepare("SELECT item_name, item_quantity, row_total  FROM item WHERE cart_id = :cartId ;");
 					$result->bindParam(':cartId', $cartId);
 					$result->execute();
+					if ($cartId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!$result) {
-						throw new Exception("Error in selecting the details");
+						throw new Exception("Error in selecting the cart details");
 					} else {
 						return $result;
 					}
@@ -281,6 +319,7 @@
 					$shippingMethod = "Local pickup";
 				}
 				try {
+					$connection->beginTransaction();
 					$cart = $connection->prepare("UPDATE cart SET is_active = :isActive, payment_method = :paymentMethod, 
 												shipping_method = :shippingMethod WHERE cart_id = :cartId;");
 					$cart->bindParam(':isActive', $isActive);
@@ -306,6 +345,12 @@
 					$statement->bindParam(':company', $company);
 					$statement->bindParam(':checkoutDate', $checkoutDate);
 					$result = $statement->execute();
+					if ($result && $cart) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!($result && $cart)) {
 						throw new Exception("Error in inserting and updating the details");
 					} else {
@@ -333,6 +378,7 @@
 				$subTotal = floatval($_POST['sub_total']);
 				$cartId = $this->session['cartId'];
 				try {
+					$connection->beginTransaction();
 					$statement =  $connection->prepare("UPDATE cart SET sub_total = :subTotal, shipping_fee = :shippingFee, 
 														grand_total = :grandTotal WHERE cart_id = :cartId;");
 					$statement->bindParam(':subTotal', $subTotal);
@@ -340,6 +386,12 @@
 					$statement->bindParam(':cartId', $cartId);
 					$statement->bindParam(':grandTotal', $grandTotal);
 					$result = $statement->execute();
+					if ($cartId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!$result) {
 						throw new Exception("Error in updating the details");
 					}
@@ -362,11 +414,18 @@
 				$cartId = $this->session['cartId'];
 				$userId = $this->session['userId'];
 				try {
+					$connection->beginTransaction();
 					$result = $connection->prepare("SELECT grand_total, shipping_method, payment_method  FROM cart 
 													WHERE cart_id = :cartId AND user_id = :userId ;");
 					$result->bindParam(':cartId', $cartId);
 					$result->bindParam(':userId', $userId);
 					$result->execute();
+					if ($cartId > 0 && $userId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!$result) {
 						throw new Exception("Error in selecting the details");
 					} else {
@@ -391,11 +450,18 @@
 				$cartId = $this->session['cartId'];
 				$userId = $this->session['userId'];
 				try {
+					$connection->beginTransaction();
 					$result = $connection->prepare("SELECT phone, email, address, checkout_date  FROM checkout 
 													WHERE cart_id = :cartId AND user_id = :userId ;");
 					$result->bindParam(':cartId', $cartId);
 					$result->bindParam(':userId', $userId);
 					$result->execute();
+					if ($cartId > 0 && $userId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!$result) {
 						throw new Exception("Error in selecting the details");
 					} else {
@@ -419,9 +485,16 @@
 				$connection = $this->instance->getConnection();
 				$userId = $this->session['userId'];
 				try {
+					$connection->beginTransaction();
 					$result = $connection->prepare("SELECT address FROM checkout WHERE user_id = :userId;");
 					$result->bindParam(':userId', $userId);
 					$result->execute();
+					if ($userId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!$result) {
 						throw new Exception("Error in selecting the details");
 					} else {
@@ -445,11 +518,18 @@
 				$connection = $this->instance->getConnection();
 				$userId = $this->session['userId'];
 				try {
+					$connection->beginTransaction();
 					$result = $connection->prepare("SELECT cart.cart_id, checkout.checkout_date, cart.grand_total, cart.order_status
 													FROM cart JOIN checkout ON cart.cart_id = checkout.cart_id
 													WHERE cart.user_id = :userId;");
 					$result->bindParam(':userId', $userId);
 					$result->execute();
+					if ($userId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!$result) {
 						throw new Exception("Error in selecting the details");
 					} else {
@@ -473,12 +553,19 @@
 				$connection = $this->instance->getConnection();
 				$userId = $this->session['userId'];
 				try {
+					$connection->beginTransaction();
 					$result = $connection->prepare("SELECT item.item_name, item.item_quantity FROM item 
 													JOIN cart ON item.cart_id = cart.cart_id
 													WHERE cart.user_id = :userId AND item.cart_id = :cartId;");
 					$result->bindParam(':cartId', $cartId);
 					$result->bindParam(':userId', $userId);
 					$result->execute();
+					if ($cartId > 0 && $userId > 0) {
+						$connection->commit();
+					} else {
+						$connection->rollback();
+						return false;
+					}
 					if (!$result) {
 						throw new Exception("Error in selecting the details");
 					} else {

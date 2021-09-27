@@ -32,7 +32,8 @@
         {
             $connection = $this->instance->getConnection();
             $cartId = $this->session['cartId'];
-            $isActive = intval(1);
+            $isActive = 1;
+            $connection->beginTransaction();
             $statement = $connection->prepare("SELECT product.image, item.item_id, item.item_name, item.item_price, 
                                                 item.item_quantity, item.row_total  FROM item
                                                 JOIN product ON product.product_id = item.product_id
@@ -41,6 +42,12 @@
             $statement->bindParam(':cart_id', $cartId);
             $statement->bindParam(':isActive', $isActive);
             $statement->execute();
+            if ($cartId > 0) {
+                $connection->commit();
+            } else {
+                $connection->rollback();
+                return false;
+            }
             $count = $statement->rowCount();
             $_SESSION['itemCount'] = $count;
             return $statement; 
