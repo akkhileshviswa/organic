@@ -101,7 +101,7 @@
 				}
 				$row = $result->fetch();
 				if ($row['username'] == $name && $row['password'] == $mdPassword) {
-					$_SESSION['user_id'] = $row['user_id'];
+					$_SESSION['user_id'] = &$row['user_id'];
 					return true;
 				} else {
 					return false;

@@ -86,7 +86,7 @@
 					$cartIdResult->execute();
 					$cartIdArray = $cartIdResult->fetch(PDO::FETCH_ASSOC); 
 					$cartId = $cartIdArray['cart_id'];
-					$_SESSION['cart_id'] = $cartId;
+					$_SESSION['cart_id'] = &$cartId;
 					$productIdResult = $connection->prepare("SELECT product_id, item_quantity, item_price FROM item 
 																WHERE cart_id = :cartId AND product_id = :productId;");
 					$productIdResult->bindParam(':cartId', $cartId);
