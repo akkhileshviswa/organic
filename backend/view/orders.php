@@ -68,7 +68,7 @@
                             <?php 
                                 $adminModel = new AdminModel;
                                 $orderDetails = $adminModel->orderDetails();
-                                while ( $results = $orderDetails->fetch_assoc()): 
+                                while ($results = $orderDetails->fetch_assoc()): 
                             ?>
                             <tr>
                                 <td colspan="7"><hr></td>
@@ -79,7 +79,7 @@
                                     <ol class="productslist">
                                         <?php 
                                             $getCustomerCartProducts = $adminModel->getCustomerCartProducts($results['cart_id']);
-                                            while ( $i = $getCustomerCartProducts->fetch_assoc()): 
+                                            while ($i = $getCustomerCartProducts->fetch_assoc()): 
                                         ?>
                                         <li><?php echo $i['item_name']; ?></li>
                                         <?php endwhile; ?>
@@ -87,7 +87,7 @@
                                 </td>
                                 <?php 
                                         $customerDetails = $adminModel->customerDetails($results['cart_id']);
-                                        while ( $j = $customerDetails->fetch_assoc()):
+                                        while ($j = $customerDetails->fetch_assoc()):
                                 ?>
                                 <td><?php echo $j['first_name']; ?></td>
                                 <td><?php echo $j['checkout_date']; ?></td>

@@ -43,7 +43,7 @@
             $routes = Routes::getRoutes(post);
         }
         if (!empty($routes)) {
-            foreach($routes as $route) {
+            foreach ($routes as $route) {
                 if (strstr($request,$route['url'])) {
                     $controller = $route['controller'];
                     $method = $route['method'];

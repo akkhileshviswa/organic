@@ -14,7 +14,7 @@
 				<?php
 					$controller = new Controller;
 					$editProduct = $controller -> editProduct();
-					while ( $i = $editProduct->fetch_assoc()): 
+					while ($i = $editProduct->fetch_assoc()): 
 				?>
 				<tr>
 					<td>

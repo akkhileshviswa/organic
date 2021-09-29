@@ -60,7 +60,7 @@
                         <tbody>
                             <?php 
                                 $showCustomers = $result->showCustomers();
-                                while ( $results = $showCustomers->fetch_assoc()): 
+                                while ($results = $showCustomers->fetch_assoc()): 
                             ?>
                             <tr>
                                 <td colspan="5"><hr></td>

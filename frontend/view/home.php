@@ -66,7 +66,7 @@
                     $product = new ProductDetails;
                     $result = $product->getProductDetails();
                     $tdlimit = 0;
-                    foreach ($result as $j) :
+                    foreach ($result as $j):
                         if ($tdlimit%4 == 0) {
                             echo '</tr>';
                             echo '<tr>';

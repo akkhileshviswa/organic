@@ -26,7 +26,7 @@
                 <?php 
                     $cart = new CartDetails;
                     $result = $cart->getCartDetails();
-                    foreach ($result as $j ) : 
+                    foreach ($result as $j): 
                 ?>
                     <tr id="border">
                         <td><img id="tableimage" src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $j['image']; ?>"></td>

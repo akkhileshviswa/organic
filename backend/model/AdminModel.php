@@ -1,5 +1,6 @@
 <?php   
-	trait Admin {
+	trait Admin 
+	{
 		/**
          * This method is used to show the customer checkout details,
 		 * @return object of the result.

@@ -59,7 +59,7 @@
                         <?php 
                             $cartModel = new CartModel;
                             $getMyAcccountCartDetails = $cartModel->getMyAcccountCartDetails();
-                            foreach ($getMyAcccountCartDetails as $i) :
+                            foreach ($getMyAcccountCartDetails as $i):
                         ?>
                         <tr>
                             <td colspan="6"><hr></td>
@@ -70,7 +70,7 @@
                                 <ol>
                                     <?php 
                                         $getMyAcccountCartProducts = $cartModel->getMyAcccountCartProducts( $i['cart_id']);
-                                        foreach ($getMyAcccountCartProducts as $j) : 
+                                        foreach ($getMyAcccountCartProducts as $j): 
                                     ?>
                                     <li><?php echo $j['item_name']; ?></li>
                                     <?php endforeach; ?>
@@ -80,7 +80,7 @@
                                 <ol class="productslist">
                                     <?php 
                                         $getMyAcccountCartProducts = $cartModel->getMyAcccountCartProducts( $i['cart_id']);
-                                        foreach ($getMyAcccountCartProducts as $j) : 
+                                        foreach ($getMyAcccountCartProducts as $j): 
                                     ?>
                                     <li><?php echo $j['item_quantity']; ?></li>
                                     <?php endforeach; ?>

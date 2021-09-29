@@ -27,7 +27,7 @@
                         $orderDetails = $orders->orderDetails();
                         $array = $orders->customerDetails();
                         $customerDetails = $array->fetch(PDO::FETCH_ASSOC);
-                        foreach ($orderDetails as $orderDetail) : 
+                        foreach ($orderDetails as $orderDetail): 
                     ?>
                     <tr>
                         <td>#<?php echo $_SESSION['cart_id']; ?></td>
@@ -46,7 +46,7 @@
                 <tbody id="orderstablebody">
                 <?php 
                         $itemDetails = $orders->showCartDetails();
-                        foreach ($itemDetails as $itemDetail) :
+                        foreach ($itemDetails as $itemDetail):
                     ?>
                     <tr>
                         <td><?php echo $itemDetail['item_name']; ?> x <?php echo $itemDetail['item_quantity']; ?></td><td></td>

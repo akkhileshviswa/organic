@@ -62,7 +62,7 @@
                         <tbody>
                             <?php 
                                 $showProducts = $result->showProducts();
-                                while ( $products = $showProducts->fetch_assoc()): ?>
+                                while ($products = $showProducts->fetch_assoc()): ?>
                             <tr>
                                 <td colspan="6"><hr></td>
                             </tr>

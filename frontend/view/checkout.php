@@ -96,7 +96,7 @@
                     <?php 
                             $showCartDetails = new CartController;
                             $cartDetails = $showCartDetails->showCartDetails();
-                            foreach ($cartDetails as $j) :
+                            foreach ($cartDetails as $j):
                     ?>
                     <tr>
                         <td><?php echo $j['item_name']; ?> × <?php echo $j['item_quantity']; ?></td>
