@@ -22,31 +22,31 @@
             ?>
         </div>         
         <div class="owl-carousel owl-theme">
-            <div><img src="<?= Utility::getAssests() ?>/assests/images/index/slider_1.jpg"></div>
-            <div><img src="<?= Utility::getAssests() ?>/assests/images/index/slider_2.jpg"></div>
-            <div><img src="<?= Utility::getAssests() ?>/assests/images/index/slider_3.jpg"></div>
+            <div><img alt="Slider 1" src="<?= Utility::getAssests() ?>/assests/images/index/slider_1.jpg"></div>
+            <div><img alt="Slider 2" src="<?= Utility::getAssests() ?>/assests/images/index/slider_2.jpg"></div>
+            <div><img alt="Slider 3" src="<?= Utility::getAssests() ?>/assests/images/index/slider_3.jpg"></div>
         </div>
         <div>
-            <img class="fruit" src="<?= Utility::getAssests() ?>/assests/images/index/fruit_1.jpg">
-            <img class="fruit" src="<?= Utility::getAssests() ?>/assests/images/index/fruit_2.jpg">
-            <img class="fruit" src="<?= Utility::getAssests() ?>/assests/images/index/fruit_3.jpg">
-            <img class="fruit" src="<?= Utility::getAssests() ?>/assests/images/index/fruit_4.jpg">
-            <img class="fruit" src="<?= Utility::getAssests() ?>/assests/images/index/fruit_5.jpg">
+            <img class="fruit" alt="Fruit 1" src="<?= Utility::getAssests() ?>/assests/images/index/fruit_1.jpg">
+            <img class="fruit" alt="Fruit 2" src="<?= Utility::getAssests() ?>/assests/images/index/fruit_2.jpg">
+            <img class="fruit" alt="Fruit 3" src="<?= Utility::getAssests() ?>/assests/images/index/fruit_3.jpg">
+            <img class="fruit" alt="Fruit 4" src="<?= Utility::getAssests() ?>/assests/images/index/fruit_4.jpg">
+            <img class="fruit" alt="Fruit 5" src="<?= Utility::getAssests() ?>/assests/images/index/fruit_5.jpg">
         </div>
         <div id = "newproducts">
-            <img width="40" height="39" src="<?= Utility::getAssests() ?>/assests/images/index/icon.png"> 
+            <img width="40" height="39" alt="Icon"  src="<?= Utility::getAssests() ?>/assests/images/index/icon.png"> 
             <h2 id="heading">NEW PRODUCTS</h2>
             <p id="para"> There are many variations of passages of Lorem Ipsum available</p>
             <br>
             <ul>
                 <li>ALL PRODUCTS</li>
-                <li><img src="<?= Utility::getAssests() ?>/assests/images/index/doubleslash.png" height="15px" width="20px"></li>
+                <li><img alt="Doubleslash" src="<?= Utility::getAssests() ?>/assests/images/index/doubleslash.png" height="15px" width="20px"></li>
                 <li>FRUIT</li>
-                <li><img src="<?= Utility::getAssests() ?>/assests/images/index/doubleslash.png" height="15px" width="20px"></li>
+                <li><img alt="Doubleslash" src="<?= Utility::getAssests() ?>/assests/images/index/doubleslash.png" height="15px" width="20px"></li>
                 <li>VEGETABLE</li>
-                <li><img src="<?= Utility::getAssests() ?>/assests/images/index/doubleslash.png" height="15px" width="20px"></li>
+                <li><img alt="Doubleslash" src="<?= Utility::getAssests() ?>/assests/images/index/doubleslash.png" height="15px" width="20px"></li>
                 <li>BREAD</li>
-                <li><img src="<?= Utility::getAssests() ?>/assests/images/index/doubleslash.png" height="15px" width="20px"></li>
+                <li><img alt="Doubleslash" src="<?= Utility::getAssests() ?>/assests/images/index/doubleslash.png" height="15px" width="20px"></li>
                 <li>OTHERS</li>
             </ul>
         </div>
@@ -77,7 +77,7 @@
                         <form class="form-submit" action= "<?php echo $action; ?>" method="POST" >   
                         <div class="image">
                         <br>
-                        <img width="250" height="300" src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $j['image']; ?>">
+                        <img alt="<?php echo $j['image']; ?>" width="250" height="300" src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $j['image']; ?>">
                         <br><br>
                         </div>
                         <h3><?php echo $j['product_name']; ?></h3>

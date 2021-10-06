@@ -23,7 +23,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="logo"><a href="home"><img src="<?= Utility::getAssests() ?>/assests/images/header/logo.png"></a></td>
+                <td class="logo"><a href="home"><img alt="Logo" src="<?= Utility::getAssests() ?>/assests/images/header/logo.png"></a></td>
             </tr>    
         </table>
         <div class="down"></div>
