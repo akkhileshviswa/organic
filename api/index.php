@@ -1,5 +1,9 @@
 <?php
-    $password = "root";
+    function getpassword() 
+    {
+        return "root";
+    }
+    $password = getpassword();
     $connect = mysqli_connect("localhost","root",$password,"organic");
 
     $request = $_SERVER['REQUEST_METHOD'];
