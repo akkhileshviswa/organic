@@ -1,0 +1,120 @@
+#title{
+    margin-top: 1%;
+    text-align: center;
+    font-size: 1.8em;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 5%;
+}
+
+#orders{
+    margin-left: 10%;
+    margin-top: 3%;
+    font-size: 1.4em;
+    color: grey;
+}
+
+#ordertablehead{
+    background-color: #79cba8;
+    height:50px;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    font-size: 20px;
+}
+
+#ordertablebody::before {
+    content: "$";
+    display: block;
+    line-height: 2.4em;
+    color: transparent;
+}
+
+#ordertablehead td{
+    text-align:center;
+    padding:5px 0px 5px;  
+    font-size: 20px;
+}
+
+#ordertablebody td{
+    width: 240px;
+    text-align:center;
+    padding:5px;
+    font-family:Lato,sans-serif;
+    font-size: 18px;
+    color: grey;
+}
+
+#ordertablebody td::after {
+    content: "$";
+    display: block;
+    line-height: 2em;
+    color: transparent;
+}
+
+h4{
+    color: black;
+    font-family:Lato,sans-serif;
+}
+
+#orderstablehead{
+    background-color: #79cba8;
+    height:50px;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    font-size: 20px;
+}
+
+#orderstablehead td{
+    text-align:center;
+    padding:5px;  
+    font-size: 20px;
+}
+
+#orderstablebody td{
+    width: 240px;
+    text-align:center;
+    padding:5px;
+    font-family:Lato,sans-serif;
+    font-size: 18px;
+    color: grey;
+}
+
+#orderstablebody::before {
+    content: "$";
+    display: block;
+    line-height: 2.4em;
+    color: transparent;
+}
+
+#orderstablebody td::after {
+    content: "$";
+    display: block;
+    line-height: 2em;
+    color: transparent;
+}
+
+#customertablebody td{
+    width: 250px;
+    text-align:center;
+    padding:5px;
+    font-family:Lato,sans-serif;
+    font-size: 18px;
+    color: grey;
+}
+
+#detail::before {
+    content: "$";
+    display: block;
+    line-height: 1.5em;
+    color: transparent;
+}
+
+#customertablebody::after {
+    content: "$";
+    display: block;
+    line-height: 2.4em;
+    color: transparent;
+}
+
+.amount::before{
+    content: "₹";
+}

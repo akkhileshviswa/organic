@@ -1,0 +1,174 @@
+#title{
+    margin-top: 4%;
+    text-align: center;
+    font-family: Lato,Pacifico,cursive;
+    font-size: 1.8em;
+}
+
+#producttable{
+    margin-left: 5.5%;
+    margin-top: 3%;
+    font-size: 1.4em;
+    color: grey;
+}
+
+#tableimage{
+    width:100px;
+    height:140px;
+    padding: -10px;
+    border: 2px solid #f4eede;
+}
+
+#producttablehead{
+    background-color: #79cba8;
+    height:60px;
+    font-family: Lato,Pacifico,cursive;
+    color: #fff;
+}
+
+#producttablebody:before {
+    content: "$";
+    display: block;
+    line-height: 2.4em;
+    color: transparent;
+}
+
+#producttablehead td{
+    width:190px;
+    text-align:center;
+    padding:5px 
+}
+
+#producttablebody td{
+    width:190px;
+    text-align:center;
+    padding:5px;
+    font-family:Lato,sans-serif;
+}
+
+#producttable tr td a{
+    text-decoration: none;
+    display: block;
+    padding: 0px 10px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+    
+}
+
+#continue {
+    margin-left: 480%;
+    padding: 10px;
+    width: 180px;
+    color: white;
+    border:none;
+    background-color: #79cba8;
+    font-family:Lato,sans-serif;
+    font-size : 14px; 
+    text-transform: uppercase;
+}
+
+hr{
+    border: 1px solid #f4eede;
+}
+
+#remove{
+    color: red;
+    border: none;
+    font-family: sans-serif;
+    font-size : 1em; 
+    width: 50%; 
+    height: 30px;
+    background-color: #fff;
+}
+
+input[type='number']{
+    width: 40px;
+    height: 30px;
+    border: 2px solid rgb(221, 248, 199);
+    color: grey;
+} 
+
+#right{
+    padding: 17.5px;
+    font-family: Lato,sans-serif;
+    color: #696969;
+    font-size: 14px;
+    line-height: 4em;
+    margin-left: 33%;
+    margin-top: 4%;
+    height: 20px;
+    border:1px dashed #f4eede;
+}
+
+#right h2{
+    margin-bottom: 30px;
+    margin-top: 1%;
+    font-size: 24px;
+    font-family: Pacifico,cursive;
+    line-height: 1.2;
+    color: #212121;
+}
+
+#right td p{
+   line-height: 1.2;
+}
+
+.amount::before{
+    content: "₹";
+}
+
+.total span{
+    color: #79cba8;
+}
+
+#right tr td a{
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: #79cba8;
+    color:#fff; 
+    display: block;
+    padding: 0px 20px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+}
+
+#button{
+    font-size: 12px;
+    background: #79cba8;
+    border-radius: 0;
+    color: #fff;
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    border:none;
+}
+
+
+#imagebackground {
+    height: 250px;
+    background-color: #79cba8;
+    margin: 7% 0% 5%;
+    padding-left: 16%;
+}
+
+#quote{
+    padding-top: 0px;
+    font-family: Lato,Pacifico,cursive;
+    font-size: 1.99em;
+    color: white;
+}
+
+h1{
+    font-family: sans-serif;
+    font-size: 40px;
+    color: white;
+}
+
+#fruitimage{
+    padding-top: 4%;
+    padding-left: 260px ;
+}

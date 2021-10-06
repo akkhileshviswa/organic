@@ -1,0 +1,175 @@
+body{
+    margin: 0;
+    overflow-y: hidden;
+    font-family: work-Sans,sans-serif;
+    font-size: 18px;
+}
+
+#left{
+    float: left;
+    height: 642px;
+    width: 266px;
+}
+
+#user{
+    text-align: center;
+}
+
+#userimage{
+    border-radius: 50%;
+}
+
+hr{
+    border: none;
+    height: 1px;
+    background: #dadada;
+}
+
+#username{
+    color: #40a944;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    margin-bottom: 3px;
+    font-size: 18px;
+}
+
+p{
+    color: #777;
+    font-size: 13px;
+}
+
+#options{
+    margin-top: 3%;
+    font-size: 14px;
+    letter-spacing: .5px;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    text-transform:capitalize;
+    font-weight: 600;
+    color: #313131;
+}
+
+a:link, a:visited, a:active{
+    color: #313131;
+}
+
+a:hover{
+    color: #40a944;
+}
+
+a{
+    margin-left: 40px;
+    text-decoration: none;
+    color: #313131;
+}
+
+span{
+    margin-left: 15px;
+}
+
+#logout{
+    display: block;
+    width: 100px;
+    height: 25px;
+    background: #40a944;
+    padding: 10px;
+    text-align: center;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    padding-left: 6px;
+    padding-right: 14px;
+    padding-bottom: 5px;
+} 
+
+#right{
+    margin-left:250px;
+    height: 605px;
+    width: 1000px;
+    background-color: hsla(0,0%,96.5%,.6); 
+    padding: 10px 50px 20px 50px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#name{
+    margin-bottom: 3px;
+}
+
+#sessionmessage{
+    color:blueviolet;
+    font-family: work-Sans,sans-serif;
+}
+
+#productstable {
+    border-top: 0; 
+    padding-top: 0;
+    padding: .75rem;
+    background-color: #fff;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#productstable thead tr td{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+#productstable thead::after{
+    content:"@";
+    display:block; 
+    line-height:20px;
+    text-indent:-99999px; 
+}
+
+#productstable tbody tr td hr{
+    border: 0px solid #dadada;
+}
+
+#productstable tbody td{
+    width: 250px;
+    font-size: 16px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+select{
+    width: 150px;
+    height:30px;
+    background: #fff;
+    color: #666;
+}
+
+#updatebutton {   
+    color: white;
+    margin-left: 0%;
+}
+
+#updatebutton {
+    padding: 10px;
+    width: 100px;
+    background-color: #40a944;
+    font-weight: bold;
+    font-size: medium;
+    border: none;
+    border-radius: 5px;
+}
+
+li{
+    list-style-type: none;
+}
+
+#heading{
+    margin-top: 20;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-left: 40px;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    text-align: left;
+    font-size: 22px;
+    background-color: #fff;
+    border-bottom: none;
+}

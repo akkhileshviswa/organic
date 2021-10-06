@@ -1,0 +1,48 @@
+#box{
+    color:blueviolet;
+    font-family:  sans-serif;
+    margin-left:5%;
+}
+
+#table{
+    margin-top: 3%;
+    margin-left: 38%;
+    padding: 17.5px;
+    font-family:  sans-serif;
+    font-size: 0.9em;
+    line-height: 1.6;
+    margin-right: 19.2%;
+    height: 20px;
+    border: 4px solid #f4eede;
+}
+
+input[type=text]{
+    height: 40px;
+    padding: 4px;
+    border: solid thin#f4eede;
+    color: grey;
+    border-radius: 15px;
+}
+
+#button{
+    padding: 15px;
+    width: 150px;
+    color: white;
+    border:none;
+    border-radius: 15px;
+    background-color: #40a944;
+    font-size: 1.5em;
+}
+
+#required::after{
+    content: " *";
+    color: red;
+}
+
+span {
+    color: red;
+}
+
+.error{
+    color: red;
+}
