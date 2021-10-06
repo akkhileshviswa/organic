@@ -6,7 +6,7 @@
 	{
 		const dbhost = "localhost";
 		const dbuser = "root";
-		const dbpass = "";
+		const dbpass = "root";
 		const databasename = "warehouse";
 
 		/**

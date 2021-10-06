@@ -9,10 +9,11 @@
             <div id="left">
                 <div id="user">
                     <br>
-                    <img src="<?= Utility::getAssests() ?>/assests/images/login/logo.jpg" height="39px" width="190px">
+                    <img alt="Logo" src="<?= Utility::getAssests() ?>/assests/images/login/logo.jpg" height="39px" width="190px">
                     <br><hr>
                     <br>
-                    <img id="userimage" src="<?= Utility::getAssests() ?>/assests/images/login/man.jpg" height="70px" width="70px">
+                    <img id="userimage" alt="Profile Photo" src="<?= Utility::getAssests() ?>/assests/images/login/man.jpg" 
+                        height="70px" width="70px">
                     <?php 
                         $result = new Controller;
                         $showAdmin = $result-> showAdmin();

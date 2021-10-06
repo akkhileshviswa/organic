@@ -6,7 +6,7 @@
 	{
 		const dbhost = "localhost";
 		const dbuser = "root";
-		const dbpass = "";
+		const dbpass = "root";
 		const dbname = "organic";
 		/**
 		 * This method connects to the database for the provided details.
