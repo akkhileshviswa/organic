@@ -25,15 +25,15 @@
 						<form method="POST" action="createproduct" autocomplete="off" onsubmit="return validate();" enctype="multipart/form-data" >
 						<label id="required">PRODUCT NAME</label><br>
 						<input id="product_name" type="text" name="product_name" size="40" 
-							value="<?php if (isset($_POST['product_name'])) echo $_POST['product_name']; ?>"><br><br>
+							value="<?php if (isset($_POST['product_name'])) echo htmlspecialchars($_POST['product_name']); ?>"><br><br>
 						<span id="nameerr"></span><br>
 						<br><label id="required">PRICE</label><br>
 						<input id="price" type="text" name="price" size="40" 
-							value="<?php if (isset($_POST['price'])) echo $_POST['price']; ?>"><br><br>
+							value="<?php if (isset($_POST['price'])) echo htmlspecialchars($_POST['price']); ?>"><br><br>
 						<span id="priceerr"></span><br>
 						<br><label id="required">Quantity</label><br>
 						<br><input id="quantity" type="text" name="quantity" size="40" 
-							value="<?php if (isset($_POST['quantity'])) echo $_POST['quantity']; ?>"><br><br>
+							value="<?php if (isset($_POST['quantity'])) echo htmlspecialchars($_POST['quantity']); ?>"><br><br>
 						<span id="quantityerr" class="error"></span><br>
 						<br><label id="required">UPLOAD IMAGE OF PRODUCT </label><br>
 						<br><input id="file" type="file" name="file" ><br>
