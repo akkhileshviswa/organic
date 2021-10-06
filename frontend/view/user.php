@@ -31,11 +31,11 @@
                         <form method="POST" action= "login" onsubmit="return loginvalidate()" autocomplete="off">
                             <label id="required">USERNAME</label><br>
                             <input id="loginname" type="text" name="loginname" size="42" 
-                                value="<?php if (isset($_POST['loginname'])) echo $_POST['loginname']; ?>"><br>
+                                value="<?php if (isset($_POST['loginname'])) echo htmlspecialchars($_POST['loginname']); ?>"><br>
                             <span id="loginnameerr"></span><br>
                             <br><label id="required">PASSWORD</label><br>
                             <input id="loginpassword" type="password" name="loginpassword" size="40"
-                                value="<?php if (isset($_POST['loginpassword'])) echo $_POST['loginpassword']; ?>"><br>
+                                value="<?php if (isset($_POST['loginpassword'])) echo htmlspecialchars($_POST['loginpassword']); ?>"><br>
                             <span id="loginpassworderr"></span><br>
                             <br><input id="button" type="submit" value="Login"><br><br>
                             <br>LOST YOUR PASSWORD?<br><br>
@@ -49,15 +49,15 @@
                         <form method="POST" action="register" onsubmit="return validate()" autocomplete="off">
                             <label id="required">USERNAME</label><br>
                             <input id="name" type="text" name="name" size="42"
-                                value="<?php if (isset($_POST['name'])) echo $_POST['name']; ?>"><br>
+                                value="<?php if (isset($_POST['name'])) echo htmlspecialchars($_POST['name']); ?>"><br>
                             <span id="nameerr"></span><br>
                             <br><label id="required">EMAIL</label><br>
                             <input id="email" type="text" name="email" size="42"
-                                value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>"><br>
+                                value="<?php if (isset($_POST['email'])) echo htmlspecialchars($_POST['email']); ?>"><br>
                             <span id="emailerr"></span><br>
                             <br><label id="required">PASSWORD</label><br>
                             <input id="password" type="password" name="password" size="40"
-                                value="<?php if (isset($_POST['password'])) echo $_POST['password']; ?>"><br>
+                                value="<?php if (isset($_POST['password'])) echo htmlspecialchars($_POST['password']); ?>"><br>
                             <span id="passworderr"></span><br>
                             <br><input id="button" type="submit" value="REGISTER"><br><br>	
                         </form>
