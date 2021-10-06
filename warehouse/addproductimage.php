@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <title>Add Products</title>
     <link href="assests/css/addproduct.css" type="text/css" rel="stylesheet">
 </head>
 <body>
