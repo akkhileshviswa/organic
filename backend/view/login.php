@@ -11,7 +11,8 @@
                     <table id="left">
                         <tr>
                             <td>
-                                <img src="<?= Utility::getAssests() ?>/assests/images/login/analysis.png" height="150px" width="151px">
+                                <img alt="Analysis" src="<?= Utility::getAssests() ?>/assests/images/login/analysis.png" 
+                                    height="150px" width="151px">
                                 <h3>Welcome to Organici</h3>
                                 For the organic food,<br> the less it's designed,<br> the better it is.
                             </td>

@@ -10,10 +10,11 @@
             <div id="left">
                 <div id="user">
                     <br>
-                    <img src="<?= Utility::getAssests() ?>/assests/images/login/logo.jpg" height="39px" width="190px">
+                    <img alt="Logo" src="<?= Utility::getAssests() ?>/assests/images/login/logo.jpg" height="39px" width="190px">
                     <br><hr>
                     <br>
-                    <img id="userimage" src="<?= Utility::getAssests() ?>/assests/images/login/man.jpg" height="70px" width="70px">
+                    <img id="userimage" alt="Profile Photo" src="<?= Utility::getAssests() ?>/assests/images/login/man.jpg" 
+                        height="70px" width="70px">
                     <?php 
                         $result = new Controller;
                         $showAdmin = $result->showAdmin();
@@ -68,7 +69,8 @@
                             </tr>
                             <tr>
                                 <td><?php echo $products['product_id']; ?></td>
-                                <td><img id="tableimage" src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $products['image']; ?>"></td>
+                                <td><img id="tableimage" alt="<?php echo $products['image']; ?>" 
+                                        src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $products['image']; ?>"></td>
                                 <td><?php echo $products['product_name']; ?></td>
                                 <td>₹<?php echo $products['price']; ?></td>
                                 <td><?php echo $products['quantity']; ?></td>
@@ -85,7 +87,8 @@
                                         $isActiveId = "enable";
                                     }
                                 ?><br>
-                                <input type="button" value="<?php echo $isActive;?>" id = "<?php echo $isActiveId;?>" onclick="enableOrDisableProduct(<?php echo $products['product_id'];?>, <?php echo $products['is_active'];?>);">
+                                <input type="button" value="<?php echo $isActive;?>" id = "<?php echo $isActiveId;?>" 
+                                    onclick="enableOrDisableProduct(<?php echo $products['product_id'];?>, <?php echo $products['is_active'];?>);">
                                 </td>
                             </tr>
                             <?php endwhile; ?>   

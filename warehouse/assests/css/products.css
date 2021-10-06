@@ -13,11 +13,8 @@ body{
 
 #productstable {
     border-top: 0; 
-    padding-top: 0;
     padding: .75rem;
     background-color: #fff;
-    padding-left: 40px;
-    padding-right: 40px;
 }   
 
 #productstable thead tr td{

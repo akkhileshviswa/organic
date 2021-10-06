@@ -12,10 +12,11 @@
             <div id="left">
                 <div id="user">
                     <br>
-                    <img src="<?= Utility::getAssests() ?>/assests/images/login/logo.jpg" height="39px" width="190px">
+                    <img alt="Logo" src="<?= Utility::getAssests() ?>/assests/images/login/logo.jpg" height="39px" width="190px">
                     <br><hr>
                     <br>
-                    <img id="userimage" src="<?= Utility::getAssests() ?>/assests/images/login/man.jpg" height="70px" width="70px">
+                    <img id="userimage" alt="Profile Photo" src="<?= Utility::getAssests() ?>/assests/images/login/man.jpg" 
+                        height="70px" width="70px">
                     <?php 
                         $result = new Controller;
                         $showAdmin = $result->showAdmin();
@@ -44,7 +45,8 @@
                 <br>
                 <div id="one">
                     <div id="hole">
-                        <img src="<?= Utility::getAssests() ?>/assests/images/index/eLetter.png" height="60px" width="60px">
+                        <img alt="Eletter.png" src="<?= Utility::getAssests() ?>/assests/images/index/eLetter.png" 
+                            height="60px" width="60px">
                     </div>
                     <div id="info">
                         <p id="infotext">Earnings</p>
@@ -54,7 +56,8 @@
                 </div>
                 <div id="two">
                     <div id="hole">
-                        <img src="<?= Utility::getAssests() ?>/assests/images/index/pLetter.png" height="60px" width="60px">                        
+                        <img alt="Pletter.png" src="<?= Utility::getAssests() ?>/assests/images/index/pLetter.png" 
+                            height="60px" width="60px">                        
                     </div>
                     <div id="info">
                         <p id="infotext">Products</p>
