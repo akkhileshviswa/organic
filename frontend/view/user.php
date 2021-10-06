@@ -74,7 +74,7 @@
                     </td>
                     <td>  
                         <div id="fruitimage">
-                            <img src="<?= Utility::getAssests() ?>/assests/images/user/loginfruit.png">
+                            <img alt="Fruit Image" src="<?= Utility::getAssests() ?>/assests/images/user/loginfruit.png">
                         </div>
                     </td>
                 </tr>

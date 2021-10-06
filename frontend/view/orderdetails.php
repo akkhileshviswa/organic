@@ -9,7 +9,7 @@
             <?php include "header.php" ?>
         </div>
         <div id="title">
-            <img src="<?= Utility::getAssests() ?>/assests/images/cart.png">
+            <img alt="Cart Image" src="<?= Utility::getAssests() ?>/assests/images/cart.png">
             <h3>THANK YOU FOR SHOPPING WITH US</h3>
         </div>
         <div id="orders">

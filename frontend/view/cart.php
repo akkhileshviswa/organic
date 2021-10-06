@@ -29,7 +29,7 @@
                     foreach ($result as $j): 
                 ?>
                     <tr id="border">
-                        <td><img id="tableimage" src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $j['image']; ?>"></td>
+                        <td><img alt="<?php echo $j['image']; ?>" id="tableimage" src="<?= Utility::getAssests() ?>/assests/images/index/<?php echo $j['image']; ?>"></td>
                         <td><?php echo $j['item_name']; ?></td>
                         <td>₹<?php echo $j['item_price']; ?></td>
                         <td><input type="number" min=1 placeholder="1" id="item_quantity" value="<?php echo $j['item_quantity']; ?>" 
@@ -111,7 +111,7 @@
                     </td>
                     <td>  
                         <div id="fruitimage">
-                            <img src="<?= Utility::getAssests() ?>/assests/images/user/loginfruit.png">
+                            <img alt="Fruit Image" src="<?= Utility::getAssests() ?>/assests/images/user/loginfruit.png">
                         </div>
                     </td>
                 </tr>
