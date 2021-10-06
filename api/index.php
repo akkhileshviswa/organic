@@ -1,5 +1,5 @@
 <?php
-    $connect = mysqli_connect("localhost","root","","organic");
+    $connect = mysqli_connect("localhost","root","root","organic");
 
     $request = $_SERVER['REQUEST_METHOD'];
 
