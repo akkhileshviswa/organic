@@ -28,7 +28,7 @@
                         <tr>
                             <td><?php echo $products['product_code']; ?></td>
                             <td><?php echo $products['product_name']; ?></td>
-                            <td><img id="tableimage" src="uploads/<?php echo $products['image']; ?>"></td>
+                            <td><img alt="<?php echo $products['image']; ?>" id="tableimage" src="uploads/<?php echo $products['image']; ?>"></td>
                         <?php endwhile; ?>   
                         <tr>
                             <td colspan="3"><hr></td>
