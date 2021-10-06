@@ -48,7 +48,7 @@
                             <table>
                                 <tr>
                                     <td><img alt="oliu-left.png" src="<?= Utility::getAssests() ?>/assests/images/footer/oliu-left.png"></td>
-                                    <td><i>HAPPY HOURS</i></td>
+                                    <td><em>HAPPY HOURS</em></td>
                                     <td><img alt="oliu-right.png" src="<?= Utility::getAssests() ?>/assests/images/footer/oliu-right.png"></td>
                                 </tr>
                             </table>

@@ -115,7 +115,7 @@
                         <td>
                             <input type="radio" id="delivery" name="shipping_method" value=2 
                                 onchange="changeShippingMethod(<?php echo $subTotal; ?>,this.value);">
-                            <label>Flat rate: <b>₹2.00</b></label><br><br>
+                            <label>Flat rate: <strong>₹2.00</strong></label><br><br>
                             <input type="radio" id="delivery" name="shipping_method" value=1 
                                 onchange="changeShippingMethod(<?php echo $subTotal; ?>,this.value);">
                             <label>Free shipping</label><br><br>
