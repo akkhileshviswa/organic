@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>User Page</title>
         <link rel="stylesheet" type="text/css" href="<?= Utility::getAssests() ?>/assests/css/user.css">

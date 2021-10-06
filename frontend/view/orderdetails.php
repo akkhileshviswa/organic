@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Confirmation</title>
         <link rel="stylesheet" href="<?= Utility::getAssests() ?>/assests/css/completepage.css">

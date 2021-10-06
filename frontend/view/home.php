@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Organic Store</title>
         <link rel="stylesheet" type="text/css" href="<?= Utility::getAssests() ?>/assests/css/index.css">
