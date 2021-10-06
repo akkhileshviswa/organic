@@ -13,16 +13,6 @@
 		 */
 		public function getConnection() 
 		{
-			try {
-				$connect = new mysqli(self::dbhost,self::dbuser,self::dbpass,self::dbname);
-				if(!$connect) {
-					throw new Exception("Error in Connecting to server");
-				} else {
-					return $connect;    
-				}
-			} catch(Exception $e) {
-				throw "Message: " .$e->getMessage();
-				return false;
-			}	
+			return new mysqli(self::dbhost,self::dbuser,self::dbpass,self::dbname);			
 		}
 	}
