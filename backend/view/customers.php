@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Customers</title>
         <link rel="stylesheet" href="<?= Utility::getAssests() ?>/assests/css/customers.css">
