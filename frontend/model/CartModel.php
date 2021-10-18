@@ -52,12 +52,12 @@
 							$connection->rollback();
 						}
 						if (!$result) {
-							return false;
+							throw new Exception("Error in creating the cart!!");
 						} else {
 							return true;    
 						}
-					} catch (Exception) {
-						throw "Message: Error in creating the cart!!" ;
+					} catch (Exception $e) {
+						throw "Message: " .$e->getMessage();
 					}	
 			} else {
 				return false;
@@ -135,13 +135,13 @@
 							return false;
 						}
 						if (!$result) {
-							return false;
+							throw new Exception("Error in adding the product to the cart!!");
 						} else {
 							return true;    
 						}
 					}
-				} catch (Exception) {
-					throw "Message: Error in adding the product to the cart!!" ;
+				} catch (Exception $e) {
+					throw "Message: " .$e->getMessage();
 				}	
 			} else {
 				return false;

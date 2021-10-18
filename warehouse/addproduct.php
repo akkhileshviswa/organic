@@ -21,7 +21,6 @@
                 <td>Product Name</td>
                 <td>Quantity</td>
                 <td>Product Code</td>
-                <td>Upload Product Image</td>
             </tr>
             <tr id="row1">
                 <td class="right"><input type="text" name="name[]" placeholder="Enter Product Name"></td>
