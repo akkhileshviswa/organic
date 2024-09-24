@@ -1,5 +1,5 @@
 # Ecommerce Flow
-# Front-End:
+## Front-End:
 User Creation/Login,
 Cart flow,
 Update Quantity through AJAX call,
@@ -7,13 +7,13 @@ Checkout,
 Order Placing,
 Update User Password.
 
-# Back-End:
+## Back-End:
 Dynamic Product Management(CRUD),
 Update Product Quantity via Cron.
 Order Management.
 
-# Warehouse:
+## Warehouse:
 Create Products Using Multiform feature(adding multiple products in the same form),
 
-# API:
+## API:
 APIs related to cart, orders.
